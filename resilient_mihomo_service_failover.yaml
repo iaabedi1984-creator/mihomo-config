@@ -1,0 +1,161 @@
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: info
+ipv6: false
+unified-delay: true
+tcp-concurrent: true
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+proxy-providers:
+  provider-b-vless:
+    type: http
+    url: "https://raw.githubusercontent.com/Baarcuda/vpn-configs/master/top100-vless.txt"
+    path: ./proxy_providers/provider-b-vless.txt
+    interval: 1800
+    health-check:
+      enable: true
+      url: "https://www.gstatic.com/generate_204"
+      interval: 180
+      timeout: 8000
+      lazy: false
+      expected-status: 204
+    override:
+      additional-prefix: "[B] "
+
+  provider-a-public:
+    type: http
+    url: "https://github.com/Au1rxx/free-vpn-subscriptions/raw/main/output/v2ray-base64.txt"
+    path: ./proxy_providers/provider-a-public.txt
+    interval: 1800
+    health-check:
+      enable: true
+      url: "https://www.gstatic.com/generate_204"
+      interval: 180
+      timeout: 8000
+      lazy: false
+      expected-status: 204
+    override:
+      additional-prefix: "[A] "
+
+proxies:
+  - name: "Fastly-223"
+    type: vless
+    server: 199.232.78.223
+    port: 443
+    uuid: 36e8e5e8-8010-45a1-9fb7-9fa21f7e4c66
+    udp: true
+    tls: true
+    servername: ssl.fastly.com
+    client-fingerprint: chrome
+    skip-cert-verify: false
+    network: ws
+    ws-opts:
+      path: /
+      headers:
+        Host: pannn1.global.ssl.fastly.net
+
+  - name: "Fastly-159"
+    type: vless
+    server: 199.232.78.159
+    port: 443
+    uuid: 36e8e5e8-8010-45a1-9fb7-9fa21f7e4c66
+    udp: true
+    tls: true
+    servername: ssl.fastly.com
+    client-fingerprint: chrome
+    skip-cert-verify: false
+    network: ws
+    ws-opts:
+      path: /
+      headers:
+        Host: pannn1.global.ssl.fastly.net
+
+  - name: "Fastly-DNS"
+    type: vless
+    server: pannn1.global.ssl.fastly.net
+    port: 443
+    uuid: 36e8e5e8-8010-45a1-9fb7-9fa21f7e4c66
+    udp: true
+    tls: true
+    servername: ssl.fastly.com
+    client-fingerprint: chrome
+    skip-cert-verify: false
+    network: ws
+    ws-opts:
+      path: /
+      headers:
+        Host: pannn1.global.ssl.fastly.net
+
+proxy-groups:
+  - name: "FASTLY-STABLE"
+    type: fallback
+    proxies:
+      - Fastly-223
+      - Fastly-159
+      - Fastly-DNS
+    url: "https://www.gstatic.com/generate_204"
+    interval: 120
+    timeout: 8000
+    max-failed-times: 2
+    lazy: false
+    expected-status: 204
+
+  - name: "PROVIDER-B"
+    type: url-test
+    use:
+      - provider-b-vless
+    url: "https://www.gstatic.com/generate_204"
+    interval: 180
+    tolerance: 350
+    timeout: 8000
+    lazy: false
+    max-failed-times: 2
+    expected-status: 204
+
+  - name: "PROVIDER-A"
+    type: url-test
+    use:
+      - provider-a-public
+    url: "https://www.gstatic.com/generate_204"
+    interval: 180
+    tolerance: 350
+    timeout: 8000
+    lazy: false
+    max-failed-times: 2
+    expected-status: 204
+
+  - name: "AUTO-RESCUE"
+    type: fallback
+    proxies:
+      - FASTLY-STABLE
+      - PROVIDER-B
+      - PROVIDER-A
+    url: "https://www.gstatic.com/generate_204"
+    interval: 120
+    timeout: 10000
+    max-failed-times: 2
+    lazy: false
+    expected-status: 204
+
+  - name: "PROXY"
+    type: select
+    proxies:
+      - AUTO-RESCUE
+      - FASTLY-STABLE
+      - PROVIDER-B
+      - PROVIDER-A
+      - Fastly-223
+      - Fastly-159
+      - Fastly-DNS
+      - DIRECT
+
+rules:
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - MATCH,PROXY
