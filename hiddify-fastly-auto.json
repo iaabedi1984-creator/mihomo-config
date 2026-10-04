@@ -1,0 +1,72 @@
+{
+  "log": {
+    "level": "info",
+    "timestamp": true
+  },
+  "outbounds": [
+    {
+      "type": "vless",
+      "tag": "fastly-223",
+      "server": "199.232.78.223",
+      "server_port": 443,
+      "uuid": "36e8e5e8-8010-45a1-9fb7-9fa21f7e4c66",
+      "network": "tcp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ssl.fastly.com",
+        "insecure": false,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "pannn1.global.ssl.fastly.net"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "fastly-159",
+      "server": "199.232.78.159",
+      "server_port": 443,
+      "uuid": "36e8e5e8-8010-45a1-9fb7-9fa21f7e4c66",
+      "network": "tcp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ssl.fastly.com",
+        "insecure": false,
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "pannn1.global.ssl.fastly.net"
+        }
+      }
+    },
+    {
+      "type": "urltest",
+      "tag": "auto",
+      "outbounds": [
+        "fastly-223",
+        "fastly-159"
+      ],
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "1m",
+      "tolerance": 300,
+      "idle_timeout": "10m",
+      "interrupt_exist_connections": true
+    }
+  ],
+  "route": {
+    "final": "auto"
+  }
+}
