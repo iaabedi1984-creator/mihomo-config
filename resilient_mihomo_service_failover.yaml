@@ -109,8 +109,8 @@ proxy-groups:
     use:
       - provider-b-vless
     url: "https://www.gstatic.com/generate_204"
-    interval: 180
-    tolerance: 350
+    interval: 120
+    tolerance: 250
     timeout: 8000
     lazy: false
     max-failed-times: 2
@@ -129,24 +129,24 @@ proxy-groups:
     expected-status: 204
 
   - name: "AUTO-RESCUE"
-    type: fallback
+    type: url-test
     proxies:
-      - FASTLY-STABLE
       - PROVIDER-B
-      - PROVIDER-A
+      - FASTLY-STABLE
     url: "https://www.gstatic.com/generate_204"
-    interval: 120
+    interval: 90
+    tolerance: 250
     timeout: 10000
-    max-failed-times: 2
     lazy: false
+    max-failed-times: 2
     expected-status: 204
 
   - name: "PROXY"
     type: select
     proxies:
       - AUTO-RESCUE
-      - FASTLY-STABLE
       - PROVIDER-B
+      - FASTLY-STABLE
       - PROVIDER-A
       - Fastly-223
       - Fastly-159
