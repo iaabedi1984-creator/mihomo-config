@@ -1,8 +1,8 @@
-name: Update Hiddify Top100
+name: Update Hiddify Verified
 
 on:
   schedule:
-    - cron: '7,37 * * * *'
+    - cron: '5,35 * * * *'
   workflow_dispatch:
   push:
     branches:
@@ -20,12 +20,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Fetch current fastest VLESS subscription
+      - name: Fetch Iran-focused traffic-verified subscription
         shell: bash
         run: |
           set -euo pipefail
           curl -fsSL --retry 3 --connect-timeout 15 \
-            https://raw.githubusercontent.com/Baarcuda/vpn-configs/master/top100-vless.txt \
+            https://raw.githubusercontent.com/ZendanTeam/SS44-sub/main/SS44-gold.txt \
             -o hiddify-sub.txt
           test -s hiddify-sub.txt
 
@@ -39,5 +39,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add hiddify-sub.txt
-          git commit -m "Refresh Hiddify fastest VLESS feed"
+          git commit -m "Refresh Hiddify Iran-verified feed"
           git push
