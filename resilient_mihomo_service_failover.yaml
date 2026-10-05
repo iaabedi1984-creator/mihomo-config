@@ -56,6 +56,51 @@ proxy-providers:
     override:
       additional-prefix: "[C] "
 
+  provider-r1-ss44:
+    type: http
+    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/hiddify-sub.txt"
+    path: ./proxy_providers/provider-r1-ss44.txt
+    interval: 600
+    health-check:
+      enable: true
+      url: "https://speed.cloudflare.com/__down?bytes=2048"
+      interval: 300
+      timeout: 12000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[R1] "
+
+  provider-r2-blacklist:
+    type: http
+    url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/BLACK_VLESS_RUS_mobile.txt"
+    path: ./proxy_providers/provider-r2-blacklist.txt
+    interval: 600
+    health-check:
+      enable: true
+      url: "https://speed.cloudflare.com/__down?bytes=2048"
+      interval: 300
+      timeout: 12000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[R2] "
+
+  provider-r3-whitelist:
+    type: http
+    url: "https://raw.githubusercontent.com/hussaroff/lte-universal-checked/refs/heads/main/whitelist.txt"
+    path: ./proxy_providers/provider-r3-whitelist.txt
+    interval: 600
+    health-check:
+      enable: true
+      url: "https://speed.cloudflare.com/__down?bytes=2048"
+      interval: 300
+      timeout: 12000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[R3] "
+
 proxies:
   - name: "Fastly-223"
     type: vless
@@ -252,6 +297,20 @@ proxies:
     udp: true
 
 proxy-groups:
+  - name: "ROTATING-RESCUE"
+    type: url-test
+    use:
+      - provider-r1-ss44
+      - provider-r2-blacklist
+      - provider-r3-whitelist
+    url: "https://speed.cloudflare.com/__down?bytes=2048"
+    interval: 300
+    tolerance: 1200
+    timeout: 12000
+    lazy: false
+    max-failed-times: 4
+    expected-status: 200
+
   - name: "TESTED-MIX"
     type: url-test
     use:
@@ -360,6 +419,7 @@ proxy-groups:
   - name: "AUTO-RESCUE"
     type: fallback
     proxies:
+      - ROTATING-RESCUE
       - TESTED-MIX
       - TROJAN-TLS-443
       - REALITY-443
@@ -378,6 +438,7 @@ proxy-groups:
     type: select
     proxies:
       - AUTO-RESCUE
+      - ROTATING-RESCUE
       - TESTED-MIX
       - SS-TCP-443
       - TROJAN-TLS-443
