@@ -35,100 +35,133 @@ jobs:
           unzip -q nthlink.apk -d apk
           rootlib="$(grep -l -a 'teon.com/root-go/root.apiGetConfigFromAWS' apk/lib/*/*.so | head -n1 || true)"
           test -n "$rootlib"
+          echo "ROOTLIB=$rootlib"
           cp "$rootlib" rootgo.so
+          readelf -SW rootgo.so > elf-sections.txt
+          file rootgo.so > elf-file.txt
 
-      - name: Build GoReSym and recover stripped symbols
+      - name: Parse Go pclntab without symbol table
         shell: bash
         run: |
           set -euo pipefail
-          git clone --depth 1 https://github.com/mandiant/GoReSym.git /tmp/GoReSym
-          (cd /tmp/GoReSym && go build -o /tmp/GoReSym-bin .)
-          /tmp/GoReSym-bin -strings -p rootgo.so > goresym.json
+          mkdir -p analysis/nthlink-pclntab
           python3 - <<'PY'
-          import json,re
+          import struct,json,re
           from pathlib import Path
-          d=json.load(open('goresym.json'))
-          pats=re.compile(r'(?i)(root-go/root\.(apiGetConfig|apiGetConfigFromAWS|getConfig|getConfigFromAWS|handleGetConfigResponse|GetConfigWithJson|GetConfig|doRequest|doRequests|decryptResponseData|decryptData|Encrypt|Decrypt|checkKeys|setKeys|getRootSecretKey|parseKey|isResponseSignValid))')
+          b=Path('rootgo.so').read_bytes()
+          magic=b'\xf1\xff\xff\xff'
+          candidates=[]
+          pos=0
+          while True:
+              i=b.find(magic,pos)
+              if i<0: break
+              pos=i+1
+              if i+72>len(b) or b[i+4:i+6]!=b'\x00\x00' or b[i+6] not in (1,2,4) or b[i+7] not in (4,8):
+                  continue
+              ps=b[i+7]
+              try:
+                  def word(n):
+                      off=i+8+n*ps
+                      return int.from_bytes(b[off:off+ps],'little')
+                  nfunc,nfiles=word(0),word(1)
+                  textStart=word(2)
+                  funcnameOff,cuOff,filetabOff,pctabOff,pclnOff=[word(x) for x in range(3,8)]
+                  vals=[funcnameOff,cuOff,filetabOff,pctabOff,pclnOff]
+                  if not (100 < nfunc < 1000000): continue
+                  if any(v<=0 or i+v>=len(b) for v in vals): continue
+                  # Validate first functions and names.
+                  ft=i+pclnOff
+                  good=0; samples=[]
+                  for k in range(min(int(nfunc),100)):
+                      q=ft+k*8
+                      if q+8>len(b): break
+                      entryoff,funcoff=struct.unpack_from('<II',b,q)
+                      fd=ft+funcoff
+                      if fd+8>len(b): continue
+                      nameoff=struct.unpack_from('<i',b,fd+4)[0]
+                      ns=i+funcnameOff+nameoff
+                      if 0<=ns<len(b):
+                          ne=b.find(b'\0',ns,min(len(b),ns+500))
+                          if ne>ns:
+                              try: name=b[ns:ne].decode('utf-8')
+                              except: continue
+                              if re.fullmatch(r'[ -~]{2,500}',name):
+                                  good+=1
+                                  if len(samples)<8: samples.append(name)
+                  if good<20: continue
+                  candidates.append(dict(base=i,ptrSize=ps,minLC=b[i+6],nfunc=nfunc,nfiles=nfiles,textStart=textStart,funcnameOff=funcnameOff,cuOff=cuOff,filetabOff=filetabOff,pctabOff=pctabOff,pclnOff=pclnOff,goodFirst100=good,samples=samples))
+              except Exception:
+                  pass
+          Path('analysis/nthlink-pclntab/candidates.json').write_text(json.dumps(candidates,indent=2))
+          if not candidates: raise SystemExit('No valid Go 1.20+ pclntab found')
+          h=max(candidates,key=lambda x:x['goodFirst100'])
+          i=h['base']; nfunc=int(h['nfunc']); text=int(h['textStart']); fno=int(h['funcnameOff']); pco=int(h['pclnOff']); ft=i+pco
           funcs=[]
-          def walk(x):
-              if isinstance(x,dict):
-                  s=json.dumps(x,ensure_ascii=False)
-                  if pats.search(s): funcs.append(x)
-                  for v in x.values(): walk(v)
-              elif isinstance(x,list):
-                  for v in x: walk(v)
-          walk(d.get('UserFunctions',d))
-          # de-duplicate exact serialized objects and keep only compact records.
-          seen=set(); out=[]
-          for f in funcs:
-              z=json.dumps(f,sort_keys=True,ensure_ascii=False)
-              if z in seen: continue
-              seen.add(z); out.append(f)
-          Path('goresym-focus.json').write_text(json.dumps(out,indent=2,ensure_ascii=False))
-          print('focused functions:',len(out))
+          for k in range(nfunc):
+              q=ft+k*8
+              if q+8>len(b): break
+              entryoff,funcoff=struct.unpack_from('<II',b,q)
+              fd=ft+funcoff
+              if fd+8>len(b): continue
+              nameoff=struct.unpack_from('<i',b,fd+4)[0]
+              ns=i+fno+nameoff
+              if not (0<=ns<len(b)): continue
+              ne=b.find(b'\0',ns,min(len(b),ns+1000))
+              if ne<=ns: continue
+              try: name=b[ns:ne].decode('utf-8')
+              except: continue
+              if not re.fullmatch(r'[ -~]{1,1000}',name): continue
+              start=text+entryoff
+              # functab sentinel gives next start; if unavailable use next parsed entry below.
+              nextq=ft+(k+1)*8
+              end=None
+              if nextq+4<=len(b):
+                  nextoff=struct.unpack_from('<I',b,nextq)[0]
+                  if nextoff>=entryoff: end=text+nextoff
+              funcs.append(dict(index=k,name=name,start=start,end=end,entryoff=entryoff,funcoff=funcoff,nameoff=nameoff))
+          Path('analysis/nthlink-pclntab/all-functions.json').write_text(json.dumps(funcs,indent=2))
+          roots=[f for f in funcs if 'teon.com/root-go/root.' in f['name']]
+          Path('analysis/nthlink-pclntab/root-functions.tsv').write_text('name\tstart\tend\tentryoff\n'+''.join(f"{f['name']}\t0x{f['start']:x}\t{('0x%x'%f['end']) if f['end'] else ''}\t0x{f['entryoff']:x}\n" for f in roots))
+          Path('analysis/nthlink-pclntab/selected-header.json').write_text(json.dumps(h,indent=2))
+          print('pclntab base',hex(i),'nfunc',nfunc,'textStart',hex(text),'root funcs',len(roots))
+          for f in roots:
+              if re.search(r'(?i)(GetConfig|doRequest|decrypt|encrypt|checkKeys|setKeys|getRootSecretKey|parseKey|isResponseSignValid)',f['name']):
+                  print(hex(f['start']),hex(f['end'] or 0),f['name'])
           PY
+          cp elf-sections.txt elf-file.txt apk_url.txt analysis/nthlink-pclntab/
 
-      - name: Extract function ranges and disassemble
+      - name: Disassemble config bootstrap and map calls
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p analysis/nthlink-goresym
-          cp goresym-focus.json analysis/nthlink-goresym/functions.json
           python3 - <<'PY'
           import json,re,subprocess
           from pathlib import Path
-          arr=json.load(open('goresym-focus.json'))
-          wanted=re.compile(r'(?i)(apiGetConfigFromAWS|getConfigFromAWS|apiGetConfig$|getConfig$|handleGetConfigResponse|GetConfigWithJson|decryptResponseData|doRequest$|checkKeys|getRootSecretKey)')
-          records=[]
-          def scalar(d,*keys):
-              for k in keys:
-                  if k in d and isinstance(d[k],(str,int,float)): return d[k]
-          for f in arr:
-              name=str(scalar(f,'FullName','Name','name','fullName') or '')
-              if not wanted.search(name): continue
-              start=scalar(f,'Start','StartVA','Entry','start','start_address','StartAddress')
-              end=scalar(f,'End','EndVA','end','end_address','EndAddress')
-              def num(v):
-                  if isinstance(v,int): return v
-                  if isinstance(v,float): return int(v)
-                  if isinstance(v,str):
-                      try: return int(v,0)
-                      except: return None
-              a,b=num(start),num(end)
-              records.append((name,a,b,f))
-          Path('analysis/nthlink-goresym/ranges.txt').write_text('\n'.join(f'{n}\t{a!r}\t{b!r}' for n,a,b,_ in records)+'\n')
-          for i,(name,a,b,f) in enumerate(records):
-              safe=re.sub(r'[^A-Za-z0-9_.-]+','_',name)[-100:]
-              if a is None or b is None or b<=a: continue
-              cmd=['llvm-objdump','-d','--start-address='+hex(a),'--stop-address='+hex(b),'rootgo.so']
+          funcs=json.load(open('analysis/nthlink-pclntab/all-functions.json'))
+          byaddr={int(f['start']):f['name'] for f in funcs}
+          wanted=re.compile(r'(?i)teon\.com/root-go/root\.(apiGetConfigFromAWS|getConfigFromAWS|apiGetConfig|getConfig|handleGetConfigResponse|GetConfigWithJson|GetConfig|doRequest|doRequests|decryptResponseData|decryptData|Encrypt|Decrypt|checkKeys|setKeys|getRootSecretKey|parseKey|isResponseSignValid)$')
+          selected=[f for f in funcs if wanted.search(f['name']) and f.get('end') and f['end']>f['start']]
+          graph=[]
+          for idx,f in enumerate(selected):
+              safe=re.sub(r'[^A-Za-z0-9_.-]+','_',f['name'])[-110:]
+              cmd=['llvm-objdump','-d','--start-address='+hex(f['start']),'--stop-address='+hex(f['end']),'rootgo.so']
               p=subprocess.run(cmd,text=True,capture_output=True)
-              Path(f'analysis/nthlink-goresym/{i:02d}_{safe}.asm.txt').write_text(p.stdout+'\n'+p.stderr)
-          PY
-
-      - name: Recover relevant embedded strings safely
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          import json,re
-          from pathlib import Path
-          d=json.load(open('goresym.json'))
-          pat=re.compile(r'(?i)(getserver3|nthassets|amazonaws|domainKey|domainKeys|serverPublicKey|apiKey|clientId|GetConfigDoRequestResults|responseBody|responseStatusCode|custom_config|servers|obfuUrls|obfuExcludeHost|RootRequestToken|EncryptedRequest|Authorization|Content-Type)')
-          found=[]
-          def walk(x,path=''):
-              if isinstance(x,dict):
-                  for k,v in x.items(): walk(v,path+'/'+str(k))
-              elif isinstance(x,list):
-                  for i,v in enumerate(x): walk(v,path+f'/{i}')
-              elif isinstance(x,str) and pat.search(x):
-                  # retain field names/endpoints, redact token-like values
-                  y=re.sub(r'(?<![A-Za-z0-9])([A-Za-z0-9_\-+/=]{28,})(?![A-Za-z0-9])','<LONG_TOKEN_REDACTED>',x)
-                  found.append(path+'\t'+y)
-          walk(d)
+              out=p.stdout+'\n'+p.stderr
+              # annotate BL targets with recovered Go names.
+              lines=[]
+              for line in out.splitlines():
+                  m=re.search(r'\bbl\s+0x([0-9a-fA-F]+)',line)
+                  if m:
+                      a=int(m.group(1),16); nm=byaddr.get(a)
+                      if nm:
+                          line += '    ; CALL '+nm
+                          graph.append((f['name'],nm))
+                  lines.append(line)
+              Path(f'analysis/nthlink-pclntab/{idx:02d}_{safe}.asm.txt').write_text('\n'.join(lines)+'\n')
           seen=[]
-          for x in found:
+          for x in graph:
               if x not in seen: seen.append(x)
-          Path('analysis/nthlink-goresym/strings.txt').write_text('\n'.join(seen[:1000])+'\n')
+          Path('analysis/nthlink-pclntab/callgraph.tsv').write_text('caller\tcallee\n'+''.join(a+'\t'+b+'\n' for a,b in seen))
           PY
 
       - name: Commit recovered metadata
@@ -137,10 +170,10 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add analysis/nthlink-goresym/
+          git add analysis/nthlink-pclntab/
           if git diff --cached --quiet; then
             echo 'No recovered metadata changes'
           else
-            git commit -m 'Update recovered nthLink Go symbols'
+            git commit -m 'Recover nthLink root-go pclntab functions'
             git push origin HEAD:main
           fi
