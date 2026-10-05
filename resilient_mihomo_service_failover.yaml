@@ -227,6 +227,30 @@ proxies:
     skip-cert-verify: false
     client-fingerprint: chrome
 
+  - name: "SS-Azure-1-443"
+    type: ss
+    server: 20.107.219.181
+    port: 443
+    cipher: chacha20-ietf-poly1305
+    password: 2fGnKgP8k8EHFuvj
+    udp: true
+
+  - name: "SS-Azure-2-443"
+    type: ss
+    server: 4.231.217.136
+    port: 443
+    cipher: chacha20-ietf-poly1305
+    password: vKzNmQJnP07Ys7Fp
+    udp: true
+
+  - name: "SS-Azure-3-443"
+    type: ss
+    server: 20.107.184.151
+    port: 443
+    cipher: chacha20-ietf-poly1305
+    password: zziXHDOFXc4qRjoj
+    udp: true
+
 proxy-groups:
   - name: "TESTED-MIX"
     type: url-test
@@ -234,6 +258,20 @@ proxy-groups:
       - provider-c-tested
     url: "https://speed.cloudflare.com/__down?bytes=2048"
     interval: 300
+    tolerance: 800
+    timeout: 12000
+    lazy: false
+    max-failed-times: 4
+    expected-status: 200
+
+  - name: "SS-TCP-443"
+    type: url-test
+    proxies:
+      - SS-Azure-1-443
+      - SS-Azure-2-443
+      - SS-Azure-3-443
+    url: "https://speed.cloudflare.com/__down?bytes=2048"
+    interval: 180
     tolerance: 800
     timeout: 12000
     lazy: false
@@ -323,6 +361,7 @@ proxy-groups:
     type: fallback
     proxies:
       - TESTED-MIX
+      - SS-TCP-443
       - TROJAN-TLS-443
       - REALITY-443
       - FASTLY-STABLE
@@ -341,12 +380,16 @@ proxy-groups:
     proxies:
       - AUTO-RESCUE
       - TESTED-MIX
+      - SS-TCP-443
       - TROJAN-TLS-443
       - REALITY-443
       - FASTLY-STABLE
       - FASTLY-PUBLIC
       - PROVIDER-B
       - PROVIDER-A
+      - SS-Azure-1-443
+      - SS-Azure-2-443
+      - SS-Azure-3-443
       - Trojan-JP-443
       - Trojan-KR1-443
       - Trojan-KR2-443
