@@ -11,62 +11,17 @@ profile:
   store-fake-ip: true
 
 proxy-providers:
-  provider-b-vless:
-    type: http
-    url: "https://raw.githubusercontent.com/Baarcuda/vpn-configs/master/top100-vless.txt"
-    path: ./proxy_providers/provider-b-vless.txt
-    interval: 1800
-    health-check:
-      enable: true
-      url: "https://speed.cloudflare.com/__down?bytes=2048"
-      interval: 180
-      timeout: 10000
-      lazy: false
-      expected-status: 200
-    override:
-      additional-prefix: "[B] "
-
-  provider-a-public:
-    type: http
-    url: "https://github.com/Au1rxx/free-vpn-subscriptions/raw/main/output/v2ray-base64.txt"
-    path: ./proxy_providers/provider-a-public.txt
-    interval: 1800
-    health-check:
-      enable: true
-      url: "https://speed.cloudflare.com/__down?bytes=2048"
-      interval: 180
-      timeout: 10000
-      lazy: false
-      expected-status: 200
-    override:
-      additional-prefix: "[A] "
-
-  provider-c-tested:
-    type: http
-    url: "https://raw.githubusercontent.com/MohammadBahemmat/V2ray-Collector/main/Tested.txt"
-    path: ./proxy_providers/provider-c-tested.txt
-    interval: 900
-    health-check:
-      enable: true
-      url: "https://speed.cloudflare.com/__down?bytes=2048"
-      interval: 300
-      timeout: 12000
-      lazy: false
-      expected-status: 200
-    override:
-      additional-prefix: "[C] "
-
   provider-r1-ss44:
     type: http
     url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/hiddify-sub.txt"
     path: ./proxy_providers/provider-r1-ss44.txt
-    interval: 600
+    interval: 300
     health-check:
       enable: true
       url: "https://speed.cloudflare.com/__down?bytes=2048"
-      interval: 300
+      interval: 240
       timeout: 12000
-      lazy: true
+      lazy: false
       expected-status: 200
     override:
       additional-prefix: "[R1] "
@@ -101,202 +56,128 @@ proxy-providers:
     override:
       additional-prefix: "[R3] "
 
+  provider-c-tested:
+    type: http
+    url: "https://raw.githubusercontent.com/MohammadBahemmat/V2ray-Collector/main/Tested.txt"
+    path: ./proxy_providers/provider-c-tested.txt
+    interval: 900
+    health-check:
+      enable: true
+      url: "https://speed.cloudflare.com/__down?bytes=2048"
+      interval: 300
+      timeout: 12000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[C] "
+
+  provider-b-vless:
+    type: http
+    url: "https://raw.githubusercontent.com/Baarcuda/vpn-configs/master/top100-vless.txt"
+    path: ./proxy_providers/provider-b-vless.txt
+    interval: 1800
+    health-check:
+      enable: true
+      url: "https://speed.cloudflare.com/__down?bytes=2048"
+      interval: 300
+      timeout: 12000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[B] "
+
+  provider-a-public:
+    type: http
+    url: "https://github.com/Au1rxx/free-vpn-subscriptions/raw/main/output/v2ray-base64.txt"
+    path: ./proxy_providers/provider-a-public.txt
+    interval: 1800
+    health-check:
+      enable: true
+      url: "https://speed.cloudflare.com/__down?bytes=2048"
+      interval: 300
+      timeout: 12000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[A] "
+
 proxies:
-  - name: "Fastly-223"
+  - name: "R1-GREEN-070"
+    type: ss
+    server: 195.238.126.20
+    port: 9002
+    cipher: aes-256-cfb
+    password: "b8KkNDjEd5QqFyRm"
+    udp: true
+
+  - name: "R1-GREEN-082"
+    type: ss
+    server: 91.201.65.122
+    port: 9070
+    cipher: aes-256-cfb
+    password: "bf7v334KKDV3YDhH"
+    udp: true
+
+  - name: "R1-GREEN-085"
+    type: ss
+    server: 91.201.65.122
+    port: 9065
+    cipher: aes-256-cfb
+    password: "PeHSHm5SqEjBuEXE"
+    udp: true
+
+  - name: "R1-GREEN-093"
+    type: ss
+    server: 91.201.65.122
+    port: 9002
+    cipher: aes-256-cfb
+    password: "b8KkNDjEd5QqFyRm"
+    udp: true
+
+  - name: "R1-GREEN-102-FASTLY"
     type: vless
-    server: 199.232.78.223
+    server: 199.232.78.159
     port: 443
-    uuid: 36e8e5e8-8010-45a1-9fb7-9fa21f7e4c66
+    uuid: 6ead3f4c-023f-4322-b5c4-ac4e327d259d
     udp: true
     tls: true
     servername: ssl.fastly.com
-    client-fingerprint: chrome
     skip-cert-verify: false
     network: ws
     ws-opts:
       path: /
       headers:
         Host: pannn1.global.ssl.fastly.net
-
-  - name: "Fastly-159"
-    type: vless
-    server: 199.232.78.159
-    port: 443
-    uuid: 36e8e5e8-8010-45a1-9fb7-9fa21f7e4c66
-    udp: true
-    tls: true
-    servername: ssl.fastly.com
-    client-fingerprint: chrome
-    skip-cert-verify: false
-    network: ws
-    ws-opts:
-      path: /
-      headers:
-        Host: pannn1.global.ssl.fastly.net
-
-  - name: "Fastly-DNS"
-    type: vless
-    server: pannn1.global.ssl.fastly.net
-    port: 443
-    uuid: 36e8e5e8-8010-45a1-9fb7-9fa21f7e4c66
-    udp: true
-    tls: true
-    servername: ssl.fastly.com
-    client-fingerprint: chrome
-    skip-cert-verify: false
-    network: ws
-    ws-opts:
-      path: /
-      headers:
-        Host: pannn1.global.ssl.fastly.net
-
-  - name: "Fastly-Public-Italy-151"
-    type: vless
-    server: 151.101.56.7
-    port: 443
-    uuid: e0454af2-6fe9-4983-a55d-05e1da202602
-    udp: true
-    tls: true
-    servername: ssl.fastly.com
-    client-fingerprint: chrome
-    skip-cert-verify: false
-    network: ws
-    ws-opts:
-      path: /
-      headers:
-        Host: italyan.global.ssl.fastly.net
-
-  - name: "Fastly-Public-LSJ-159"
-    type: vless
-    server: 199.232.78.159
-    port: 443
-    uuid: e0454af2-6fe9-4983-a55d-05e1da202602
-    udp: true
-    tls: true
-    servername: ssl.fastly.com
-    client-fingerprint: chrome
-    skip-cert-verify: false
-    network: ws
-    ws-opts:
-      path: /
-      headers:
-        Host: lsjaoijji.global.ssl.fastly.net
-
-  - name: "Fastly-Public-Poker-159"
-    type: vless
-    server: 199.232.78.159
-    port: 443
-    uuid: 3d9092f3-2ee2-497a-9732-ee7570531c09
-    udp: true
-    tls: true
-    servername: ssl.fastly.com
-    client-fingerprint: chrome
-    skip-cert-verify: false
-    network: ws
-    ws-opts:
-      path: /
-      headers:
-        Host: pokerrr.global.ssl.fastly.net
-
-  - name: "Reality-Intel-443"
-    type: vless
-    server: 2.26.194.15
-    port: 443
-    uuid: 0a54534f-8a65-42f7-ae91-573ae0bf09b7
-    udp: true
-    tls: true
-    servername: www.intel.com
-    client-fingerprint: firefox
-    network: tcp
-    reality-opts:
-      public-key: vqxKvKPwdM4NB1EnIAy90LSglZM9oTRx995mUQIW2Rg
-      short-id: 6bd15a
-
-  - name: "Reality-GitHub-443"
-    type: vless
-    server: 130.17.25.67
-    port: 443
-    uuid: 1c5ed2e1-56da-41ab-9a78-159d9892ec17
-    udp: true
-    tls: true
-    servername: github.com
-    client-fingerprint: chrome
-    network: tcp
-    flow: xtls-rprx-vision
-    reality-opts:
-      public-key: lHCkAu_DOVFtE-iL2JGrPt44QeTCFijXuRfuGaSni3Q
-      short-id: 9e4eced6e98ed4d4
-
-  - name: "Reality-Yandex-443"
-    type: vless
-    server: usself.yandex-api.com
-    port: 443
-    uuid: 1b7ee703-fa08-4305-8469-ae3e30e61e44
-    udp: true
-    tls: true
-    servername: usself.yandex-api.com
-    client-fingerprint: random
-    network: tcp
-    flow: xtls-rprx-vision
-    reality-opts:
-      public-key: HXFe_cPryw01zqXchAFjZciDAS4UJg1-xScx6vjgjjY
-      short-id: 7f2e9c4b1a8d6e25
-
-  - name: "Trojan-JP-443"
-    type: trojan
-    server: jp2.sanfen001.pics
-    port: 443
-    password: 8800c518-e68a-4441-a45c-cd67855784c8
-    sni: jp1.sanfen001.pics
-    udp: true
-    skip-cert-verify: false
-    client-fingerprint: chrome
-
-  - name: "Trojan-KR1-443"
-    type: trojan
-    server: kr1.sanfen001.pics
-    port: 443
-    password: 8800c518-e68a-4441-a45c-cd67855784c8
-    sni: kr1.sanfen001.pics
-    udp: true
-    skip-cert-verify: false
-    client-fingerprint: chrome
-
-  - name: "Trojan-KR2-443"
-    type: trojan
-    server: kr2.sanfen001.pics
-    port: 443
-    password: 8800c518-e68a-4441-a45c-cd67855784c8
-    sni: kr1.sanfen001.pics
-    udp: true
-    skip-cert-verify: false
-    client-fingerprint: chrome
-
-  - name: "SS-Azure-1-443"
-    type: ss
-    server: 20.107.219.181
-    port: 443
-    cipher: chacha20-ietf-poly1305
-    password: 2fGnKgP8k8EHFuvj
-    udp: true
-
-  - name: "SS-Azure-2-443"
-    type: ss
-    server: 4.231.217.136
-    port: 443
-    cipher: chacha20-ietf-poly1305
-    password: vKzNmQJnP07Ys7Fp
-    udp: true
-
-  - name: "SS-Azure-3-443"
-    type: ss
-    server: 20.107.184.151
-    port: 443
-    cipher: chacha20-ietf-poly1305
-    password: zziXHDOFXc4qRjoj
-    udp: true
 
 proxy-groups:
+  - name: "R1-GREEN-PINNED"
+    type: url-test
+    proxies:
+      - R1-GREEN-082
+      - R1-GREEN-085
+      - R1-GREEN-093
+      - R1-GREEN-070
+      - R1-GREEN-102-FASTLY
+    url: "https://speed.cloudflare.com/__down?bytes=2048"
+    interval: 120
+    tolerance: 900
+    timeout: 12000
+    lazy: false
+    max-failed-times: 4
+    expected-status: 200
+
+  - name: "R1-DISCOVERY"
+    type: url-test
+    use:
+      - provider-r1-ss44
+    url: "https://speed.cloudflare.com/__down?bytes=2048"
+    interval: 240
+    tolerance: 1200
+    timeout: 12000
+    lazy: false
+    max-failed-times: 4
+    expected-status: 200
+
   - name: "ROTATING-RESCUE"
     type: url-test
     use:
@@ -305,7 +186,7 @@ proxy-groups:
       - provider-r3-whitelist
     url: "https://speed.cloudflare.com/__down?bytes=2048"
     interval: 300
-    tolerance: 1200
+    tolerance: 1500
     timeout: 12000
     lazy: false
     max-failed-times: 4
@@ -317,79 +198,10 @@ proxy-groups:
       - provider-c-tested
     url: "https://speed.cloudflare.com/__down?bytes=2048"
     interval: 300
-    tolerance: 800
-    timeout: 12000
-    lazy: false
-    max-failed-times: 4
-    expected-status: 200
-
-  - name: "SS-TCP-443"
-    type: url-test
-    proxies:
-      - SS-Azure-1-443
-      - SS-Azure-2-443
-      - SS-Azure-3-443
-    url: "https://speed.cloudflare.com/__down?bytes=2048"
-    interval: 600
-    tolerance: 800
+    tolerance: 1000
     timeout: 12000
     lazy: true
     max-failed-times: 4
-    expected-status: 200
-
-  - name: "TROJAN-TLS-443"
-    type: url-test
-    proxies:
-      - Trojan-JP-443
-      - Trojan-KR1-443
-      - Trojan-KR2-443
-    url: "https://speed.cloudflare.com/__down?bytes=2048"
-    interval: 120
-    tolerance: 250
-    timeout: 10000
-    lazy: false
-    max-failed-times: 2
-    expected-status: 200
-
-  - name: "REALITY-443"
-    type: url-test
-    proxies:
-      - Reality-Intel-443
-      - Reality-GitHub-443
-      - Reality-Yandex-443
-    url: "https://speed.cloudflare.com/__down?bytes=2048"
-    interval: 120
-    tolerance: 250
-    timeout: 10000
-    lazy: false
-    max-failed-times: 2
-    expected-status: 200
-
-  - name: "FASTLY-STABLE"
-    type: fallback
-    proxies:
-      - Fastly-223
-      - Fastly-159
-      - Fastly-DNS
-    url: "https://speed.cloudflare.com/__down?bytes=2048"
-    interval: 120
-    timeout: 10000
-    max-failed-times: 2
-    lazy: false
-    expected-status: 200
-
-  - name: "FASTLY-PUBLIC"
-    type: url-test
-    proxies:
-      - Fastly-Public-Italy-151
-      - Fastly-Public-LSJ-159
-      - Fastly-Public-Poker-159
-    url: "https://speed.cloudflare.com/__down?bytes=2048"
-    interval: 120
-    tolerance: 250
-    timeout: 10000
-    lazy: false
-    max-failed-times: 2
     expected-status: 200
 
   - name: "PROVIDER-B"
@@ -397,11 +209,11 @@ proxy-groups:
     use:
       - provider-b-vless
     url: "https://speed.cloudflare.com/__down?bytes=2048"
-    interval: 180
-    tolerance: 350
-    timeout: 10000
-    lazy: false
-    max-failed-times: 2
+    interval: 300
+    tolerance: 900
+    timeout: 12000
+    lazy: true
+    max-failed-times: 3
     expected-status: 200
 
   - name: "PROVIDER-A"
@@ -409,26 +221,24 @@ proxy-groups:
     use:
       - provider-a-public
     url: "https://speed.cloudflare.com/__down?bytes=2048"
-    interval: 180
-    tolerance: 350
-    timeout: 10000
-    lazy: false
-    max-failed-times: 2
+    interval: 300
+    tolerance: 900
+    timeout: 12000
+    lazy: true
+    max-failed-times: 3
     expected-status: 200
 
   - name: "AUTO-RESCUE"
     type: fallback
     proxies:
+      - R1-GREEN-PINNED
+      - R1-DISCOVERY
       - ROTATING-RESCUE
       - TESTED-MIX
-      - TROJAN-TLS-443
-      - REALITY-443
-      - FASTLY-STABLE
-      - FASTLY-PUBLIC
       - PROVIDER-B
       - PROVIDER-A
     url: "https://speed.cloudflare.com/__down?bytes=2048"
-    interval: 180
+    interval: 120
     timeout: 12000
     max-failed-times: 3
     lazy: false
@@ -438,30 +248,17 @@ proxy-groups:
     type: select
     proxies:
       - AUTO-RESCUE
+      - R1-GREEN-PINNED
+      - R1-DISCOVERY
       - ROTATING-RESCUE
       - TESTED-MIX
-      - SS-TCP-443
-      - TROJAN-TLS-443
-      - REALITY-443
-      - FASTLY-STABLE
-      - FASTLY-PUBLIC
       - PROVIDER-B
       - PROVIDER-A
-      - SS-Azure-1-443
-      - SS-Azure-2-443
-      - SS-Azure-3-443
-      - Trojan-JP-443
-      - Trojan-KR1-443
-      - Trojan-KR2-443
-      - Reality-Intel-443
-      - Reality-GitHub-443
-      - Reality-Yandex-443
-      - Fastly-223
-      - Fastly-159
-      - Fastly-DNS
-      - Fastly-Public-Italy-151
-      - Fastly-Public-LSJ-159
-      - Fastly-Public-Poker-159
+      - R1-GREEN-082
+      - R1-GREEN-085
+      - R1-GREEN-093
+      - R1-GREEN-070
+      - R1-GREEN-102-FASTLY
       - DIRECT
 
 rules:
