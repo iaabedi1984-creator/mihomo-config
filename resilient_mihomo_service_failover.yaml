@@ -90,6 +90,54 @@ proxies:
       headers:
         Host: pannn1.global.ssl.fastly.net
 
+  - name: "Fastly-Public-Italy-151"
+    type: vless
+    server: 151.101.56.7
+    port: 443
+    uuid: e0454af2-6fe9-4983-a55d-05e1da202602
+    udp: true
+    tls: true
+    servername: ssl.fastly.com
+    client-fingerprint: chrome
+    skip-cert-verify: false
+    network: ws
+    ws-opts:
+      path: /
+      headers:
+        Host: italyan.global.ssl.fastly.net
+
+  - name: "Fastly-Public-LSJ-159"
+    type: vless
+    server: 199.232.78.159
+    port: 443
+    uuid: e0454af2-6fe9-4983-a55d-05e1da202602
+    udp: true
+    tls: true
+    servername: ssl.fastly.com
+    client-fingerprint: chrome
+    skip-cert-verify: false
+    network: ws
+    ws-opts:
+      path: /
+      headers:
+        Host: lsjaoijji.global.ssl.fastly.net
+
+  - name: "Fastly-Public-Poker-159"
+    type: vless
+    server: 199.232.78.159
+    port: 443
+    uuid: 3d9092f3-2ee2-497a-9732-ee7570531c09
+    udp: true
+    tls: true
+    servername: ssl.fastly.com
+    client-fingerprint: chrome
+    skip-cert-verify: false
+    network: ws
+    ws-opts:
+      path: /
+      headers:
+        Host: pokerrr.global.ssl.fastly.net
+
 proxy-groups:
   - name: "FASTLY-STABLE"
     type: fallback
@@ -102,6 +150,20 @@ proxy-groups:
     timeout: 8000
     max-failed-times: 2
     lazy: false
+    expected-status: 204
+
+  - name: "FASTLY-PUBLIC"
+    type: url-test
+    proxies:
+      - Fastly-Public-Italy-151
+      - Fastly-Public-LSJ-159
+      - Fastly-Public-Poker-159
+    url: "https://www.gstatic.com/generate_204"
+    interval: 120
+    tolerance: 250
+    timeout: 8000
+    lazy: false
+    max-failed-times: 2
     expected-status: 204
 
   - name: "PROVIDER-B"
@@ -132,6 +194,7 @@ proxy-groups:
     type: fallback
     proxies:
       - FASTLY-STABLE
+      - FASTLY-PUBLIC
       - PROVIDER-B
       - PROVIDER-A
     url: "https://www.gstatic.com/generate_204"
@@ -146,11 +209,15 @@ proxy-groups:
     proxies:
       - AUTO-RESCUE
       - FASTLY-STABLE
+      - FASTLY-PUBLIC
       - PROVIDER-B
       - PROVIDER-A
       - Fastly-223
       - Fastly-159
       - Fastly-DNS
+      - Fastly-Public-Italy-151
+      - Fastly-Public-LSJ-159
+      - Fastly-Public-Poker-159
       - DIRECT
 
 rules:
