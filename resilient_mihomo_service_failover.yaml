@@ -13,33 +13,33 @@ profile:
 proxy-providers:
   provider-b-vless:
     type: http
-    url: "https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt"
-    path: ./proxy_providers/provider-b-vless.txt
-    interval: 900
-    health-check:
-      enable: true
-      url: "https://cp.cloudflare.com/generate_204"
-      interval: 120
-      timeout: 6000
-      lazy: false
-      expected-status: 204
-    override:
-      additional-prefix: "[F] "
-
-  provider-a-public:
-    type: http
     url: "https://raw.githubusercontent.com/Baarcuda/vpn-configs/master/top100-vless.txt"
-    path: ./proxy_providers/provider-a-public.txt
-    interval: 900
+    path: ./proxy_providers/provider-b-vless.txt
+    interval: 1800
     health-check:
       enable: true
-      url: "https://cp.cloudflare.com/generate_204"
+      url: "https://www.gstatic.com/generate_204"
       interval: 180
-      timeout: 6000
+      timeout: 8000
       lazy: false
       expected-status: 204
     override:
       additional-prefix: "[B] "
+
+  provider-a-public:
+    type: http
+    url: "https://github.com/Au1rxx/free-vpn-subscriptions/raw/main/output/v2ray-base64.txt"
+    path: ./proxy_providers/provider-a-public.txt
+    interval: 1800
+    health-check:
+      enable: true
+      url: "https://www.gstatic.com/generate_204"
+      interval: 180
+      timeout: 8000
+      lazy: false
+      expected-status: 204
+    override:
+      additional-prefix: "[A] "
 
 proxies:
   - name: "Fastly-223"
@@ -97,10 +97,10 @@ proxy-groups:
       - Fastly-223
       - Fastly-159
       - Fastly-DNS
-    url: "https://cp.cloudflare.com/generate_204"
+    url: "https://www.gstatic.com/generate_204"
     interval: 120
-    timeout: 6000
-    max-failed-times: 1
+    timeout: 8000
+    max-failed-times: 2
     lazy: false
     expected-status: 204
 
@@ -108,36 +108,36 @@ proxy-groups:
     type: url-test
     use:
       - provider-b-vless
-    url: "https://cp.cloudflare.com/generate_204"
-    interval: 120
-    tolerance: 250
-    timeout: 6000
+    url: "https://www.gstatic.com/generate_204"
+    interval: 180
+    tolerance: 350
+    timeout: 8000
     lazy: false
-    max-failed-times: 1
+    max-failed-times: 2
     expected-status: 204
 
   - name: "PROVIDER-A"
     type: url-test
     use:
       - provider-a-public
-    url: "https://cp.cloudflare.com/generate_204"
+    url: "https://www.gstatic.com/generate_204"
     interval: 180
-    tolerance: 300
-    timeout: 6000
+    tolerance: 350
+    timeout: 8000
     lazy: false
-    max-failed-times: 1
+    max-failed-times: 2
     expected-status: 204
 
   - name: "AUTO-RESCUE"
     type: fallback
     proxies:
-      - PROVIDER-B
       - FASTLY-STABLE
+      - PROVIDER-B
       - PROVIDER-A
-    url: "https://cp.cloudflare.com/generate_204"
-    interval: 90
-    timeout: 7000
-    max-failed-times: 1
+    url: "https://www.gstatic.com/generate_204"
+    interval: 120
+    timeout: 10000
+    max-failed-times: 2
     lazy: false
     expected-status: 204
 
@@ -145,8 +145,8 @@ proxy-groups:
     type: select
     proxies:
       - AUTO-RESCUE
-      - PROVIDER-B
       - FASTLY-STABLE
+      - PROVIDER-B
       - PROVIDER-A
       - Fastly-223
       - Fastly-159
