@@ -1,0 +1,142 @@
+name: Recover nthLink with gosym
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/recover-nthlink-gosym.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download official nthLink APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 3 https://www.downloadnth.com/android.html -o android.html
+          python3 - <<'PY' > apk_url.txt
+          import re
+          from urllib.parse import urljoin
+          html=open('android.html',encoding='utf-8',errors='ignore').read()
+          links=re.findall(r'href=["\']([^"\']+\.apk(?:\?[^"\']*)?)["\']',html,re.I)
+          if not links: raise SystemExit('APK link not found')
+          print(urljoin('https://www.downloadnth.com/android.html',links[0]))
+          PY
+          curl -fL --retry 3 "$(cat apk_url.txt)" -o nthlink.apk
+          rm -rf apk && mkdir apk
+          unzip -q nthlink.apk -d apk
+          rootlib="$(grep -l -a 'teon.com/root-go/root.apiGetConfigFromAWS' apk/lib/*/*.so | head -n1 || true)"
+          test -n "$rootlib"
+          cp "$rootlib" rootgo.so
+          echo "rootlib=$rootlib"
+
+      - name: Recover functions using debug/gosym
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p analysis/nthlink-gosym
+          cat > /tmp/gosymdump.go <<'EOF'
+          package main
+          import (
+            "debug/elf"
+            "debug/gosym"
+            "encoding/json"
+            "fmt"
+            "os"
+            "sort"
+            "strings"
+          )
+          type F struct { Name string `json:"name"`; Entry uint64 `json:"entry"`; End uint64 `json:"end"` }
+          func main() {
+            ef, err := elf.Open("rootgo.so"); if err != nil { panic(err) }; defer ef.Close()
+            pcln := ef.Section(".gopclntab"); text := ef.Section(".text")
+            if pcln==nil || text==nil { panic("missing .gopclntab or .text") }
+            data,err:=pcln.Data(); if err!=nil { panic(err) }
+            lt:=gosym.NewLineTable(data,text.Addr)
+            tab,err:=gosym.NewTable(nil,lt); if err!=nil { panic(err) }
+            fs:=make([]F,0,len(tab.Funcs))
+            for _,fn:=range tab.Funcs { fs=append(fs,F{Name:fn.Name,Entry:fn.Entry,End:fn.End}) }
+            sort.Slice(fs,func(i,j int)bool{return fs[i].Entry<fs[j].Entry})
+            enc,_:=json.MarshalIndent(fs,"","  "); os.WriteFile("analysis/nthlink-gosym/all-functions.json",enc,0644)
+            out:="name\tentry\tend\n"
+            for _,f:=range fs { if strings.Contains(f.Name,"teon.com/root-go/root.") { out += fmt.Sprintf("%s\t0x%x\t0x%x\n",f.Name,f.Entry,f.End) } }
+            os.WriteFile("analysis/nthlink-gosym/root-functions.tsv",[]byte(out),0644)
+            fmt.Printf("text=0x%x pcln=0x%x funcs=%d\n",text.Addr,pcln.Addr,len(fs))
+          }
+          EOF
+          go run /tmp/gosymdump.go
+          grep -E 'GetConfig|doRequest|decrypt|encrypt|checkKeys|setKeys|getRootSecretKey|parseKey|isResponseSignValid' analysis/nthlink-gosym/root-functions.tsv || true
+
+      - name: Install ARM64 binutils and disassemble selected functions
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq binutils-aarch64-linux-gnu
+          python3 - <<'PY'
+          import json,re,subprocess
+          from pathlib import Path
+          funcs=json.load(open('analysis/nthlink-gosym/all-functions.json'))
+          byaddr={int(f['entry']):f['name'] for f in funcs}
+          wanted=re.compile(r'(?i)teon\.com/root-go/root\.(apiGetConfigFromAWS|getConfigFromAWS|apiGetConfig|getConfig|handleGetConfigResponse|GetConfigWithJson|GetConfig|doRequest|doRequests|verifyAndDecryptResponseBody|decryptResponseData|decryptData|Encrypt|Decrypt|checkKeys|setKeys|getRootSecretKey|parseKey|isResponseSignValid)$')
+          sel=[f for f in funcs if wanted.search(f['name']) and f['end']>f['entry']]
+          edges=[]
+          for idx,f in enumerate(sel):
+            safe=re.sub(r'[^A-Za-z0-9_.-]+','_',f['name'])[-110:]
+            p=subprocess.run(['aarch64-linux-gnu-objdump','-d','--start-address='+hex(f['entry']),'--stop-address='+hex(f['end']),'rootgo.so'],text=True,capture_output=True)
+            lines=[]
+            for line in (p.stdout+'\n'+p.stderr).splitlines():
+              m=re.search(r'\bbl\s+(?:0x)?([0-9a-fA-F]+)',line)
+              if m:
+                a=int(m.group(1),16); nm=byaddr.get(a)
+                if nm:
+                  line += '    ; CALL '+nm
+                  edges.append((f['name'],nm))
+              lines.append(line)
+            Path(f'analysis/nthlink-gosym/{idx:02d}_{safe}.asm.txt').write_text('\n'.join(lines)+'\n')
+          uniq=[]
+          for e in edges:
+            if e not in uniq: uniq.append(e)
+          Path('analysis/nthlink-gosym/callgraph.tsv').write_text('caller\tcallee\n'+''.join(a+'\t'+b+'\n' for a,b in uniq))
+          print('selected',len(sel),'edges',len(uniq))
+          PY
+
+      - name: Extract high-signal static strings
+        shell: bash
+        run: |
+          set -euo pipefail
+          strings -a -n 4 rootgo.so > /tmp/rootstrings.txt
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          pat=re.compile(r'(?i)(getserver3|nthassets|amazonaws|RootRequestToken|EncryptedRequest|domainKey|domainKeys|serverPublicKey|apiKey|clientId|responseBody|responseStatusCode|custom_config|obfuUrls|obfuExcludeHost|Content-Type|Authorization|User-Agent)')
+          vals=[]
+          for s in Path('/tmp/rootstrings.txt').read_text(errors='ignore').splitlines():
+            if pat.search(s):
+              s=re.sub(r'(?<![A-Za-z0-9])([A-Za-z0-9_\-+/=]{32,})(?![A-Za-z0-9])','<LONG_TOKEN_REDACTED>',s)
+              if s not in vals: vals.append(s)
+          Path('analysis/nthlink-gosym/high-signal-strings.txt').write_text('\n'.join(vals[:800])+'\n')
+          PY
+          cp apk_url.txt analysis/nthlink-gosym/
+
+      - name: Commit recovered outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/nthlink-gosym/
+          if git diff --cached --quiet; then
+            echo 'No gosym changes'
+          else
+            git commit -m 'Recover nthLink functions with gosym'
+            git push origin HEAD:main
+          fi
