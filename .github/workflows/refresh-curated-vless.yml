@@ -1,0 +1,76 @@
+name: Refresh Curated VLESS 443
+
+on:
+  schedule:
+    - cron: '11,41 * * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/refresh-curated-vless.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build curated provider
+        shell: bash
+        run: |
+          set -euo pipefail
+          TMP="$(mktemp -d)"
+          ALL="$TMP/all.txt"
+          OUT="$TMP/curated.txt"
+          : > "$ALL"
+
+          fetch_uri() {
+            local url="$1"
+            local file="$2"
+            if curl -fsSL --retry 3 --connect-timeout 15 --max-time 45 "$url" -o "$file"; then
+              tr -d '\r' < "$file" >> "$ALL"
+              printf '\n' >> "$ALL"
+            fi
+          }
+
+          fetch_uri "https://raw.githubusercontent.com/MahanKenway/Freedom-V2Ray/main/configs/vless.txt" "$TMP/freedom.txt"
+          fetch_uri "https://raw.githubusercontent.com/Baarcuda/vpn-configs/master/top100-vless.txt" "$TMP/baarcuda.txt"
+          fetch_uri "https://raw.githubusercontent.com/ZendanTeam/SS44-sub/main/SS44-gold.txt" "$TMP/ss44.txt"
+
+          grep '^vless://' "$ALL" \
+            | grep -E '@[^?[:space:]]+:443\?' \
+            | grep -Ei 'security=(reality|tls)' \
+            | grep -Evi 'allowinsecure=1|insecure=1' \
+            | awk '!seen[$0]++' > "$TMP/eligible.txt" || true
+
+          {
+            grep -i 'security=reality' "$TMP/eligible.txt" || true
+            grep -i 'security=tls' "$TMP/eligible.txt" | grep -vi 'security=reality' || true
+          } | awk '!seen[$0]++' | head -n 60 > "$OUT"
+
+          COUNT="$(wc -l < "$OUT" | tr -d ' ')"
+          echo "Curated nodes: $COUNT"
+          if [ "$COUNT" -lt 5 ]; then
+            echo "Too few curated nodes; keeping previous provider"
+            exit 1
+          fi
+
+          mv "$OUT" curated-vless-443.txt
+
+      - name: Commit provider update
+        shell: bash
+        run: |
+          if git diff --quiet -- curated-vless-443.txt; then
+            echo "No provider changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add curated-vless-443.txt
+          git commit -m "Refresh curated VLESS 443 provider"
+          git push
