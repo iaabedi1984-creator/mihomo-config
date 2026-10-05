@@ -18,11 +18,11 @@ proxy-providers:
     interval: 1800
     health-check:
       enable: true
-      url: "https://www.gstatic.com/generate_204"
+      url: "https://speed.cloudflare.com/__down?bytes=2048"
       interval: 180
-      timeout: 8000
+      timeout: 10000
       lazy: false
-      expected-status: 204
+      expected-status: 200
     override:
       additional-prefix: "[B] "
 
@@ -33,11 +33,11 @@ proxy-providers:
     interval: 1800
     health-check:
       enable: true
-      url: "https://www.gstatic.com/generate_204"
+      url: "https://speed.cloudflare.com/__down?bytes=2048"
       interval: 180
-      timeout: 8000
+      timeout: 10000
       lazy: false
-      expected-status: 204
+      expected-status: 200
     override:
       additional-prefix: "[A] "
 
@@ -48,11 +48,11 @@ proxy-providers:
     interval: 900
     health-check:
       enable: true
-      url: "https://www.gstatic.com/generate_204"
-      interval: 180
-      timeout: 8000
+      url: "https://speed.cloudflare.com/__down?bytes=2048"
+      interval: 120
+      timeout: 10000
       lazy: false
-      expected-status: 204
+      expected-status: 200
     override:
       additional-prefix: "[C] "
 
@@ -197,32 +197,76 @@ proxies:
       public-key: HXFe_cPryw01zqXchAFjZciDAS4UJg1-xScx6vjgjjY
       short-id: 7f2e9c4b1a8d6e25
 
+  - name: "Trojan-JP-443"
+    type: trojan
+    server: jp2.sanfen001.pics
+    port: 443
+    password: 8800c518-e68a-4441-a45c-cd67855784c8
+    sni: jp1.sanfen001.pics
+    udp: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+
+  - name: "Trojan-KR1-443"
+    type: trojan
+    server: kr1.sanfen001.pics
+    port: 443
+    password: 8800c518-e68a-4441-a45c-cd67855784c8
+    sni: kr1.sanfen001.pics
+    udp: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+
+  - name: "Trojan-KR2-443"
+    type: trojan
+    server: kr2.sanfen001.pics
+    port: 443
+    password: 8800c518-e68a-4441-a45c-cd67855784c8
+    sni: kr1.sanfen001.pics
+    udp: true
+    skip-cert-verify: false
+    client-fingerprint: chrome
+
 proxy-groups:
+  - name: "TROJAN-TLS-443"
+    type: url-test
+    proxies:
+      - Trojan-JP-443
+      - Trojan-KR1-443
+      - Trojan-KR2-443
+    url: "https://speed.cloudflare.com/__down?bytes=2048"
+    interval: 120
+    tolerance: 250
+    timeout: 10000
+    lazy: false
+    max-failed-times: 2
+    expected-status: 200
+
   - name: "REALITY-443"
     type: url-test
     proxies:
       - Reality-Intel-443
       - Reality-GitHub-443
       - Reality-Yandex-443
-    url: "https://www.gstatic.com/generate_204"
+    url: "https://speed.cloudflare.com/__down?bytes=2048"
     interval: 120
     tolerance: 250
-    timeout: 8000
+    timeout: 10000
     lazy: false
     max-failed-times: 2
-    expected-status: 204
+    expected-status: 200
 
   - name: "TESTED-MIX"
     type: url-test
     use:
       - provider-c-tested
-    url: "https://www.gstatic.com/generate_204"
-    interval: 180
+    url: "https://speed.cloudflare.com/__down?bytes=2048"
+    interval: 120
     tolerance: 300
-    timeout: 8000
+    timeout: 10000
     lazy: false
     max-failed-times: 2
-    expected-status: 204
+    expected-status: 200
 
   - name: "FASTLY-STABLE"
     type: fallback
@@ -230,12 +274,12 @@ proxy-groups:
       - Fastly-223
       - Fastly-159
       - Fastly-DNS
-    url: "https://www.gstatic.com/generate_204"
+    url: "https://speed.cloudflare.com/__down?bytes=2048"
     interval: 120
-    timeout: 8000
+    timeout: 10000
     max-failed-times: 2
     lazy: false
-    expected-status: 204
+    expected-status: 200
 
   - name: "FASTLY-PUBLIC"
     type: url-test
@@ -243,64 +287,69 @@ proxy-groups:
       - Fastly-Public-Italy-151
       - Fastly-Public-LSJ-159
       - Fastly-Public-Poker-159
-    url: "https://www.gstatic.com/generate_204"
+    url: "https://speed.cloudflare.com/__down?bytes=2048"
     interval: 120
     tolerance: 250
-    timeout: 8000
+    timeout: 10000
     lazy: false
     max-failed-times: 2
-    expected-status: 204
+    expected-status: 200
 
   - name: "PROVIDER-B"
     type: url-test
     use:
       - provider-b-vless
-    url: "https://www.gstatic.com/generate_204"
+    url: "https://speed.cloudflare.com/__down?bytes=2048"
     interval: 180
     tolerance: 350
-    timeout: 8000
+    timeout: 10000
     lazy: false
     max-failed-times: 2
-    expected-status: 204
+    expected-status: 200
 
   - name: "PROVIDER-A"
     type: url-test
     use:
       - provider-a-public
-    url: "https://www.gstatic.com/generate_204"
+    url: "https://speed.cloudflare.com/__down?bytes=2048"
     interval: 180
     tolerance: 350
-    timeout: 8000
+    timeout: 10000
     lazy: false
     max-failed-times: 2
-    expected-status: 204
+    expected-status: 200
 
   - name: "AUTO-RESCUE"
     type: fallback
     proxies:
+      - TROJAN-TLS-443
       - REALITY-443
       - TESTED-MIX
       - FASTLY-STABLE
       - FASTLY-PUBLIC
       - PROVIDER-B
       - PROVIDER-A
-    url: "https://www.gstatic.com/generate_204"
+    url: "https://speed.cloudflare.com/__down?bytes=2048"
     interval: 120
-    timeout: 10000
+    timeout: 12000
     max-failed-times: 2
     lazy: false
-    expected-status: 204
+    expected-status: 200
 
   - name: "PROXY"
     type: select
     proxies:
       - AUTO-RESCUE
+      - TROJAN-TLS-443
       - REALITY-443
       - TESTED-MIX
       - FASTLY-STABLE
       - FASTLY-PUBLIC
       - PROVIDER-B
       - PROVIDER-A
+      - Trojan-JP-443
+      - Trojan-KR1-443
+      - Trojan-KR2-443
       - Reality-Intel-443
       - Reality-GitHub-443
       - Reality-Yandex-443
