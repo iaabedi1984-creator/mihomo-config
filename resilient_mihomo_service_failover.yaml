@@ -33,9 +33,9 @@ proxy-providers:
     interval: 900
     health-check:
       enable: true
-      url: "https://speed.cloudflare.com/__down?bytes=131072"
-      interval: 600
-      timeout: 20000
+      url: "https://speed.cloudflare.com/__down?bytes=65536"
+      interval: 420
+      timeout: 6500
       lazy: false
       expected-status: 200
     override:
@@ -169,10 +169,11 @@ proxy-groups:
     type: url-test
     use:
       - provider-speed-vless
-    url: "https://speed.cloudflare.com/__down?bytes=131072"
-    interval: 600
-    tolerance: 200
-    timeout: 20000
+      - provider-r1-ss44
+    url: "https://speed.cloudflare.com/__down?bytes=65536"
+    interval: 180
+    tolerance: 350
+    timeout: 6500
     lazy: false
     max-failed-times: 2
     expected-status: 200
@@ -185,12 +186,12 @@ proxy-groups:
       - R1-GREEN-085
       - R1-GREEN-093
       - R1-GREEN-102-FASTLY
-    url: "https://speed.cloudflare.com/__down?bytes=131072"
-    interval: 600
-    tolerance: 250
-    timeout: 20000
+    url: "https://speed.cloudflare.com/__down?bytes=65536"
+    interval: 180
+    tolerance: 350
+    timeout: 6500
     lazy: false
-    max-failed-times: 3
+    max-failed-times: 2
     expected-status: 200
 
   - name: "R1-GREEN-PINNED"
