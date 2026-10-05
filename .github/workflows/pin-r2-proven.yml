@@ -1,0 +1,131 @@
+name: Pin proven R2 US paths
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/pin-r2-proven.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch Mihomo config
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('resilient_mihomo_service_failover.yaml')
+          s = p.read_text()
+
+          proxy_block = '''
+  - name: "R2-HIST-DALLAS-443"
+    type: vless
+    server: 144.31.3.0
+    port: 443
+    uuid: f39a15ee-e776-4b27-a5f0-50c02052771a
+    udp: true
+    tls: true
+    servername: usin1.confstage.app
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /
+      headers:
+        Host: usin1.confstage.app
+
+  - name: "R2-CURR-US-CDN-443"
+    type: vless
+    server: minimize-evenness.cdn-content.com
+    port: 443
+    uuid: 4ea9c6dd-4d73-49f2-82ce-b80b1b5dd646
+    udp: true
+    tls: true
+    servername: minimize-evenness.cdn-content.com
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /ws
+      headers:
+        Host: minimize-evenness.cdn-content.com
+
+  - name: "R2-CURR-US-VIDEO-443"
+    type: vless
+    server: piracy-android.video-streams.org
+    port: 443
+    uuid: fbef862a-2e17-45e4-b624-dc2ccaac9e10
+    udp: true
+    tls: true
+    servername: piracy-android.video-streams.org
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /ws
+      headers:
+        Host: piracy-android.video-streams.org
+
+'''
+
+          if 'R2-HIST-DALLAS-443' not in s:
+              s = s.replace('\nproxy-groups:\n', '\n' + proxy_block + 'proxy-groups:\n', 1)
+
+          group_block = '''  - name: "R2-PROVEN-PINNED"
+    type: fallback
+    proxies:
+      - R2-HIST-DALLAS-443
+      - R2-CURR-US-CDN-443
+      - R2-CURR-US-VIDEO-443
+      - R1-GREEN-102-FASTLY
+    url: "https://www.google.com/robots.txt"
+    interval: 180
+    timeout: 8000
+    lazy: false
+    max-failed-times: 2
+    expected-status: 200
+
+'''
+
+          if 'name: "R2-PROVEN-PINNED"' not in s:
+              s = s.replace('proxy-groups:\n', 'proxy-groups:\n' + group_block, 1)
+
+          # Put proven static snapshot ahead of dynamic discovery groups.
+          marker = '  - name: "AUTO-RESCUE"\n'
+          i = s.find(marker)
+          if i >= 0:
+              j = s.find('    proxies:\n', i)
+              if j >= 0:
+                  k = j + len('    proxies:\n')
+                  if not s.startswith('      - R2-PROVEN-PINNED\n', k):
+                      s = s[:k] + '      - R2-PROVEN-PINNED\n' + s[k:]
+
+          # Expose the group and exact pinned paths for manual emergency selection.
+          pxy = '  - name: "PROXY"\n'
+          i = s.find(pxy)
+          if i >= 0:
+              j = s.find('    proxies:\n', i)
+              if j >= 0:
+                  k = j + len('    proxies:\n')
+                  add = '      - R2-PROVEN-PINNED\n      - R2-HIST-DALLAS-443\n      - R2-CURR-US-CDN-443\n      - R2-CURR-US-VIDEO-443\n'
+                  if '      - R2-HIST-DALLAS-443\n' not in s[k:s.find('\nrules:', k)]:
+                      s = s[:k] + add + s[k:]
+
+          p.write_text(s)
+          PY
+
+      - name: Commit patched config
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add resilient_mihomo_service_failover.yaml
+          git diff --cached --quiet && exit 0
+          git commit -m 'Pin proven R2 US paths ahead of rotating feeds'
+          git push
