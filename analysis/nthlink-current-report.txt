@@ -550,17 +550,3 @@ setOutlineProvider
  466580 <LONG_TOKEN_REDACTED>
  467508 <LONG_TOKEN_REDACTED>
  467532 <LONG_TOKEN_REDACTED>
-
-=== RELEVANT FUNCTION DISASSEMBLY (TRUNCATED) ===
---- <LONG_TOKEN_REDACTED>.txt ---
-objdump: disassemble rootgo.so: no symbol section
---- <LONG_TOKEN_REDACTED>.txt ---
-objdump: disassemble rootgo.so: no symbol section
---- <LONG_TOKEN_REDACTED>.txt ---
-objdump: disassemble rootgo.so: no symbol section
---- <LONG_TOKEN_REDACTED>.txt ---
-objdump: disassemble rootgo.so: no symbol section
---- <LONG_TOKEN_REDACTED>.txt ---
-objdump: disassemble rootgo.so: no symbol section
---- <LONG_TOKEN_REDACTED>.txt ---
-objdump: disassemble rootgo.so: no symbol section

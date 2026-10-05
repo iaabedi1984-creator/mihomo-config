@@ -1,0 +1,1 @@
+objdump: disassemble rootgo.so: no symbol section
