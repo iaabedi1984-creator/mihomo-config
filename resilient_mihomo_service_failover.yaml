@@ -271,10 +271,10 @@ proxy-groups:
       - SS-Azure-2-443
       - SS-Azure-3-443
     url: "https://speed.cloudflare.com/__down?bytes=2048"
-    interval: 180
+    interval: 600
     tolerance: 800
     timeout: 12000
-    lazy: false
+    lazy: true
     max-failed-times: 4
     expected-status: 200
 
@@ -361,7 +361,6 @@ proxy-groups:
     type: fallback
     proxies:
       - TESTED-MIX
-      - SS-TCP-443
       - TROJAN-TLS-443
       - REALITY-443
       - FASTLY-STABLE
