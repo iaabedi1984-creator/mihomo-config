@@ -1,0 +1,48 @@
+name: Build TV R2 US BL subscription
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/build-tv-r2-us-bl.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch current R2 US BL node and build subscriptions
+        shell: bash
+        run: |
+          set -e
+          python - <<'PY'
+          import base64, urllib.request
+
+          src = 'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/BLACK_VLESS_RUS_mobile.txt'
+          text = urllib.request.urlopen(src, timeout=30).read().decode('utf-8', errors='ignore')
+          lines = [x.strip() for x in text.splitlines() if x.strip()]
+
+          # Prefer the exact SS + simple-obfs US [BL] family that worked on the TV/phone tests.
+          candidates = [x for x in lines if x.startswith('ss://') and 'United%20States' in x and '%5BBL%5D' in x]
+          if not candidates:
+              raise SystemExit('No matching US [BL] Shadowsocks node found upstream')
+
+          node = candidates[0]
+          open('tv-r2-us-bl.txt', 'w', encoding='utf-8').write(node + '\n')
+          open('tv-r2-us-bl-v2ray-sub.txt', 'w', encoding='utf-8').write(base64.b64encode(node.encode()).decode() + '\n')
+          print('Built TV subscription from current upstream US [BL] Shadowsocks node')
+          PY
+
+      - name: Commit generated files
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tv-r2-us-bl.txt tv-r2-us-bl-v2ray-sub.txt
+          git diff --cached --quiet && exit 0
+          git commit -m 'Update TV R2 US BL subscription'
+          git push
