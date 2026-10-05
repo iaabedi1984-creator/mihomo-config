@@ -18,11 +18,10 @@ proxy-providers:
     interval: 1800
     health-check:
       enable: true
-      url: "https://www.gstatic.com/generate_204"
+      url: "https://1.1.1.1/help"
       interval: 180
       timeout: 8000
       lazy: false
-      expected-status: 204
     override:
       additional-prefix: "[B] "
 
@@ -33,11 +32,10 @@ proxy-providers:
     interval: 1800
     health-check:
       enable: true
-      url: "https://www.gstatic.com/generate_204"
+      url: "https://1.1.1.1/help"
       interval: 180
       timeout: 8000
       lazy: false
-      expected-status: 204
     override:
       additional-prefix: "[A] "
 
@@ -97,36 +95,33 @@ proxy-groups:
       - Fastly-223
       - Fastly-159
       - Fastly-DNS
-    url: "https://www.gstatic.com/generate_204"
+    url: "https://1.1.1.1/help"
     interval: 120
     timeout: 8000
     max-failed-times: 2
     lazy: false
-    expected-status: 204
 
   - name: "PROVIDER-B"
     type: url-test
     use:
       - provider-b-vless
-    url: "https://www.gstatic.com/generate_204"
+    url: "https://1.1.1.1/help"
     interval: 180
     tolerance: 350
     timeout: 8000
     lazy: false
     max-failed-times: 2
-    expected-status: 204
 
   - name: "PROVIDER-A"
     type: url-test
     use:
       - provider-a-public
-    url: "https://www.gstatic.com/generate_204"
+    url: "https://1.1.1.1/help"
     interval: 180
     tolerance: 350
     timeout: 8000
     lazy: false
     max-failed-times: 2
-    expected-status: 204
 
   - name: "AUTO-RESCUE"
     type: fallback
@@ -134,12 +129,11 @@ proxy-groups:
       - FASTLY-STABLE
       - PROVIDER-B
       - PROVIDER-A
-    url: "https://www.gstatic.com/generate_204"
+    url: "https://1.1.1.1/help"
     interval: 120
     timeout: 10000
     max-failed-times: 2
     lazy: false
-    expected-status: 204
 
   - name: "PROXY"
     type: select
