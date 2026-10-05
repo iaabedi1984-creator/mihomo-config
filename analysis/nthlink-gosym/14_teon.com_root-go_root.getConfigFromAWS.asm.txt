@@ -1,0 +1,99 @@
+
+rootgo.so:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+0000000000384900 <crosscall2@@Base+0x1d7d60>:
+  384900:	aa0803e1 	mov	x1, x8
+  384904:	97f6b73f 	bl	132600 <_cgo_yield@@Base+0x12048>
+  384908:	f94033e6 	ldr	x6, [sp, #96]
+  38490c:	aa0003e7 	mov	x7, x0
+  384910:	17ffffa5 	b	3847a4 <crosscall2@@Base+0x1d7c04>
+  384914:	f9400567 	ldr	x7, [x11, #8]
+  384918:	17ffffa3 	b	3847a4 <crosscall2@@Base+0x1d7c04>
+  38491c:	f90007e0 	str	x0, [sp, #8]
+  384920:	390043e1 	strb	w1, [sp, #16]
+  384924:	f9000fe2 	str	x2, [sp, #24]
+  384928:	f90013e3 	str	x3, [sp, #32]
+  38492c:	f90017e4 	str	x4, [sp, #40]
+  384930:	f9001be5 	str	x5, [sp, #48]
+  384934:	aa1e03e3 	mov	x3, x30
+  384938:	97f858b2 	bl	19ac00 <_cgo_yield@@Base+0x7a648>    ; CALL runtime.unspillArgs
+  38493c:	f94007e0 	ldr	x0, [sp, #8]
+  384940:	394043e1 	ldrb	w1, [sp, #16]
+  384944:	f9400fe2 	ldr	x2, [sp, #24]
+  384948:	f94013e3 	ldr	x3, [sp, #32]
+  38494c:	f94017e4 	ldr	x4, [sp, #40]
+  384950:	f9401be5 	ldr	x5, [sp, #48]
+  384954:	17ffff7f 	b	384750 <crosscall2@@Base+0x1d7bb0>
+	...
+  384960:	f9400b90 	ldr	x16, [x28, #16]
+  384964:	d10043f1 	sub	x17, sp, #0x10
+  384968:	eb10023f 	cmp	x17, x16
+  38496c:	540009a9 	b.ls	384aa0 <crosscall2@@Base+0x1d7f00>  // b.plast
+  384970:	f8170ffe 	str	x30, [sp, #-144]!
+  384974:	f81f83fd 	stur	x29, [sp, #-8]
+  384978:	d10023fd 	sub	x29, sp, #0x8
+  38497c:	f9004fe0 	str	x0, [sp, #152]
+  384980:	f90057e2 	str	x2, [sp, #168]
+  384984:	f9005be3 	str	x3, [sp, #176]
+  384988:	97ffefa6 	bl	380820 <crosscall2@@Base+0x1d3c80>
+  38498c:	f9001be0 	str	x0, [sp, #48]
+  384990:	b4000421 	cbz	x1, 384a14 <crosscall2@@Base+0x1d7e74>
+  384994:	f9400c21 	ldr	x1, [x1, #24]
+  384998:	aa0203e0 	mov	x0, x2
+  38499c:	d63f0020 	blr	x1
+  3849a0:	a904ffff 	stp	xzr, xzr, [sp, #72]
+  3849a4:	97f82b1f 	bl	18f620 <_cgo_yield@@Base+0x6f068>
+  3849a8:	f00001a1 	adrp	x1, 3bb000 <res_search@plt+0x23d90>
+  3849ac:	910f0021 	add	x1, x1, #0x3c0
+  3849b0:	f90027e1 	str	x1, [sp, #72]
+  3849b4:	f9002be0 	str	x0, [sp, #80]
+  3849b8:	a905ffff 	stp	xzr, xzr, [sp, #88]
+  3849bc:	a906ffff 	stp	xzr, xzr, [sp, #104]
+  3849c0:	a907ffff 	stp	xzr, xzr, [sp, #120]
+  3849c4:	d503201f 	nop
+  3849c8:	10000bc1 	adr	x1, 384b40 <crosscall2@@Base+0x1d7fa0>
+  3849cc:	f9002fe1 	str	x1, [sp, #88]
+  3849d0:	d2800281 	mov	x1, #0x14                  	// #20
+  3849d4:	f90037e1 	str	x1, [sp, #104]
+  3849d8:	90ffe8c1 	adrp	x1, 9c000 <_cgo_yield@@Base-0x845b8>
+  3849dc:	913dd021 	add	x1, x1, #0xf74
+  3849e0:	f90033e1 	str	x1, [sp, #96]
+  3849e4:	b24003e1 	orr	x1, xzr, #0x1
+  3849e8:	f9003fe1 	str	x1, [sp, #120]
+  3849ec:	f90043e1 	str	x1, [sp, #128]
+  3849f0:	910123e2 	add	x2, sp, #0x48
+  3849f4:	f9003be2 	str	x2, [sp, #112]
+  3849f8:	f00013fb 	adrp	x27, 603000 <res_search@plt+0x26bd90>
+  3849fc:	f945cb60 	ldr	x0, [x27, #2960]
+  384a00:	b27f03e2 	orr	x2, xzr, #0x2
+  384a04:	910163e3 	add	x3, sp, #0x58
+  384a08:	aa1f03e1 	mov	x1, xzr
+  384a0c:	97fa0c51 	bl	207b50 <crosscall2@@Base+0x5afb0>
+  384a10:	f9401be0 	ldr	x0, [sp, #48]
+  384a14:	b4000400 	cbz	x0, 384a94 <crosscall2@@Base+0x1d7ef4>
+  384a18:	a903ffff 	stp	xzr, xzr, [sp, #56]
+  384a1c:	f9400801 	ldr	x1, [x0, #16]
+  384a20:	aa0103e0 	mov	x0, x1
+  384a24:	97f82adf 	bl	18f5a0 <_cgo_yield@@Base+0x6efe8>
+  384a28:	f00001a1 	adrp	x1, 3bb000 <res_search@plt+0x23d90>
+  384a2c:	91180021 	add	x1, x1, #0x600
+  384a30:	f9001fe1 	str	x1, [sp, #56]
+  384a34:	f90023e0 	str	x0, [sp, #64]
+  384a38:	a905ffff 	stp	xzr, xzr, [sp, #88]
+  384a3c:	a906ffff 	stp	xzr, xzr, [sp, #104]
+  384a40:	a907ffff 	stp	xzr, xzr, [sp, #120]
+  384a44:	d503201f 	nop
+  384a48:	10000441 	adr	x1, 384ad0 <crosscall2@@Base+0x1d7f30>
+  384a4c:	f9002fe1 	str	x1, [sp, #88]
+  384a50:	b27f0fe1 	orr	x1, xzr, #0x1e
+  384a54:	f90037e1 	str	x1, [sp, #104]
+  384a58:	b0ffe8e1 	adrp	x1, a1000 <_cgo_yield@@Base-0x7f5b8>
+  384a5c:	912ec821 	add	x1, x1, #0xbb2
+  384a60:	f90033e1 	str	x1, [sp, #96]
+  384a64:	b24003e1 	orr	x1, xzr, #0x1
+  384a68:	f9003fe1 	str	x1, [sp, #120]
+  384a6c:	f90043e1 	str	x1, [sp, #128]
+

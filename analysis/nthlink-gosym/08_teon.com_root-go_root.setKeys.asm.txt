@@ -1,0 +1,60 @@
+
+rootgo.so:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+0000000000382f20 <crosscall2@@Base+0x1d6380>:
+  382f20:	91000421 	add	x1, x1, #0x1
+  382f24:	eb01007f 	cmp	x3, x1
+  382f28:	540000ed 	b.le	382f44 <crosscall2@@Base+0x1d63a4>
+  382f2c:	900013bb 	adrp	x27, 5f6000 <res_search@plt+0x25ed90>
+  382f30:	f9410765 	ldr	x5, [x27, #520]
+  382f34:	38616886 	ldrb	w6, [x4, x1]
+  382f38:	eb05003f 	cmp	x1, x5
+  382f3c:	54fffe83 	b.cc	382f0c <crosscall2@@Base+0x1d636c>  // b.lo, b.ul, b.last
+  382f40:	14000008 	b	382f60 <crosscall2@@Base+0x1d63c0>
+  382f44:	aa0003e1 	mov	x1, x0
+  382f48:	aa0303e2 	mov	x2, x3
+  382f4c:	aa1f03e0 	mov	x0, xzr
+  382f50:	97f85304 	bl	197b60 <_cgo_yield@@Base+0x775a8>
+  382f54:	a97ffbfd 	ldp	x29, x30, [sp, #-8]
+  382f58:	910103ff 	add	sp, sp, #0x40
+  382f5c:	d65f03c0 	ret
+  382f60:	aa0103e0 	mov	x0, x1
+  382f64:	aa0503e1 	mov	x1, x5
+  382f68:	97f868ca 	bl	19d290 <_cgo_topofstack@@Base+0x380>    ; CALL runtime.panicSliceB
+  382f6c:	d503201f 	nop
+  382f70:	aa1e03e3 	mov	x3, x30
+  382f74:	97f85f23 	bl	19ac00 <_cgo_yield@@Base+0x7a648>    ; CALL runtime.unspillArgs
+  382f78:	17ffffce 	b	382eb0 <crosscall2@@Base+0x1d6310>
+  382f7c:	00000000 	udf	#0
+  382f80:	f9400b90 	ldr	x16, [x28, #16]
+  382f84:	eb3063ff 	cmp	sp, x16
+  382f88:	54000509 	b.ls	383028 <crosscall2@@Base+0x1d6488>  // b.plast
+  382f8c:	f81c0ffe 	str	x30, [sp, #-64]!
+  382f90:	f81f83fd 	stur	x29, [sp, #-8]
+  382f94:	d10023fd 	sub	x29, sp, #0x8
+  382f98:	f90027e0 	str	x0, [sp, #72]
+  382f9c:	b50001e1 	cbnz	x1, 382fd8 <crosscall2@@Base+0x1d6438>
+  382fa0:	f00002a0 	adrp	x0, 3d9000 <res_search@plt+0x41d90>
+  382fa4:	910e8000 	add	x0, x0, #0x3a0
+  382fa8:	97f6c61a 	bl	134810 <_cgo_yield@@Base+0x14258>
+  382fac:	d2800281 	mov	x1, #0x14                  	// #20
+  382fb0:	f9000401 	str	x1, [x0, #8]
+  382fb4:	d0ffe8c1 	adrp	x1, 9c000 <_cgo_yield@@Base-0x845b8>
+  382fb8:	913d8021 	add	x1, x1, #0xf60
+  382fbc:	f9000001 	str	x1, [x0]
+  382fc0:	aa0003e1 	mov	x1, x0
+  382fc4:	d503201f 	nop
+  382fc8:	104ec800 	adr	x0, 4208c8 <res_search@plt+0x89658>
+  382fcc:	a97ffbfd 	ldp	x29, x30, [sp, #-8]
+  382fd0:	910103ff 	add	sp, sp, #0x40
+  382fd4:	d65f03c0 	ret
+  382fd8:	f9002be1 	str	x1, [sp, #80]
+  382fdc:	f90027e0 	str	x0, [sp, #72]
+  382fe0:	97ffffb4 	bl	382eb0 <crosscall2@@Base+0x1d6310>
+  382fe4:	aa0003e2 	mov	x2, x0
+  382fe8:	aa0103e3 	mov	x3, x1
+  382fec:	f94027e0 	ldr	x0, [sp, #72]
+

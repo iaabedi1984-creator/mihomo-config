@@ -1,0 +1,136 @@
+
+rootgo.so:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+0000000000381af0 <crosscall2@@Base+0x1d4f50>:
+  381af0:	97fbcfd0 	bl	275a30 <crosscall2@@Base+0xc8e90>
+  381af4:	f100001f 	cmp	x0, #0x0
+  381af8:	9a9f07e4 	cset	x4, ne	// ne = any
+  381afc:	d2400080 	eor	x0, x4, #0x1
+  381b00:	a97ffbfd 	ldp	x29, x30, [sp, #-8]
+  381b04:	910443ff 	add	sp, sp, #0x110
+  381b08:	d65f03c0 	ret
+  381b0c:	97f86df9 	bl	19d2f0 <_cgo_topofstack@@Base+0x3e0>    ; CALL runtime.getfp
+  381b10:	d503201f 	nop
+  381b14:	f90007e0 	str	x0, [sp, #8]
+  381b18:	f9000be1 	str	x1, [sp, #16]
+  381b1c:	f9000fe2 	str	x2, [sp, #24]
+  381b20:	f90013e3 	str	x3, [sp, #32]
+  381b24:	f90017e4 	str	x4, [sp, #40]
+  381b28:	f9001be5 	str	x5, [sp, #48]
+  381b2c:	aa1e03e3 	mov	x3, x30
+  381b30:	97f86434 	bl	19ac00 <_cgo_yield@@Base+0x7a648>    ; CALL runtime.unspillArgs
+  381b34:	f94007e0 	ldr	x0, [sp, #8]
+  381b38:	f9400be1 	ldr	x1, [sp, #16]
+  381b3c:	f9400fe2 	ldr	x2, [sp, #24]
+  381b40:	f94013e3 	ldr	x3, [sp, #32]
+  381b44:	f94017e4 	ldr	x4, [sp, #40]
+  381b48:	f9401be5 	ldr	x5, [sp, #48]
+  381b4c:	17ffffad 	b	381a00 <crosscall2@@Base+0x1d4e60>
+  381b50:	f9400b90 	ldr	x16, [x28, #16]
+  381b54:	d10043f1 	sub	x17, sp, #0x10
+  381b58:	eb10023f 	cmp	x17, x16
+  381b5c:	54000e29 	b.ls	381d20 <crosscall2@@Base+0x1d5180>  // b.plast
+  381b60:	f8170ffe 	str	x30, [sp, #-144]!
+  381b64:	f81f83fd 	stur	x29, [sp, #-8]
+  381b68:	d10023fd 	sub	x29, sp, #0x8
+  381b6c:	f9004fe0 	str	x0, [sp, #152]
+  381b70:	f9005be3 	str	x3, [sp, #176]
+  381b74:	f90057e2 	str	x2, [sp, #168]
+  381b78:	a907ffff 	stp	xzr, xzr, [sp, #120]
+  381b7c:	97f836a9 	bl	18f620 <_cgo_yield@@Base+0x6f068>
+  381b80:	d00001c2 	adrp	x2, 3bb000 <res_search@plt+0x23d90>
+  381b84:	910f0042 	add	x2, x2, #0x3c0
+  381b88:	f9003fe2 	str	x2, [sp, #120]
+  381b8c:	f90043e0 	str	x0, [sp, #128]
+  381b90:	f0ffe8a0 	adrp	x0, 98000 <_cgo_yield@@Base-0x885b8>
+  381b94:	91099c00 	add	x0, x0, #0x267
+  381b98:	b27f07e1 	orr	x1, xzr, #0x6
+  381b9c:	9101e3e2 	add	x2, sp, #0x78
+  381ba0:	b24003e3 	orr	x3, xzr, #0x1
+  381ba4:	aa0303e4 	mov	x4, x3
+  381ba8:	97f9c492 	bl	1f2df0 <crosscall2@@Base+0x46250>
+  381bac:	f0ffecc2 	adrp	x2, 11c000 <_cgo_yield@@Base-0x45b8>
+  381bb0:	91066042 	add	x2, x2, #0x198
+  381bb4:	b24003e3 	orr	x3, xzr, #0x1
+  381bb8:	d0ffe8a4 	adrp	x4, 97000 <_cgo_yield@@Base-0x895b8>
+  381bbc:	91308484 	add	x4, x4, #0xc21
+  381bc0:	aa0303e5 	mov	x5, x3
+  381bc4:	92800006 	mov	x6, #0xffffffffffffffff    	// #-1
+  381bc8:	97fa054a 	bl	2030f0 <crosscall2@@Base+0x56550>
+  381bcc:	f101003f 	cmp	x1, #0x40
+  381bd0:	54000a03 	b.cc	381d10 <crosscall2@@Base+0x1d5170>  // b.lo, b.ul, b.last
+  381bd4:	b27a03e1 	orr	x1, xzr, #0x40
+  381bd8:	97fbe256 	bl	27a530 <crosscall2@@Base+0xcd990>
+  381bdc:	b5000823 	cbnz	x3, 381ce0 <crosscall2@@Base+0x1d5140>
+  381be0:	97faa828 	bl	22bc80 <crosscall2@@Base+0x7f0e0>
+  381be4:	b5000742 	cbnz	x2, 381ccc <crosscall2@@Base+0x1d512c>
+  381be8:	f9002fe0 	str	x0, [sp, #88]
+  381bec:	f90037e1 	str	x1, [sp, #104]
+  381bf0:	f94057e0 	ldr	x0, [sp, #168]
+  381bf4:	f9405be1 	ldr	x1, [sp, #176]
+  381bf8:	97fbe24e 	bl	27a530 <crosscall2@@Base+0xcd990>
+  381bfc:	b50005a3 	cbnz	x3, 381cb0 <crosscall2@@Base+0x1d5110>
+  381c00:	f100405f 	cmp	x2, #0x10
+  381c04:	54000823 	b.cc	381d08 <crosscall2@@Base+0x1d5168>  // b.lo, b.ul, b.last
+  381c08:	f90033e0 	str	x0, [sp, #96]
+  381c0c:	f90027e1 	str	x1, [sp, #72]
+  381c10:	f9002be2 	str	x2, [sp, #80]
+  381c14:	d1004022 	sub	x2, x1, #0x10
+  381c18:	f90023e2 	str	x2, [sp, #64]
+  381c1c:	d00001c0 	adrp	x0, 3bb000 <res_search@plt+0x23d90>
+  381c20:	91110000 	add	x0, x0, #0x440
+  381c24:	aa0203e1 	mov	x1, x2
+  381c28:	97f85556 	bl	197180 <_cgo_yield@@Base+0x76bc8>
+  381c2c:	f9003be0 	str	x0, [sp, #112]
+  381c30:	f94037e1 	ldr	x1, [sp, #104]
+  381c34:	f94033e2 	ldr	x2, [sp, #96]
+  381c38:	b27c03e3 	orr	x3, xzr, #0x10
+  381c3c:	f9402be4 	ldr	x4, [sp, #80]
+  381c40:	f9402fe0 	ldr	x0, [sp, #88]
+  381c44:	97fa9b33 	bl	228910 <crosscall2@@Base+0x7bd70>
+  381c48:	f94027e3 	ldr	x3, [sp, #72]
+  381c4c:	f100407f 	cmp	x3, #0x10
+  381c50:	54000563 	b.cc	381cfc <crosscall2@@Base+0x1d515c>  // b.lo, b.ul, b.last
+  381c54:	f9400c07 	ldr	x7, [x0, #24]
+  381c58:	f9402be8 	ldr	x8, [sp, #80]
+  381c5c:	d1004106 	sub	x6, x8, #0x10
+  381c60:	cb0603e8 	neg	x8, x6
+  381c64:	937ffd08 	asr	x8, x8, #63
+  381c68:	927c0108 	and	x8, x8, #0x10
+  381c6c:	f94033e9 	ldr	x9, [sp, #96]
+  381c70:	8b080124 	add	x4, x9, x8
+  381c74:	aa0103e0 	mov	x0, x1
+  381c78:	f9403be1 	ldr	x1, [sp, #112]
+  381c7c:	f94023e2 	ldr	x2, [sp, #64]
+  381c80:	aa0203e3 	mov	x3, x2
+  381c84:	aa0203e5 	mov	x5, x2
+  381c88:	d63f00e0 	blr	x7
+  381c8c:	aa1f03e0 	mov	x0, xzr
+  381c90:	f9403be1 	ldr	x1, [sp, #112]
+  381c94:	f94023e2 	ldr	x2, [sp, #64]
+  381c98:	97f857b2 	bl	197b60 <_cgo_yield@@Base+0x775a8>
+  381c9c:	aa1f03e2 	mov	x2, xzr
+  381ca0:	aa1f03e3 	mov	x3, xzr
+  381ca4:	a97ffbfd 	ldp	x29, x30, [sp, #-8]
+  381ca8:	910243ff 	add	sp, sp, #0x90
+  381cac:	d65f03c0 	ret
+  381cb0:	aa1f03e0 	mov	x0, xzr
+  381cb4:	aa1f03e1 	mov	x1, xzr
+  381cb8:	aa0303e2 	mov	x2, x3
+  381cbc:	aa0403e3 	mov	x3, x4
+  381cc0:	a97ffbfd 	ldp	x29, x30, [sp, #-8]
+  381cc4:	910243ff 	add	sp, sp, #0x90
+  381cc8:	d65f03c0 	ret
+  381ccc:	aa1f03e0 	mov	x0, xzr
+  381cd0:	aa1f03e1 	mov	x1, xzr
+  381cd4:	a97ffbfd 	ldp	x29, x30, [sp, #-8]
+  381cd8:	910243ff 	add	sp, sp, #0x90
+  381cdc:	d65f03c0 	ret
+  381ce0:	aa1f03e0 	mov	x0, xzr
+  381ce4:	aa1f03e1 	mov	x1, xzr
+  381ce8:	aa0303e2 	mov	x2, x3
+  381cec:	aa0403e3 	mov	x3, x4
+
