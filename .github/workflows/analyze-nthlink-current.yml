@@ -20,18 +20,17 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          page="$(curl -fsSL --retry 3 https://www.downloadnth.com/android.html)"
-          printf '%s' "$page" > android.html
-          href="$(printf '%s' "$page" | grep -Eo 'href=["'"'][^"'"']+\.apk[^"'"']*["'"']' | head -n1 | sed -E 's/^href=["'"']|["'"']$//g')"
-          if [ -z "$href" ]; then
-            echo 'Could not resolve APK link from official page' >&2
-            exit 1
-          fi
-          case "$href" in
-            http://*|https://*) url="$href" ;;
-            /*) url="https://www.downloadnth.com$href" ;;
-            *) url="https://www.downloadnth.com/$href" ;;
-          esac
+          curl -fsSL --retry 3 https://www.downloadnth.com/android.html -o android.html
+          python3 - <<'PY' > resolved_url.txt
+          import re
+          from urllib.parse import urljoin
+          html = open('android.html', encoding='utf-8', errors='ignore').read()
+          links = re.findall(r'href=["\']([^"\']+\.apk(?:\?[^"\']*)?)["\']', html, flags=re.I)
+          if not links:
+              raise SystemExit('Could not resolve APK link from official page')
+          print(urljoin('https://www.downloadnth.com/android.html', links[0]))
+          PY
+          url="$(cat resolved_url.txt)"
           echo "url=$url" >> "$GITHUB_OUTPUT"
           echo "Resolved official APK: $url"
 
@@ -62,10 +61,8 @@ jobs:
           from pathlib import Path
 
           text = Path('all_strings.txt').read_text(errors='ignore')
-
-          urls = sorted(set(re.findall(r'https?://[^\s"\'<>\\)\]}]+', text)))
+          urls = sorted(set(re.findall(r"https?://[^\s\"'<>\\)\]}]+", text)))
           domains = sorted(set(re.findall(r'(?<![A-Za-z0-9_-])(?:[A-Za-z0-9-]+\.)+(?:com|net|org|info|io|app|dev|xyz|top|site|cloud|me|co|cn|ir)(?![A-Za-z0-9_-])', text, re.I)))
-
           keywords = re.compile(r'(?i)(getserver|directory.?server|domainkeys?|getconfig|config.?server|provision|bootstrap|server.?list|nthlink|persagg|downloadnth|outline|shadowsocks|leaf|vless|vmess|trojan|reality|amux|quic|wireguard|websocket|wss://|ss://)')
           lines=[]
           seen=set()
@@ -75,7 +72,6 @@ jobs:
                   if line and line not in seen:
                       seen.add(line)
                       lines.append(line)
-
           Path('candidate_urls.txt').write_text('\n'.join(urls[:2000]))
           Path('candidate_domains.txt').write_text('\n'.join(domains[:3000]))
           Path('keyword_hits.txt').write_text('\n'.join(lines[:5000]))
