@@ -151,19 +151,18 @@ proxies:
 
 proxy-groups:
   - name: "R1-GREEN-PINNED"
-    type: url-test
+    type: fallback
     proxies:
+      - R1-GREEN-070
       - R1-GREEN-082
       - R1-GREEN-085
       - R1-GREEN-093
-      - R1-GREEN-070
       - R1-GREEN-102-FASTLY
     url: "https://speed.cloudflare.com/__down?bytes=2048"
-    interval: 120
-    tolerance: 900
+    interval: 90
     timeout: 12000
     lazy: false
-    max-failed-times: 4
+    max-failed-times: 2
     expected-status: 200
 
   - name: "R1-DISCOVERY"
@@ -254,10 +253,10 @@ proxy-groups:
       - TESTED-MIX
       - PROVIDER-B
       - PROVIDER-A
+      - R1-GREEN-070
       - R1-GREEN-082
       - R1-GREEN-085
       - R1-GREEN-093
-      - R1-GREEN-070
       - R1-GREEN-102-FASTLY
       - DIRECT
 
