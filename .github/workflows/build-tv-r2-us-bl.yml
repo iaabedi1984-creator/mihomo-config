@@ -1,10 +1,14 @@
-name: Build TV R2 US BL subscription
+name: Build combined TV V2Ray subscription
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'
   push:
     paths:
       - '.github/workflows/build-tv-r2-us-bl.yml'
+      - 'hiddify-sub.txt'
+      - 'resilient_mihomo_service_failover.yaml'
 
 permissions:
   contents: write
@@ -15,34 +19,129 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch current R2 US BL node and build subscriptions
+      - name: Aggregate current public configs for V2Ray
         shell: bash
         run: |
           set -e
           python - <<'PY'
-          import base64, urllib.request
+          import base64
+          import html
+          import re
+          import urllib.request
+          from urllib.parse import quote
 
-          src = 'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/BLACK_VLESS_RUS_mobile.txt'
-          text = urllib.request.urlopen(src, timeout=30).read().decode('utf-8', errors='ignore')
-          lines = [x.strip() for x in text.splitlines() if x.strip()]
+          SOURCES = [
+              'https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/hiddify-sub.txt',
+              'https://raw.githubusercontent.com/luxxuria/harvester/main/speed_tested.txt',
+              'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/BLACK_VLESS_RUS_mobile.txt',
+              'https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/main/BLACK_SS+All_RUS.txt',
+              'https://raw.githubusercontent.com/hussaroff/lte-universal-checked/main/whitelist.txt',
+              'https://raw.githubusercontent.com/MohammadBahemmat/V2ray-Collector/main/Tested.txt',
+              'https://raw.githubusercontent.com/Baarcuda/vpn-configs/master/top100-vless.txt',
+              'https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt',
+          ]
 
-          # Prefer the exact SS + simple-obfs US [BL] family that worked on the TV/phone tests.
-          candidates = [x for x in lines if x.startswith('ss://') and 'United%20States' in x and '%5BBL%5D' in x]
-          if not candidates:
-              raise SystemExit('No matching US [BL] Shadowsocks node found upstream')
+          VALID_PREFIXES = ('vless://', 'vmess://', 'trojan://', 'ss://')
 
-          node = candidates[0]
-          open('tv-r2-us-bl.txt', 'w', encoding='utf-8').write(node + '\n')
-          open('tv-r2-us-bl-v2ray-sub.txt', 'w', encoding='utf-8').write(base64.b64encode(node.encode()).decode() + '\n')
-          print('Built TV subscription from current upstream US [BL] Shadowsocks node')
+          def fetch(url):
+              req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+              with urllib.request.urlopen(req, timeout=45) as r:
+                  return r.read().decode('utf-8', errors='ignore')
+
+          def maybe_decode_b64(text):
+              s = ''.join(text.split())
+              if not s or any(c not in 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=_-' for c in s):
+                  return text
+              try:
+                  padded = s + '=' * (-len(s) % 4)
+                  raw = base64.urlsafe_b64decode(padded.encode())
+                  decoded = raw.decode('utf-8', errors='ignore')
+                  if any(p in decoded for p in VALID_PREFIXES):
+                      return decoded
+              except Exception:
+                  pass
+              return text
+
+          def extract(text):
+              text = html.unescape(text).replace('\\u0026', '&')
+              # Some feeds are themselves base64 subscriptions; decode up to two layers.
+              for _ in range(2):
+                  new = maybe_decode_b64(text)
+                  if new == text:
+                      break
+                  text = new
+
+              out = []
+              for line in text.replace('\r', '\n').split('\n'):
+                  line = line.strip().strip('"').strip("'").lstrip('- ').strip()
+                  if line.startswith(VALID_PREFIXES):
+                      out.append(line)
+                      continue
+                  # Handle URI embedded in YAML/JSON/text lines.
+                  for p in VALID_PREFIXES:
+                      idx = line.find(p)
+                      if idx >= 0:
+                          candidate = line[idx:].strip().strip('"').strip("'").rstrip(',')
+                          if candidate.startswith(p):
+                              out.append(candidate)
+                          break
+              return out
+
+          nodes = []
+          seen = set()
+          stats = []
+
+          for url in SOURCES:
+              try:
+                  text = fetch(url)
+                  found = extract(text)
+                  added = 0
+                  for node in found:
+                      if node not in seen:
+                          seen.add(node)
+                          nodes.append(node)
+                          added += 1
+                  stats.append((url, len(found), added, 'ok'))
+              except Exception as e:
+                  stats.append((url, 0, 0, f'ERROR: {e}'))
+
+          # Keep the five locally proven/pinned nodes even if their upstream feed rotates.
+          def ss_uri(method, password, host, port, name):
+              user = base64.urlsafe_b64encode(f'{method}:{password}'.encode()).decode().rstrip('=')
+              return f'ss://{user}@{host}:{port}#{quote(name)}'
+
+          pinned = [
+              ss_uri('aes-256-cfb', 'b8KkNDjEd5QqFyRm', '195.238.126.20', 9002, 'PIN-R1-GREEN-070'),
+              ss_uri('aes-256-cfb', 'bf7v334KKDV3YDhH', '91.201.65.122', 9070, 'PIN-R1-GREEN-082'),
+              ss_uri('aes-256-cfb', 'PeHSHm5SqEjBuEXE', '91.201.65.122', 9065, 'PIN-R1-GREEN-085'),
+              ss_uri('aes-256-cfb', 'b8KkNDjEd5QqFyRm', '91.201.65.122', 9002, 'PIN-R1-GREEN-093'),
+              'vless://6ead3f4c-023f-4322-b5c4-ac4e327d259d@199.232.78.159:443?encryption=none&security=tls&sni=ssl.fastly.com&type=ws&host=pannn1.global.ssl.fastly.net&path=%2F#PIN-R1-GREEN-102-FASTLY',
+          ]
+          for node in reversed(pinned):
+              if node not in seen:
+                  seen.add(node)
+                  nodes.insert(0, node)
+
+          if not nodes:
+              raise SystemExit('No V2Ray-compatible configs collected')
+
+          plain = '\n'.join(nodes) + '\n'
+          encoded = base64.b64encode(plain.encode()).decode() + '\n'
+
+          open('tv-r2-us-bl.txt', 'w', encoding='utf-8').write(plain)
+          open('tv-r2-us-bl-v2ray-sub.txt', 'w', encoding='utf-8').write(encoded)
+
+          print(f'Built combined V2Ray subscription with {len(nodes)} unique configs')
+          for row in stats:
+              print(row)
           PY
 
-      - name: Commit generated files
+      - name: Commit generated subscription
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add tv-r2-us-bl.txt tv-r2-us-bl-v2ray-sub.txt
           git diff --cached --quiet && exit 0
-          git commit -m 'Update TV R2 US BL subscription'
+          git commit -m 'Update combined TV V2Ray subscription'
           git push
