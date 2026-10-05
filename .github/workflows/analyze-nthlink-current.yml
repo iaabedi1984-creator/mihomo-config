@@ -1,0 +1,101 @@
+name: Analyze current nthLink APK
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/analyze-nthlink-current.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Resolve current official APK URL
+        id: apk
+        shell: bash
+        run: |
+          set -euo pipefail
+          page="$(curl -fsSL --retry 3 https://www.downloadnth.com/android.html)"
+          printf '%s' "$page" > android.html
+          href="$(printf '%s' "$page" | grep -Eo 'href=["'"'][^"'"']+\.apk[^"'"']*["'"']' | head -n1 | sed -E 's/^href=["'"']|["'"']$//g')"
+          if [ -z "$href" ]; then
+            echo 'Could not resolve APK link from official page' >&2
+            exit 1
+          fi
+          case "$href" in
+            http://*|https://*) url="$href" ;;
+            /*) url="https://www.downloadnth.com$href" ;;
+            *) url="https://www.downloadnth.com/$href" ;;
+          esac
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "Resolved official APK: $url"
+
+      - name: Download APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 --retry-delay 2 '${{ steps.apk.outputs.url }}' -o nthlink.apk
+          file nthlink.apk
+          sha256sum nthlink.apk | tee sha256.txt
+          unzip -t nthlink.apk >/dev/null
+
+      - name: Extract and scan static strings
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf apk && mkdir apk
+          unzip -q nthlink.apk -d apk
+
+          : > all_strings.txt
+          while IFS= read -r -d '' f; do
+            echo "### FILE: $f" >> all_strings.txt
+            strings -a -n 5 "$f" >> all_strings.txt || true
+          done < <(find apk -type f \( -name '*.so' -o -name '*.dex' -o -name '*.arsc' \) -print0)
+
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+
+          text = Path('all_strings.txt').read_text(errors='ignore')
+
+          urls = sorted(set(re.findall(r'https?://[^\s"\'<>\\)\]}]+', text)))
+          domains = sorted(set(re.findall(r'(?<![A-Za-z0-9_-])(?:[A-Za-z0-9-]+\.)+(?:com|net|org|info|io|app|dev|xyz|top|site|cloud|me|co|cn|ir)(?![A-Za-z0-9_-])', text, re.I)))
+
+          keywords = re.compile(r'(?i)(getserver|directory.?server|domainkeys?|getconfig|config.?server|provision|bootstrap|server.?list|nthlink|persagg|downloadnth|outline|shadowsocks|leaf|vless|vmess|trojan|reality|amux|quic|wireguard|websocket|wss://|ss://)')
+          lines=[]
+          seen=set()
+          for line in text.splitlines():
+              if keywords.search(line):
+                  line=line.strip()
+                  if line and line not in seen:
+                      seen.add(line)
+                      lines.append(line)
+
+          Path('candidate_urls.txt').write_text('\n'.join(urls[:2000]))
+          Path('candidate_domains.txt').write_text('\n'.join(domains[:3000]))
+          Path('keyword_hits.txt').write_text('\n'.join(lines[:5000]))
+          PY
+
+          echo '===== HIGH-SIGNAL URLS ====='
+          grep -Ei 'nthlink|downloadnth|persagg|getserver|config|server|api|amazonaws|cloudfront|firebase|googleapis|githubusercontent|workers\.dev' candidate_urls.txt | head -n 250 || true
+          echo '===== HIGH-SIGNAL DOMAINS ====='
+          grep -Ei 'nthlink|downloadnth|persagg|amazonaws|cloudfront|firebase|googleapis|githubusercontent|workers\.dev' candidate_domains.txt | head -n 250 || true
+          echo '===== CORE / PROTOCOL HITS ====='
+          grep -Ei 'getserver|directory.?server|domainkeys?|getconfig|config.?server|provision|bootstrap|server.?list|outline|shadowsocks|leaf|vless|vmess|trojan|reality|amux|quic|wireguard' keyword_hits.txt | head -n 400 || true
+
+      - name: Upload scan output
+        uses: actions/upload-artifact@v4
+        with:
+          name: nthlink-static-scan
+          if-no-files-found: error
+          retention-days: 1
+          path: |
+            sha256.txt
+            candidate_urls.txt
+            candidate_domains.txt
+            keyword_hits.txt
