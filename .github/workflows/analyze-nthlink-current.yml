@@ -59,19 +59,16 @@ jobs:
           python3 - <<'PY'
           import re
           from pathlib import Path
-
           text = Path('all_strings.txt').read_text(errors='ignore')
           urls = sorted(set(re.findall(r"https?://[^\s\"'<>\\)\]}]+", text)))
           domains = sorted(set(re.findall(r'(?<![A-Za-z0-9_-])(?:[A-Za-z0-9-]+\.)+(?:com|net|org|info|io|app|dev|xyz|top|site|cloud|me|co|cn|ir)(?![A-Za-z0-9_-])', text, re.I)))
           keywords = re.compile(r'(?i)(getserver|directory.?server|domainkeys?|getconfig|config.?server|provision|bootstrap|server.?list|nthlink|persagg|downloadnth|outline|shadowsocks|leaf|vless|vmess|trojan|reality|amux|quic|wireguard|websocket|wss://|ss://)')
-          lines=[]
-          seen=set()
+          lines=[]; seen=set()
           for line in text.splitlines():
               if keywords.search(line):
                   line=line.strip()
                   if line and line not in seen:
-                      seen.add(line)
-                      lines.append(line)
+                      seen.add(line); lines.append(line)
           Path('candidate_urls.txt').write_text('\n'.join(urls[:2000]))
           Path('candidate_domains.txt').write_text('\n'.join(domains[:3000]))
           Path('keyword_hits.txt').write_text('\n'.join(lines[:5000]))
@@ -84,6 +81,63 @@ jobs:
           echo '===== CORE / PROTOCOL HITS ====='
           grep -Ei 'getserver|directory.?server|domainkeys?|getconfig|config.?server|provision|bootstrap|server.?list|outline|shadowsocks|leaf|vless|vmess|trojan|reality|amux|quic|wireguard' keyword_hits.txt | head -n 400 || true
 
+      - name: Deep scan root-go bootstrap
+        shell: bash
+        run: |
+          set -euo pipefail
+          rootlib="$(grep -l -a 'teon.com/root-go/root.apiGetConfigFromAWS' apk/lib/*/*.so | head -n1 || true)"
+          if [ -z "$rootlib" ]; then
+            echo 'root-go native library not found' >&2
+            exit 1
+          fi
+          echo "ROOTLIB=$rootlib"
+          cp "$rootlib" rootgo.so
+
+          go version -m rootgo.so > rootgo_buildinfo.txt 2>&1 || true
+          strings -a -n 4 -t x rootgo.so > rootgo_strings_offsets.txt
+          readelf -Ws rootgo.so > rootgo_symbols.txt 2>&1 || true
+          go tool nm rootgo.so > rootgo_nm.txt 2>&1 || true
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          lines = Path('rootgo_strings_offsets.txt').read_text(errors='ignore').splitlines()
+          pats = re.compile(r'(?i)(getserver3|apiGetConfigFromAWS|getConfigFromAWS|handleGetConfigResponse|domainKey|domainKeys|Authorization|Content-Type|User-Agent|X-[A-Za-z-]+|amazonaws|nthassets|GetConfigWithJson|invalid domainKey|paramsJson|country|device|platform|version|locale|language)')
+          hitidx=[i for i,l in enumerate(lines) if pats.search(l)]
+          out=[]; used=set()
+          for i in hitidx:
+              a=max(0,i-18); b=min(len(lines),i+19)
+              key=(a,b)
+              if key in used: continue
+              used.add(key)
+              out.append(f'===== CONTEXT {i} =====')
+              out.extend(lines[a:b])
+          Path('rootgo_context.txt').write_text('\n'.join(out[:12000]))
+
+          # Extract printable long tokens separately without classifying them as credentials.
+          raw='\n'.join(lines)
+          toks=sorted(set(re.findall(r'\b[A-Za-z0-9_-]{20,120}={0,2}\b', raw)))
+          Path('rootgo_long_tokens.txt').write_text('\n'.join(toks[:5000]))
+          PY
+
+          for sym in \
+            'teon.com/root-go/root.apiGetConfigFromAWS' \
+            'teon.com/root-go/root.getConfigFromAWS' \
+            'teon.com/root-go/root.apiGetConfig' \
+            'teon.com/root-go/root.getConfig' \
+            'teon.com/root-go/root.handleGetConfigResponse' \
+            'teon.com/root-go/root.GetConfigWithJson'; do
+            safe="$(printf '%s' "$sym" | tr '/.*' '___')"
+            go tool objdump -s "$sym" rootgo.so > "objdump_${safe}.txt" 2>&1 || true
+          done
+
+          echo '===== ROOT-GO BUILD INFO ====='
+          cat rootgo_buildinfo.txt || true
+          echo '===== ROOT-GO HIGH SIGNAL CONTEXT ====='
+          grep -Ei -B8 -A12 'getserver3|amazonaws|nthassets|domainKey|Authorization|Content-Type|User-Agent|GetConfigWithJson|apiGetConfigFromAWS|getConfigFromAWS|invalid domainKey|paramsJson' rootgo_context.txt | head -n 700 || true
+          echo '===== ROOT-GO SYMBOLS ====='
+          grep -Ei 'teon\.com/root-go/root\.(apiGetConfig|getConfig|handleGetConfig|GetConfig|.*Domain)' rootgo_nm.txt | head -n 300 || true
+
       - name: Upload scan output
         uses: actions/upload-artifact@v4
         with:
@@ -95,3 +149,10 @@ jobs:
             candidate_urls.txt
             candidate_domains.txt
             keyword_hits.txt
+            rootgo_buildinfo.txt
+            rootgo_strings_offsets.txt
+            rootgo_context.txt
+            rootgo_long_tokens.txt
+            rootgo_nm.txt
+            rootgo_symbols.txt
+            objdump_*.txt
