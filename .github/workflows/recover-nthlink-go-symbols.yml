@@ -1,0 +1,146 @@
+name: Recover nthLink root-go symbols
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/recover-nthlink-go-symbols.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download current official APK and root-go library
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 3 https://www.downloadnth.com/android.html -o android.html
+          python3 - <<'PY' > apk_url.txt
+          import re
+          from urllib.parse import urljoin
+          html=open('android.html',encoding='utf-8',errors='ignore').read()
+          links=re.findall(r'href=["\']([^"\']+\.apk(?:\?[^"\']*)?)["\']',html,re.I)
+          if not links: raise SystemExit('APK link not found')
+          print(urljoin('https://www.downloadnth.com/android.html',links[0]))
+          PY
+          curl -fL --retry 3 "$(cat apk_url.txt)" -o nthlink.apk
+          rm -rf apk && mkdir apk
+          unzip -q nthlink.apk -d apk
+          rootlib="$(grep -l -a 'teon.com/root-go/root.apiGetConfigFromAWS' apk/lib/*/*.so | head -n1 || true)"
+          test -n "$rootlib"
+          cp "$rootlib" rootgo.so
+
+      - name: Build GoReSym and recover stripped symbols
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --depth 1 https://github.com/mandiant/GoReSym.git /tmp/GoReSym
+          (cd /tmp/GoReSym && go build -o /tmp/GoReSym-bin .)
+          /tmp/GoReSym-bin -strings -p rootgo.so > goresym.json
+          python3 - <<'PY'
+          import json,re
+          from pathlib import Path
+          d=json.load(open('goresym.json'))
+          pats=re.compile(r'(?i)(root-go/root\.(apiGetConfig|apiGetConfigFromAWS|getConfig|getConfigFromAWS|handleGetConfigResponse|GetConfigWithJson|GetConfig|doRequest|doRequests|decryptResponseData|decryptData|Encrypt|Decrypt|checkKeys|setKeys|getRootSecretKey|parseKey|isResponseSignValid))')
+          funcs=[]
+          def walk(x):
+              if isinstance(x,dict):
+                  s=json.dumps(x,ensure_ascii=False)
+                  if pats.search(s): funcs.append(x)
+                  for v in x.values(): walk(v)
+              elif isinstance(x,list):
+                  for v in x: walk(v)
+          walk(d.get('UserFunctions',d))
+          # de-duplicate exact serialized objects and keep only compact records.
+          seen=set(); out=[]
+          for f in funcs:
+              z=json.dumps(f,sort_keys=True,ensure_ascii=False)
+              if z in seen: continue
+              seen.add(z); out.append(f)
+          Path('goresym-focus.json').write_text(json.dumps(out,indent=2,ensure_ascii=False))
+          print('focused functions:',len(out))
+          PY
+
+      - name: Extract function ranges and disassemble
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p analysis/nthlink-goresym
+          cp goresym-focus.json analysis/nthlink-goresym/functions.json
+          python3 - <<'PY'
+          import json,re,subprocess
+          from pathlib import Path
+          arr=json.load(open('goresym-focus.json'))
+          wanted=re.compile(r'(?i)(apiGetConfigFromAWS|getConfigFromAWS|apiGetConfig$|getConfig$|handleGetConfigResponse|GetConfigWithJson|decryptResponseData|doRequest$|checkKeys|getRootSecretKey)')
+          records=[]
+          def scalar(d,*keys):
+              for k in keys:
+                  if k in d and isinstance(d[k],(str,int,float)): return d[k]
+          for f in arr:
+              name=str(scalar(f,'FullName','Name','name','fullName') or '')
+              if not wanted.search(name): continue
+              start=scalar(f,'Start','StartVA','Entry','start','start_address','StartAddress')
+              end=scalar(f,'End','EndVA','end','end_address','EndAddress')
+              def num(v):
+                  if isinstance(v,int): return v
+                  if isinstance(v,float): return int(v)
+                  if isinstance(v,str):
+                      try: return int(v,0)
+                      except: return None
+              a,b=num(start),num(end)
+              records.append((name,a,b,f))
+          Path('analysis/nthlink-goresym/ranges.txt').write_text('\n'.join(f'{n}\t{a!r}\t{b!r}' for n,a,b,_ in records)+'\n')
+          for i,(name,a,b,f) in enumerate(records):
+              safe=re.sub(r'[^A-Za-z0-9_.-]+','_',name)[-100:]
+              if a is None or b is None or b<=a: continue
+              cmd=['llvm-objdump','-d','--start-address='+hex(a),'--stop-address='+hex(b),'rootgo.so']
+              p=subprocess.run(cmd,text=True,capture_output=True)
+              Path(f'analysis/nthlink-goresym/{i:02d}_{safe}.asm.txt').write_text(p.stdout+'\n'+p.stderr)
+          PY
+
+      - name: Recover relevant embedded strings safely
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,re
+          from pathlib import Path
+          d=json.load(open('goresym.json'))
+          pat=re.compile(r'(?i)(getserver3|nthassets|amazonaws|domainKey|domainKeys|serverPublicKey|apiKey|clientId|GetConfigDoRequestResults|responseBody|responseStatusCode|custom_config|servers|obfuUrls|obfuExcludeHost|RootRequestToken|EncryptedRequest|Authorization|Content-Type)')
+          found=[]
+          def walk(x,path=''):
+              if isinstance(x,dict):
+                  for k,v in x.items(): walk(v,path+'/'+str(k))
+              elif isinstance(x,list):
+                  for i,v in enumerate(x): walk(v,path+f'/{i}')
+              elif isinstance(x,str) and pat.search(x):
+                  # retain field names/endpoints, redact token-like values
+                  y=re.sub(r'(?<![A-Za-z0-9])([A-Za-z0-9_\-+/=]{28,})(?![A-Za-z0-9])','<LONG_TOKEN_REDACTED>',x)
+                  found.append(path+'\t'+y)
+          walk(d)
+          seen=[]
+          for x in found:
+              if x not in seen: seen.append(x)
+          Path('analysis/nthlink-goresym/strings.txt').write_text('\n'.join(seen[:1000])+'\n')
+          PY
+
+      - name: Commit recovered metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add analysis/nthlink-goresym/
+          if git diff --cached --quiet; then
+            echo 'No recovered metadata changes'
+          else
+            git commit -m 'Update recovered nthLink Go symbols'
+            git push origin HEAD:main
+          fi
