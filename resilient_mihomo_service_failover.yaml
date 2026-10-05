@@ -165,6 +165,13 @@ proxies:
         Host: pannn1.global.ssl.fastly.net
 
 proxy-groups:
+  - name: "R2-US-BL-STICKY"
+    type: select
+    use:
+      - provider-r2-blacklist
+    filter: "(?i)United States.*🌐.*\\[BL\\]"
+    empty-fallback: R1-GREEN-102-FASTLY
+
   - name: "REAL-DATA-RACE"
     type: url-test
     use:
@@ -196,11 +203,11 @@ proxy-groups:
   - name: "R1-GREEN-PINNED"
     type: fallback
     proxies:
+      - R1-GREEN-102-FASTLY
       - R1-GREEN-070
       - R1-GREEN-082
       - R1-GREEN-085
       - R1-GREEN-093
-      - R1-GREEN-102-FASTLY
     url: "https://www.google.com/robots.txt"
     interval: 180
     timeout: 8000
@@ -273,16 +280,18 @@ proxy-groups:
   - name: "AUTO-RESCUE"
     type: fallback
     proxies:
+      - R2-US-BL-STICKY
+      - R1-GREEN-102-FASTLY
+      - ROTATING-RESCUE
+      - R1-GREEN-PINNED
       - REAL-DATA-RACE
       - R1-REAL-DATA
-      - R1-GREEN-PINNED
       - R1-DISCOVERY
-      - ROTATING-RESCUE
       - TESTED-MIX
       - PROVIDER-B
       - PROVIDER-A
     url: "https://www.google.com/robots.txt"
-    interval: 120
+    interval: 180
     timeout: 8000
     max-failed-times: 2
     lazy: false
@@ -292,11 +301,13 @@ proxy-groups:
     type: select
     proxies:
       - AUTO-RESCUE
+      - R2-US-BL-STICKY
+      - R1-GREEN-102-FASTLY
+      - ROTATING-RESCUE
+      - R1-GREEN-PINNED
       - REAL-DATA-RACE
       - R1-REAL-DATA
-      - R1-GREEN-PINNED
       - R1-DISCOVERY
-      - ROTATING-RESCUE
       - TESTED-MIX
       - PROVIDER-B
       - PROVIDER-A
@@ -304,7 +315,6 @@ proxy-groups:
       - R1-GREEN-082
       - R1-GREEN-085
       - R1-GREEN-093
-      - R1-GREEN-102-FASTLY
       - DIRECT
 
 rules:
