@@ -121,23 +121,24 @@ jobs:
             go tool objdump -s "$sym" rootgo.so > "objdump_${safe}.txt" 2>&1 || true
           done
 
-      - name: Build sanitized persistent report
+      - name: Build persistent reverse-engineering outputs
         shell: bash
         env:
           APK_URL: ${{ steps.apk.outputs.url }}
         run: |
           set -euo pipefail
-          mkdir -p analysis
+          mkdir -p analysis/nthlink-asm
+          cp objdump_*.txt analysis/nthlink-asm/ || true
+
           python3 - <<'PY'
           from pathlib import Path
-          import os, re, glob, datetime
+          import os, re, glob
 
           def read(p):
               try: return Path(p).read_text(errors='ignore')
               except: return ''
 
           def redact(s):
-              # Keep public URLs, symbols and field names, but never persist long token-like blobs.
               s = re.sub(r'(?<![A-Za-z0-9])([A-Za-z0-9_\-+/=]{28,})(?![A-Za-z0-9])', '<LONG_TOKEN_REDACTED>', s)
               s = re.sub(r'(?i)(password|passwd|token|secret|authorization)(\s*[:=]\s*)([^\s,;\]}]{8,})', r'\1\2<REDACTED>', s)
               return s
@@ -149,13 +150,6 @@ jobs:
           for line in read('rootgo_context.txt').splitlines():
               if re.search(r'(?i)(getserver3|apiGetConfig|getConfig|handleGetConfig|domainKey|RootRequestToken|EncryptedRequest|Authorization|Content-Type|User-Agent|amazonaws|nthassets|paramsJson)',line):
                   ctx.append(line)
-
-          asm=[]
-          for p in sorted(glob.glob('objdump_*.txt')):
-              body=read(p).splitlines()
-              if body:
-                  asm.append(f'--- {Path(p).name} ---')
-                  asm.extend(body[:180])
 
           out=[]
           out.append('nthLink current APK bootstrap analysis (sanitized)')
@@ -177,25 +171,41 @@ jobs:
           out.append('')
           out.append('=== ROOT-GO STRING CONTEXT (MATCHING LINES ONLY) ===')
           out.extend(ctx[:1200])
-          out.append('')
-          out.append('=== RELEVANT FUNCTION DISASSEMBLY (TRUNCATED) ===')
-          out.extend(asm[:2200])
           Path('analysis/nthlink-current-report.txt').write_text(redact('\n'.join(out))+'\n')
-          PY
-          wc -l analysis/nthlink-current-report.txt
-          sed -n '1,180p' analysis/nthlink-current-report.txt
 
-      - name: Commit sanitized report
+          # Focused public-safe metadata. No long values are persisted.
+          tags=sorted(set(re.findall(r'json:"([A-Za-z0-9_,-]+)"', read('rootgo_strings_offsets.txt'))))
+          funcs=sorted(set(re.findall(r'teon\.com/root-go/root\.[A-Za-z0-9_.]+', read('rootgo_strings_offsets.txt'))))
+          focus=['APK='+os.environ.get('APK_URL',''), '', 'JSON TAGS:'] + tags + ['', 'ROOT-GO FUNCTIONS:'] + funcs
+          Path('analysis/nthlink-fields-functions.txt').write_text(redact('\n'.join(focus))+'\n')
+
+          # Print compact byte context around the literal marker; redact token-like blobs before persistence.
+          b=Path('rootgo.so').read_bytes()
+          chunks=[]
+          for needle in [b'getserver3', b'nthassets', b'RootRequestToken', b'EncryptedRequest', b'DomainKey']:
+              pos=0
+              while True:
+                  i=b.find(needle,pos)
+                  if i<0: break
+                  lo=max(0,i-160); hi=min(len(b),i+240)
+                  raw=b[lo:hi]
+                  txt=''.join(chr(x) if 32<=x<127 else '.' for x in raw)
+                  chunks.append(f'{needle.decode()} @ 0x{i:x}\n{txt}\n')
+                  pos=i+1
+          Path('analysis/nthlink-literal-context.txt').write_text(redact('\n'.join(chunks))+'\n')
+          PY
+
+      - name: Commit reverse-engineering outputs
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add analysis/nthlink-current-report.txt
+          git add analysis/nthlink-current-report.txt analysis/nthlink-fields-functions.txt analysis/nthlink-literal-context.txt analysis/nthlink-asm/
           if git diff --cached --quiet; then
             echo 'No report changes'
           else
-            git commit -m 'Update sanitized nthLink bootstrap report'
+            git commit -m 'Update nthLink bootstrap reverse engineering'
             git push origin HEAD:main
           fi
 
