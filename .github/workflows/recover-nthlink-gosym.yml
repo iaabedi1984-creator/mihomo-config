@@ -38,7 +38,7 @@ jobs:
           cp "$rootlib" rootgo.so
           echo "rootlib=$rootlib"
 
-      - name: Recover functions using debug/gosym
+      - name: Recover functions using embedded Go pclntab
         shell: bash
         run: |
           set -euo pipefail
@@ -46,6 +46,7 @@ jobs:
           cat > /tmp/gosymdump.go <<'EOF'
           package main
           import (
+            "bytes"
             "debug/elf"
             "debug/gosym"
             "encoding/json"
@@ -56,10 +57,12 @@ jobs:
           )
           type F struct { Name string `json:"name"`; Entry uint64 `json:"entry"`; End uint64 `json:"end"` }
           func main() {
+            raw,err:=os.ReadFile("rootgo.so"); if err!=nil { panic(err) }
+            magic:=[]byte{0xf1,0xff,0xff,0xff}
+            off:=bytes.Index(raw,magic); if off<0 { panic("Go 1.20+ pclntab magic not found") }
             ef, err := elf.Open("rootgo.so"); if err != nil { panic(err) }; defer ef.Close()
-            pcln := ef.Section(".gopclntab"); text := ef.Section(".text")
-            if pcln==nil || text==nil { panic("missing .gopclntab or .text") }
-            data,err:=pcln.Data(); if err!=nil { panic(err) }
+            text := ef.Section(".text"); if text==nil { panic("missing .text") }
+            data:=raw[off:]
             lt:=gosym.NewLineTable(data,text.Addr)
             tab,err:=gosym.NewTable(nil,lt); if err!=nil { panic(err) }
             fs:=make([]F,0,len(tab.Funcs))
@@ -67,9 +70,11 @@ jobs:
             sort.Slice(fs,func(i,j int)bool{return fs[i].Entry<fs[j].Entry})
             enc,_:=json.MarshalIndent(fs,"","  "); os.WriteFile("analysis/nthlink-gosym/all-functions.json",enc,0644)
             out:="name\tentry\tend\n"
-            for _,f:=range fs { if strings.Contains(f.Name,"teon.com/root-go/root.") { out += fmt.Sprintf("%s\t0x%x\t0x%x\n",f.Name,f.Entry,f.End) } }
+            roots:=0
+            for _,f:=range fs { if strings.Contains(f.Name,"teon.com/root-go/root.") { roots++; out += fmt.Sprintf("%s\t0x%x\t0x%x\n",f.Name,f.Entry,f.End) } }
             os.WriteFile("analysis/nthlink-gosym/root-functions.tsv",[]byte(out),0644)
-            fmt.Printf("text=0x%x pcln=0x%x funcs=%d\n",text.Addr,pcln.Addr,len(fs))
+            fmt.Printf("pcln_file_off=0x%x text=0x%x funcs=%d root=%d\n",off,text.Addr,len(fs),roots)
+            if roots==0 { panic("gosym parsed no root-go functions") }
           }
           EOF
           go run /tmp/gosymdump.go
