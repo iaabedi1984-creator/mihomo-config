@@ -26,6 +26,21 @@ proxy-providers:
     override:
       additional-prefix: "[R1] "
 
+  provider-speed-vless:
+    type: http
+    url: "https://raw.githubusercontent.com/luxxuria/harvester/main/speed_tested.txt"
+    path: ./proxy_providers/provider-speed-vless.txt
+    interval: 900
+    health-check:
+      enable: true
+      url: "https://speed.cloudflare.com/__down?bytes=131072"
+      interval: 600
+      timeout: 20000
+      lazy: false
+      expected-status: 200
+    override:
+      additional-prefix: "[SPD] "
+
   provider-r2-blacklist:
     type: http
     url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/BLACK_VLESS_RUS_mobile.txt"
@@ -150,6 +165,34 @@ proxies:
         Host: pannn1.global.ssl.fastly.net
 
 proxy-groups:
+  - name: "SPEED-RACE"
+    type: url-test
+    use:
+      - provider-speed-vless
+    url: "https://speed.cloudflare.com/__down?bytes=131072"
+    interval: 600
+    tolerance: 200
+    timeout: 20000
+    lazy: false
+    max-failed-times: 2
+    expected-status: 200
+
+  - name: "R1-GREEN-SPEED"
+    type: url-test
+    proxies:
+      - R1-GREEN-070
+      - R1-GREEN-082
+      - R1-GREEN-085
+      - R1-GREEN-093
+      - R1-GREEN-102-FASTLY
+    url: "https://speed.cloudflare.com/__down?bytes=131072"
+    interval: 600
+    tolerance: 250
+    timeout: 20000
+    lazy: false
+    max-failed-times: 3
+    expected-status: 200
+
   - name: "R1-GREEN-PINNED"
     type: fallback
     proxies:
@@ -159,10 +202,10 @@ proxy-groups:
       - R1-GREEN-093
       - R1-GREEN-102-FASTLY
     url: "https://speed.cloudflare.com/__down?bytes=2048"
-    interval: 90
+    interval: 180
     timeout: 12000
     lazy: false
-    max-failed-times: 2
+    max-failed-times: 4
     expected-status: 200
 
   - name: "R1-DISCOVERY"
@@ -230,6 +273,8 @@ proxy-groups:
   - name: "AUTO-RESCUE"
     type: fallback
     proxies:
+      - SPEED-RACE
+      - R1-GREEN-SPEED
       - R1-GREEN-PINNED
       - R1-DISCOVERY
       - ROTATING-RESCUE
@@ -247,6 +292,8 @@ proxy-groups:
     type: select
     proxies:
       - AUTO-RESCUE
+      - SPEED-RACE
+      - R1-GREEN-SPEED
       - R1-GREEN-PINNED
       - R1-DISCOVERY
       - ROTATING-RESCUE
