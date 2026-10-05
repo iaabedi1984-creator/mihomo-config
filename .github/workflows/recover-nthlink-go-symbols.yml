@@ -69,7 +69,6 @@ jobs:
                   vals=[funcnameOff,cuOff,filetabOff,pctabOff,pclnOff]
                   if not (100 < nfunc < 1000000): continue
                   if any(v<=0 or i+v>=len(b) for v in vals): continue
-                  # Validate first functions and names.
                   ft=i+pclnOff
                   good=0; samples=[]
                   for k in range(min(int(nfunc),100)):
@@ -112,7 +111,6 @@ jobs:
               except: continue
               if not re.fullmatch(r'[ -~]{1,1000}',name): continue
               start=text+entryoff
-              # functab sentinel gives next start; if unavailable use next parsed entry below.
               nextq=ft+(k+1)*8
               end=None
               if nextq+4<=len(b):
@@ -130,6 +128,14 @@ jobs:
           PY
           cp elf-sections.txt elf-file.txt apk_url.txt analysis/nthlink-pclntab/
 
+      - name: Install ARM64 disassembler
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq binutils-aarch64-linux-gnu
+          aarch64-linux-gnu-objdump --version | head -n1
+
       - name: Disassemble config bootstrap and map calls
         shell: bash
         run: |
@@ -139,18 +145,17 @@ jobs:
           from pathlib import Path
           funcs=json.load(open('analysis/nthlink-pclntab/all-functions.json'))
           byaddr={int(f['start']):f['name'] for f in funcs}
-          wanted=re.compile(r'(?i)teon\.com/root-go/root\.(apiGetConfigFromAWS|getConfigFromAWS|apiGetConfig|getConfig|handleGetConfigResponse|GetConfigWithJson|GetConfig|doRequest|doRequests|decryptResponseData|decryptData|Encrypt|Decrypt|checkKeys|setKeys|getRootSecretKey|parseKey|isResponseSignValid)$')
+          wanted=re.compile(r'(?i)teon\.com/root-go/root\.(apiGetConfigFromAWS|getConfigFromAWS|apiGetConfig|getConfig|handleGetConfigResponse|GetConfigWithJson|GetConfig|doRequest|doRequests|verifyAndDecryptResponseBody|decryptResponseData|decryptData|Encrypt|Decrypt|checkKeys|setKeys|getRootSecretKey|parseKey|isResponseSignValid)$')
           selected=[f for f in funcs if wanted.search(f['name']) and f.get('end') and f['end']>f['start']]
           graph=[]
           for idx,f in enumerate(selected):
               safe=re.sub(r'[^A-Za-z0-9_.-]+','_',f['name'])[-110:]
-              cmd=['llvm-objdump','-d','--start-address='+hex(f['start']),'--stop-address='+hex(f['end']),'rootgo.so']
+              cmd=['aarch64-linux-gnu-objdump','-d','--start-address='+hex(f['start']),'--stop-address='+hex(f['end']),'rootgo.so']
               p=subprocess.run(cmd,text=True,capture_output=True)
               out=p.stdout+'\n'+p.stderr
-              # annotate BL targets with recovered Go names.
               lines=[]
               for line in out.splitlines():
-                  m=re.search(r'\bbl\s+0x([0-9a-fA-F]+)',line)
+                  m=re.search(r'\bbl\s+(?:0x)?([0-9a-fA-F]+)',line)
                   if m:
                       a=int(m.group(1),16); nm=byaddr.get(a)
                       if nm:
@@ -162,6 +167,7 @@ jobs:
           for x in graph:
               if x not in seen: seen.append(x)
           Path('analysis/nthlink-pclntab/callgraph.tsv').write_text('caller\tcallee\n'+''.join(a+'\t'+b+'\n' for a,b in seen))
+          print('selected',len(selected),'call edges',len(seen))
           PY
 
       - name: Commit recovered metadata
