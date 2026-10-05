@@ -49,8 +49,8 @@ proxy-providers:
     health-check:
       enable: true
       url: "https://speed.cloudflare.com/__down?bytes=2048"
-      interval: 120
-      timeout: 10000
+      interval: 300
+      timeout: 12000
       lazy: false
       expected-status: 200
     override:
@@ -228,6 +228,18 @@ proxies:
     client-fingerprint: chrome
 
 proxy-groups:
+  - name: "TESTED-MIX"
+    type: url-test
+    use:
+      - provider-c-tested
+    url: "https://speed.cloudflare.com/__down?bytes=2048"
+    interval: 300
+    tolerance: 800
+    timeout: 12000
+    lazy: false
+    max-failed-times: 4
+    expected-status: 200
+
   - name: "TROJAN-TLS-443"
     type: url-test
     proxies:
@@ -251,18 +263,6 @@ proxy-groups:
     url: "https://speed.cloudflare.com/__down?bytes=2048"
     interval: 120
     tolerance: 250
-    timeout: 10000
-    lazy: false
-    max-failed-times: 2
-    expected-status: 200
-
-  - name: "TESTED-MIX"
-    type: url-test
-    use:
-      - provider-c-tested
-    url: "https://speed.cloudflare.com/__down?bytes=2048"
-    interval: 120
-    tolerance: 300
     timeout: 10000
     lazy: false
     max-failed-times: 2
@@ -322,17 +322,17 @@ proxy-groups:
   - name: "AUTO-RESCUE"
     type: fallback
     proxies:
+      - TESTED-MIX
       - TROJAN-TLS-443
       - REALITY-443
-      - TESTED-MIX
       - FASTLY-STABLE
       - FASTLY-PUBLIC
       - PROVIDER-B
       - PROVIDER-A
     url: "https://speed.cloudflare.com/__down?bytes=2048"
-    interval: 120
+    interval: 180
     timeout: 12000
-    max-failed-times: 2
+    max-failed-times: 3
     lazy: false
     expected-status: 200
 
@@ -340,9 +340,9 @@ proxy-groups:
     type: select
     proxies:
       - AUTO-RESCUE
+      - TESTED-MIX
       - TROJAN-TLS-443
       - REALITY-443
-      - TESTED-MIX
       - FASTLY-STABLE
       - FASTLY-PUBLIC
       - PROVIDER-B
