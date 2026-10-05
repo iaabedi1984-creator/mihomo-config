@@ -164,7 +164,165 @@ proxies:
       headers:
         Host: pannn1.global.ssl.fastly.net
 
+  - name: "F443-RAIL-34"
+    type: vless
+    server: 69.46.46.34
+    port: 443
+    uuid: 00be8dab-84dc-c4a3-5214-0987fbb4cbb3
+    udp: true
+    tls: true
+    servername: ivory-ridge-9884-production.up.railway.app
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /ws/00be8dab-84dc-c4a3-5214-0987fbb4cbb3
+      headers:
+        Host: ivory-ridge-9884-production.up.railway.app
+
+  - name: "F443-RAIL-56"
+    type: vless
+    server: 69.46.46.56
+    port: 443
+    uuid: 1a2bb091-a1e7-8feb-b98f-a59df78416f3
+    udp: true
+    tls: true
+    servername: x4g-production-7013.up.railway.app
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /ws/1a2bb091-a1e7-8feb-b98f-a59df78416f3
+      headers:
+        Host: x4g-production-7013.up.railway.app
+
+  - name: "F443-RAIL-124"
+    type: vless
+    server: 69.46.46.124
+    port: 443
+    uuid: 6abbc9ed-209e-94d7-98e2-e315b5ff3aa9
+    udp: true
+    tls: true
+    servername: norl-production.up.railway.app
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /ws/6abbc9ed-209e-94d7-98e2-e315b5ff3aa9
+      headers:
+        Host: norl-production.up.railway.app
+
+  - name: "F443-LOTUS"
+    type: vless
+    server: 66.81.247.155
+    port: 443
+    uuid: 17540a16-a0dd-5694-7e1e-14e281ccc032
+    udp: true
+    tls: true
+    servername: crm.lotussec.com
+    skip-cert-verify: false
+    network: ws
+    ws-opts:
+      path: /@JavidnamanIran/Javid-SHAH-KingRezaPahlavi/
+      headers:
+        Host: crm.lotussec.com
+
+  - name: "F443-MERKY"
+    type: vless
+    server: 94.143.231.146
+    port: 443
+    uuid: 6e05822a-e9da-4135-a9db-71aa07a944af
+    udp: true
+    tls: true
+    servername: sub.merky.top
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /merky-connect/de6/
+      headers:
+        Host: sub.merky.top
+
+  - name: "F443-KAMAZ-12"
+    type: vless
+    server: 167.104.216.12
+    port: 443
+    uuid: 5999a497-a2da-41d0-92cb-5b758082f83c
+    udp: true
+    tls: true
+    servername: kamaz4.api3-max.ru
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: tcp
+    flow: xtls-rprx-vision
+
+  - name: "F443-KAMAZ-206"
+    type: vless
+    server: 167.104.216.206
+    port: 443
+    uuid: 5999a497-a2da-41d0-92cb-5b758082f83c
+    udp: true
+    tls: true
+    servername: kamaz03.api3-max.ru
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: tcp
+    flow: xtls-rprx-vision
+
+  - name: "F443-ZOOM"
+    type: vless
+    server: 170.114.46.6
+    port: 443
+    uuid: 5aafc2be-9348-4dec-b896-f4a91253bbca
+    udp: true
+    tls: true
+    servername: support.zoom.us.yxls.eu.cc
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /id-tksi
+      headers:
+        Host: support.zoom.us.yxls.eu.cc
+
 proxy-groups:
+  - name: "FRESH-443-DATA"
+    type: url-test
+    proxies:
+      - F443-RAIL-34
+      - F443-RAIL-56
+      - F443-RAIL-124
+      - F443-LOTUS
+      - F443-MERKY
+      - F443-KAMAZ-12
+      - F443-KAMAZ-206
+      - F443-ZOOM
+    url: "https://cachefly.cachefly.net/1mb.test"
+    interval: 600
+    tolerance: 500
+    timeout: 10000
+    lazy: false
+    max-failed-times: 2
+    expected-status: 200
+
+  - name: "FRESH-443-LIVE"
+    type: fallback
+    proxies:
+      - F443-RAIL-34
+      - F443-RAIL-56
+      - F443-RAIL-124
+      - F443-LOTUS
+      - F443-MERKY
+      - F443-KAMAZ-12
+      - F443-KAMAZ-206
+      - F443-ZOOM
+    url: "https://www.google.com/robots.txt"
+    interval: 180
+    timeout: 8000
+    lazy: false
+    max-failed-times: 2
+    expected-status: 200
+
   - name: "R2-US-BL-STICKY"
     type: select
     use:
@@ -203,11 +361,11 @@ proxy-groups:
   - name: "R1-GREEN-PINNED"
     type: fallback
     proxies:
-      - R1-GREEN-102-FASTLY
       - R1-GREEN-070
       - R1-GREEN-082
       - R1-GREEN-085
       - R1-GREEN-093
+      - R1-GREEN-102-FASTLY
     url: "https://www.google.com/robots.txt"
     interval: 180
     timeout: 8000
@@ -280,8 +438,9 @@ proxy-groups:
   - name: "AUTO-RESCUE"
     type: fallback
     proxies:
+      - FRESH-443-DATA
+      - FRESH-443-LIVE
       - R2-US-BL-STICKY
-      - R1-GREEN-102-FASTLY
       - ROTATING-RESCUE
       - R1-GREEN-PINNED
       - REAL-DATA-RACE
@@ -290,6 +449,7 @@ proxy-groups:
       - TESTED-MIX
       - PROVIDER-B
       - PROVIDER-A
+      - R1-GREEN-102-FASTLY
     url: "https://www.google.com/robots.txt"
     interval: 180
     timeout: 8000
@@ -301,8 +461,9 @@ proxy-groups:
     type: select
     proxies:
       - AUTO-RESCUE
+      - FRESH-443-DATA
+      - FRESH-443-LIVE
       - R2-US-BL-STICKY
-      - R1-GREEN-102-FASTLY
       - ROTATING-RESCUE
       - R1-GREEN-PINNED
       - REAL-DATA-RACE
@@ -311,6 +472,15 @@ proxy-groups:
       - TESTED-MIX
       - PROVIDER-B
       - PROVIDER-A
+      - F443-RAIL-34
+      - F443-RAIL-56
+      - F443-RAIL-124
+      - F443-LOTUS
+      - F443-MERKY
+      - F443-KAMAZ-12
+      - F443-KAMAZ-206
+      - F443-ZOOM
+      - R1-GREEN-102-FASTLY
       - R1-GREEN-070
       - R1-GREEN-082
       - R1-GREEN-085
