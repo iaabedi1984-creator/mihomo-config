@@ -18,9 +18,9 @@ proxy-providers:
     interval: 300
     health-check:
       enable: true
-      url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
-      interval: 240
-      timeout: 12000
+      url: "https://www.google.com/robots.txt"
+      interval: 300
+      timeout: 8000
       lazy: false
       expected-status: 200
     override:
@@ -33,9 +33,9 @@ proxy-providers:
     interval: 900
     health-check:
       enable: true
-      url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/hiddify-sub.txt"
-      interval: 420
-      timeout: 7000
+      url: "https://www.google.com/robots.txt"
+      interval: 600
+      timeout: 8000
       lazy: false
       expected-status: 200
     override:
@@ -48,9 +48,9 @@ proxy-providers:
     interval: 600
     health-check:
       enable: true
-      url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
+      url: "https://www.google.com/robots.txt"
       interval: 300
-      timeout: 12000
+      timeout: 8000
       lazy: true
       expected-status: 200
     override:
@@ -63,9 +63,9 @@ proxy-providers:
     interval: 600
     health-check:
       enable: true
-      url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
+      url: "https://www.google.com/robots.txt"
       interval: 300
-      timeout: 12000
+      timeout: 8000
       lazy: true
       expected-status: 200
     override:
@@ -78,9 +78,9 @@ proxy-providers:
     interval: 900
     health-check:
       enable: true
-      url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
+      url: "https://www.google.com/robots.txt"
       interval: 300
-      timeout: 12000
+      timeout: 8000
       lazy: true
       expected-status: 200
     override:
@@ -93,9 +93,9 @@ proxy-providers:
     interval: 1800
     health-check:
       enable: true
-      url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
+      url: "https://www.google.com/robots.txt"
       interval: 300
-      timeout: 12000
+      timeout: 8000
       lazy: true
       expected-status: 200
     override:
@@ -108,9 +108,9 @@ proxy-providers:
     interval: 1800
     health-check:
       enable: true
-      url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
+      url: "https://www.google.com/robots.txt"
       interval: 300
-      timeout: 12000
+      timeout: 8000
       lazy: true
       expected-status: 200
     override:
@@ -165,20 +165,19 @@ proxies:
         Host: pannn1.global.ssl.fastly.net
 
 proxy-groups:
-  - name: "SPEED-RACE"
+  - name: "REAL-DATA-RACE"
     type: url-test
     use:
       - provider-speed-vless
-      - provider-r1-ss44
-    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/hiddify-sub.txt"
-    interval: 180
-    tolerance: 350
-    timeout: 7000
+    url: "https://cachefly.cachefly.net/1mb.test"
+    interval: 1800
+    tolerance: 400
+    timeout: 6500
     lazy: false
     max-failed-times: 2
     expected-status: 200
 
-  - name: "R1-GREEN-SPEED"
+  - name: "R1-REAL-DATA"
     type: url-test
     proxies:
       - R1-GREEN-070
@@ -186,10 +185,10 @@ proxy-groups:
       - R1-GREEN-085
       - R1-GREEN-093
       - R1-GREEN-102-FASTLY
-    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/hiddify-sub.txt"
-    interval: 180
-    tolerance: 350
-    timeout: 7000
+    url: "https://cachefly.cachefly.net/1mb.test"
+    interval: 900
+    tolerance: 400
+    timeout: 6500
     lazy: false
     max-failed-times: 2
     expected-status: 200
@@ -202,23 +201,23 @@ proxy-groups:
       - R1-GREEN-085
       - R1-GREEN-093
       - R1-GREEN-102-FASTLY
-    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
+    url: "https://www.google.com/robots.txt"
     interval: 180
-    timeout: 12000
+    timeout: 8000
     lazy: false
-    max-failed-times: 4
+    max-failed-times: 3
     expected-status: 200
 
   - name: "R1-DISCOVERY"
     type: url-test
     use:
       - provider-r1-ss44
-    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
+    url: "https://www.google.com/robots.txt"
     interval: 240
-    tolerance: 1200
-    timeout: 12000
+    tolerance: 500
+    timeout: 8000
     lazy: false
-    max-failed-times: 4
+    max-failed-times: 3
     expected-status: 200
 
   - name: "ROTATING-RESCUE"
@@ -227,34 +226,34 @@ proxy-groups:
       - provider-r1-ss44
       - provider-r2-blacklist
       - provider-r3-whitelist
-    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
+    url: "https://www.google.com/robots.txt"
     interval: 300
-    tolerance: 1500
-    timeout: 12000
+    tolerance: 650
+    timeout: 8000
     lazy: false
-    max-failed-times: 4
+    max-failed-times: 3
     expected-status: 200
 
   - name: "TESTED-MIX"
     type: url-test
     use:
       - provider-c-tested
-    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
+    url: "https://www.google.com/robots.txt"
     interval: 300
-    tolerance: 1000
-    timeout: 12000
+    tolerance: 500
+    timeout: 8000
     lazy: true
-    max-failed-times: 4
+    max-failed-times: 3
     expected-status: 200
 
   - name: "PROVIDER-B"
     type: url-test
     use:
       - provider-b-vless
-    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
+    url: "https://www.google.com/robots.txt"
     interval: 300
-    tolerance: 900
-    timeout: 12000
+    tolerance: 500
+    timeout: 8000
     lazy: true
     max-failed-times: 3
     expected-status: 200
@@ -263,10 +262,10 @@ proxy-groups:
     type: url-test
     use:
       - provider-a-public
-    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
+    url: "https://www.google.com/robots.txt"
     interval: 300
-    tolerance: 900
-    timeout: 12000
+    tolerance: 500
+    timeout: 8000
     lazy: true
     max-failed-times: 3
     expected-status: 200
@@ -274,18 +273,18 @@ proxy-groups:
   - name: "AUTO-RESCUE"
     type: fallback
     proxies:
-      - SPEED-RACE
-      - R1-GREEN-SPEED
+      - REAL-DATA-RACE
+      - R1-REAL-DATA
       - R1-GREEN-PINNED
       - R1-DISCOVERY
       - ROTATING-RESCUE
       - TESTED-MIX
       - PROVIDER-B
       - PROVIDER-A
-    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
+    url: "https://www.google.com/robots.txt"
     interval: 120
-    timeout: 12000
-    max-failed-times: 3
+    timeout: 8000
+    max-failed-times: 2
     lazy: false
     expected-status: 200
 
@@ -293,8 +292,8 @@ proxy-groups:
     type: select
     proxies:
       - AUTO-RESCUE
-      - SPEED-RACE
-      - R1-GREEN-SPEED
+      - REAL-DATA-RACE
+      - R1-REAL-DATA
       - R1-GREEN-PINNED
       - R1-DISCOVERY
       - ROTATING-RESCUE
