@@ -285,7 +285,69 @@ proxies:
       headers:
         Host: support.zoom.us.yxls.eu.cc
 
+  - name: "R2-HIST-DALLAS-443"
+    type: vless
+    server: 144.31.3.0
+    port: 443
+    uuid: f39a15ee-e776-4b27-a5f0-50c02052771a
+    udp: true
+    tls: true
+    servername: usin1.confstage.app
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /
+      headers:
+        Host: usin1.confstage.app
+
+  - name: "R2-CURR-US-CDN-443"
+    type: vless
+    server: minimize-evenness.cdn-content.com
+    port: 443
+    uuid: 4ea9c6dd-4d73-49f2-82ce-b80b1b5dd646
+    udp: true
+    tls: true
+    servername: minimize-evenness.cdn-content.com
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /ws
+      headers:
+        Host: minimize-evenness.cdn-content.com
+
+  - name: "R2-CURR-US-VIDEO-443"
+    type: vless
+    server: piracy-android.video-streams.org
+    port: 443
+    uuid: fbef862a-2e17-45e4-b624-dc2ccaac9e10
+    udp: true
+    tls: true
+    servername: piracy-android.video-streams.org
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /ws
+      headers:
+        Host: piracy-android.video-streams.org
+
 proxy-groups:
+  - name: "R2-PROVEN-PINNED"
+    type: fallback
+    proxies:
+      - R2-HIST-DALLAS-443
+      - R2-CURR-US-CDN-443
+      - R2-CURR-US-VIDEO-443
+      - R1-GREEN-102-FASTLY
+    url: "https://www.google.com/robots.txt"
+    interval: 180
+    timeout: 8000
+    lazy: false
+    max-failed-times: 2
+    expected-status: 200
+
   - name: "FRESH-443-DATA"
     type: url-test
     proxies:
@@ -438,6 +500,7 @@ proxy-groups:
   - name: "AUTO-RESCUE"
     type: fallback
     proxies:
+      - R2-PROVEN-PINNED
       - FRESH-443-DATA
       - FRESH-443-LIVE
       - R2-US-BL-STICKY
@@ -460,6 +523,10 @@ proxy-groups:
   - name: "PROXY"
     type: select
     proxies:
+      - R2-PROVEN-PINNED
+      - R2-HIST-DALLAS-443
+      - R2-CURR-US-CDN-443
+      - R2-CURR-US-VIDEO-443
       - AUTO-RESCUE
       - FRESH-443-DATA
       - FRESH-443-LIVE
