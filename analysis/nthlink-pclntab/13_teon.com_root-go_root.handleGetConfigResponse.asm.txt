@@ -1,0 +1,140 @@
+
+rootgo.so:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+000000000025bf60 <crosscall2@@Base+0xaf3c0>:
+  25bf60:	aa0503e0 	mov	x0, x5
+  25bf64:	97fffc33 	bl	25b030 <crosscall2@@Base+0xae490>
+  25bf68:	f94027e4 	ldr	x4, [sp, #72]
+  25bf6c:	91000480 	add	x0, x4, #0x1
+  25bf70:	f1003c1f 	cmp	x0, #0xf
+  25bf74:	54fffe6b 	b.lt	25bf40 <crosscall2@@Base+0xaf3a0>  // b.tstop
+  25bf78:	f9495be3 	ldr	x3, [sp, #4784]
+  25bf7c:	f9400064 	ldr	x4, [x3]
+  25bf80:	f9400481 	ldr	x1, [x4, #8]
+  25bf84:	f9002fe1 	str	x1, [sp, #88]
+  25bf88:	f94947e0 	ldr	x0, [sp, #4744]
+  25bf8c:	f9400804 	ldr	x4, [x0, #16]
+  25bf90:	d503201f 	nop
+  25bf94:	eb01009f 	cmp	x4, x1
+  25bf98:	540001eb 	b.lt	25bfd4 <crosscall2@@Base+0xaf434>  // b.tstop
+  25bf9c:	f9400404 	ldr	x4, [x0, #8]
+  25bfa0:	b4000104 	cbz	x4, 25bfc0 <crosscall2@@Base+0xaf420>
+  25bfa4:	f9400002 	ldr	x2, [x0]
+  25bfa8:	d37df081 	lsl	x1, x4, #3
+  25bfac:	aa0203e0 	mov	x0, x2
+  25bfb0:	97fd05b4 	bl	19d680 <_cgo_topofstack@@Base+0x770>    ; CALL type:.eq.crypto/x509.rfc2821Mailbox
+  25bfb4:	f94947e0 	ldr	x0, [sp, #4744]
+  25bfb8:	f9402fe1 	ldr	x1, [sp, #88]
+  25bfbc:	f9495be3 	ldr	x3, [sp, #4784]
+  25bfc0:	f9400802 	ldr	x2, [x0, #16]
+  25bfc4:	eb01005f 	cmp	x2, x1
+  25bfc8:	54001d83 	b.cc	25c378 <crosscall2@@Base+0xaf7d8>  // b.lo, b.ul, b.last
+  25bfcc:	f9000401 	str	x1, [x0, #8]
+  25bfd0:	14000013 	b	25c01c <crosscall2@@Base+0xaf47c>
+  25bfd4:	90000b00 	adrp	x0, 3bb000 <res_search@plt+0x23d90>
+  25bfd8:	91190000 	add	x0, x0, #0x640
+  25bfdc:	aa0103e2 	mov	x2, x1
+  25bfe0:	97fcec68 	bl	197180 <_cgo_yield@@Base+0x76bc8>
+  25bfe4:	f9402fe3 	ldr	x3, [sp, #88]
+  25bfe8:	f94947e1 	ldr	x1, [sp, #4744]
+  25bfec:	f9000423 	str	x3, [x1, #8]
+  25bff0:	f9000823 	str	x3, [x1, #16]
+  25bff4:	b0001e9b 	adrp	x27, 62c000 <x_cgo_inittls@@Base+0x286f0>
+  25bff8:	b9499363 	ldr	w3, [x27, #2448]
+  25bffc:	340000a3 	cbz	w3, 25c010 <crosscall2@@Base+0xaf470>
+  25c000:	97fd03f0 	bl	19cfc0 <_cgo_topofstack@@Base+0xb0>
+  25c004:	f9000320 	str	x0, [x25]
+  25c008:	f9400024 	ldr	x4, [x1]
+  25c00c:	f9000724 	str	x4, [x25, #8]
+  25c010:	f9000020 	str	x0, [x1]
+  25c014:	aa0103e0 	mov	x0, x1
+  25c018:	f9495be3 	ldr	x3, [sp, #4784]
+  25c01c:	f9400404 	ldr	x4, [x0, #8]
+  25c020:	f100009f 	cmp	x4, #0x0
+  25c024:	54001a49 	b.ls	25c36c <crosscall2@@Base+0xaf7cc>  // b.plast
+  25c028:	f9400004 	ldr	x4, [x0]
+  25c02c:	b24003e5 	orr	x5, xzr, #0x1
+  25c030:	f9000085 	str	x5, [x4]
+  25c034:	f9400c62 	ldr	x2, [x3, #24]
+  25c038:	d503201f 	nop
+  25c03c:	aa0003e1 	mov	x1, x0
+  25c040:	97fffbfc 	bl	25b030 <crosscall2@@Base+0xae490>
+  25c044:	d503201f 	nop
+  25c048:	9101c3f4 	add	x20, sp, #0x70
+  25c04c:	1000009b 	adr	x27, 25c05c <crosscall2@@Base+0xaf4bc>
+  25c050:	a93eeffd 	stp	x29, x27, [sp, #-24]
+  25c054:	d10063fd 	sub	x29, sp, #0x18
+  25c058:	97fd04f2 	bl	19d420 <_cgo_topofstack@@Base+0x510>
+  25c05c:	d10023fd 	sub	x29, sp, #0x8
+  25c060:	f90887ff 	str	xzr, [sp, #4360]
+  25c064:	f90883ff 	str	xzr, [sp, #4352]
+  25c068:	b27b03e4 	orr	x4, xzr, #0x20
+  25c06c:	f90887e4 	str	x4, [sp, #4360]
+  25c070:	9101c3e4 	add	x4, sp, #0x70
+  25c074:	f9087fe4 	str	x4, [sp, #4344]
+  25c078:	f9495be1 	ldr	x1, [sp, #4784]
+  25c07c:	f9400024 	ldr	x4, [x1]
+  25c080:	d503201f 	nop
+  25c084:	f9400482 	ldr	x2, [x4, #8]
+  25c088:	b7f81682 	tbnz	x2, #63, 25c358 <crosscall2@@Base+0xaf7b8>
+  25c08c:	f9001fe2 	str	x2, [sp, #56]
+  25c090:	f100805f 	cmp	x2, #0x20
+  25c094:	5400018c 	b.gt	25c0c4 <crosscall2@@Base+0xaf524>
+  25c098:	b40000c2 	cbz	x2, 25c0b0 <crosscall2@@Base+0xaf510>
+  25c09c:	f9487fe0 	ldr	x0, [sp, #4344]
+  25c0a0:	d37df041 	lsl	x1, x2, #3
+  25c0a4:	97fd0577 	bl	19d680 <_cgo_topofstack@@Base+0x770>    ; CALL type:.eq.crypto/x509.rfc2821Mailbox
+  25c0a8:	f9495be1 	ldr	x1, [sp, #4784]
+  25c0ac:	f9401fe2 	ldr	x2, [sp, #56]
+  25c0b0:	f94887e4 	ldr	x4, [sp, #4360]
+  25c0b4:	eb02009f 	cmp	x4, x2
+  25c0b8:	540014a3 	b.cc	25c34c <crosscall2@@Base+0xaf7ac>  // b.lo, b.ul, b.last
+  25c0bc:	f90883e2 	str	x2, [sp, #4352]
+  25c0c0:	14000015 	b	25c114 <crosscall2@@Base+0xaf574>
+  25c0c4:	f0000ae0 	adrp	x0, 3bb000 <res_search@plt+0x23d90>
+  25c0c8:	91190000 	add	x0, x0, #0x640
+  25c0cc:	aa0203e1 	mov	x1, x2
+  25c0d0:	97fcec2c 	bl	197180 <_cgo_yield@@Base+0x76bc8>
+  25c0d4:	f9487fe1 	ldr	x1, [sp, #4344]
+  25c0d8:	f94883e3 	ldr	x3, [sp, #4352]
+  25c0dc:	f9401fe4 	ldr	x4, [sp, #56]
+  25c0e0:	eb04007f 	cmp	x3, x4
+  25c0e4:	9a84b063 	csel	x3, x3, x4, lt	// lt = tstop
+  25c0e8:	eb01001f 	cmp	x0, x1
+  25c0ec:	540000c0 	b.eq	25c104 <crosscall2@@Base+0xaf564>  // b.none
+  25c0f0:	f9087be0 	str	x0, [sp, #4336]
+  25c0f4:	d37df062 	lsl	x2, x3, #3
+  25c0f8:	97fd05ca 	bl	19d820 <_cgo_topofstack@@Base+0x910>
+  25c0fc:	f9487be0 	ldr	x0, [sp, #4336]
+  25c100:	f9401fe4 	ldr	x4, [sp, #56]
+  25c104:	f90883e4 	str	x4, [sp, #4352]
+  25c108:	f90887e4 	str	x4, [sp, #4360]
+  25c10c:	f9087fe0 	str	x0, [sp, #4344]
+  25c110:	f9495be1 	ldr	x1, [sp, #4784]
+  25c114:	f94947e0 	ldr	x0, [sp, #4744]
+  25c118:	f94953e4 	ldr	x4, [sp, #4768]
+  25c11c:	f9494fe5 	ldr	x5, [sp, #4760]
+  25c120:	aa1f03e2 	mov	x2, xzr
+  25c124:	14000002 	b	25c12c <crosscall2@@Base+0xaf58c>
+  25c128:	91000442 	add	x2, x2, #0x1
+  25c12c:	eb02009f 	cmp	x4, x2
+  25c130:	5400012d 	b.le	25c154 <crosscall2@@Base+0xaf5b4>
+  25c134:	f9002fe2 	str	x2, [sp, #88]
+  25c138:	386268a6 	ldrb	w6, [x5, x2]
+  25c13c:	3900bfe6 	strb	w6, [sp, #47]
+  25c140:	a9067fff 	stp	xzr, xzr, [sp, #96]
+  25c144:	b27e03e7 	orr	x7, xzr, #0x4
+  25c148:	f90033e7 	str	x7, [sp, #96]
+  25c14c:	aa1f03e3 	mov	x3, xzr
+  25c150:	1400000e 	b	25c188 <crosscall2@@Base+0xaf5e8>
+  25c154:	97fffb57 	bl	25aeb0 <crosscall2@@Base+0xae310>
+  25c158:	a97ffbfd 	ldp	x29, x30, [sp, #-8]
+  25c15c:	d282501b 	mov	x27, #0x1280                	// #4736
+  25c160:	8b3b63ff 	add	sp, sp, x27
+  25c164:	d65f03c0 	ret
+  25c168:	f9402be8 	ldr	x8, [sp, #80]
+  25c16c:	91000503 	add	x3, x8, #0x1
+

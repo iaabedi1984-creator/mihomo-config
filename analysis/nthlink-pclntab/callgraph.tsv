@@ -1,0 +1,6 @@
+caller	callee
+teon.com/root-go/root.apiGetConfig	slices.insertionSortOrdered[go.shape.int32]
+teon.com/root-go/root.doRequests	teon.com/root-go/root.report
+teon.com/root-go/root.doRequests	type:.eq.crypto/x509.rfc2821Mailbox
+teon.com/root-go/root.getConfig	type:.eq.crypto/x509.rfc2821Mailbox
+teon.com/root-go/root.handleGetConfigResponse	type:.eq.crypto/x509.rfc2821Mailbox

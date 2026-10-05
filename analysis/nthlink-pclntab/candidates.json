@@ -1,0 +1,26 @@
+[
+  {
+    "base": 4336768,
+    "ptrSize": 8,
+    "minLC": 4,
+    "nfunc": 6209,
+    "nfiles": 631,
+    "textStart": 0,
+    "funcnameOff": 96,
+    "cuOff": 281120,
+    "filetabOff": 293248,
+    "pctabOff": 336448,
+    "pclnOff": 1078816,
+    "goodFirst100": 100,
+    "samples": [
+      "internal/abi.Kind.String",
+      "internal/abi.(*Type).Kind",
+      "internal/abi.(*Type).Len",
+      "internal/abi.(*Type).Elem",
+      "internal/abi.(*Type).Size",
+      "internal/abi.(*Type).ExportedMethods",
+      "internal/abi.(*Type).NumMethod",
+      "internal/abi.Name.IsBlank"
+    ]
+  }
+]

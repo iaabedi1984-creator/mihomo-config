@@ -1,0 +1,180 @@
+
+rootgo.so:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+000000000025bc60 <crosscall2@@Base+0xaf0c0>:
+  25bc60:	a93eeffd 	stp	x29, x27, [sp, #-24]
+  25bc64:	d10063fd 	sub	x29, sp, #0x18
+  25bc68:	97fd05ee 	bl	19d420 <_cgo_topofstack@@Base+0x510>
+  25bc6c:	d10023fd 	sub	x29, sp, #0x8
+  25bc70:	f908cfff 	str	xzr, [sp, #4504]
+  25bc74:	f908cbff 	str	xzr, [sp, #4496]
+  25bc78:	f908cfe4 	str	x4, [sp, #4504]
+  25bc7c:	9119c3e6 	add	x6, sp, #0x670
+  25bc80:	f908c7e6 	str	x6, [sp, #4488]
+  25bc84:	d503201f 	nop
+  25bc88:	9115c3f4 	add	x20, sp, #0x570
+  25bc8c:	1000009b 	adr	x27, 25bc9c <crosscall2@@Base+0xaf0fc>
+  25bc90:	a93eeffd 	stp	x29, x27, [sp, #-24]
+  25bc94:	d10063fd 	sub	x29, sp, #0x18
+  25bc98:	97fd05e2 	bl	19d420 <_cgo_topofstack@@Base+0x510>
+  25bc9c:	d10023fd 	sub	x29, sp, #0x8
+  25bca0:	f908c3ff 	str	xzr, [sp, #4480]
+  25bca4:	f908bfff 	str	xzr, [sp, #4472]
+  25bca8:	f908c3e4 	str	x4, [sp, #4480]
+  25bcac:	9115c3e6 	add	x6, sp, #0x570
+  25bcb0:	f908bbe6 	str	x6, [sp, #4464]
+  25bcb4:	d503201f 	nop
+  25bcb8:	9111c3f4 	add	x20, sp, #0x470
+  25bcbc:	1000009b 	adr	x27, 25bccc <crosscall2@@Base+0xaf12c>
+  25bcc0:	a93eeffd 	stp	x29, x27, [sp, #-24]
+  25bcc4:	d10063fd 	sub	x29, sp, #0x18
+  25bcc8:	97fd05d6 	bl	19d420 <_cgo_topofstack@@Base+0x510>
+  25bccc:	d10023fd 	sub	x29, sp, #0x8
+  25bcd0:	f908b7ff 	str	xzr, [sp, #4456]
+  25bcd4:	f908b3ff 	str	xzr, [sp, #4448]
+  25bcd8:	f908b7e4 	str	x4, [sp, #4456]
+  25bcdc:	9111c3e6 	add	x6, sp, #0x470
+  25bce0:	f908afe6 	str	x6, [sp, #4440]
+  25bce4:	d503201f 	nop
+  25bce8:	910dc3f4 	add	x20, sp, #0x370
+  25bcec:	1000009b 	adr	x27, 25bcfc <crosscall2@@Base+0xaf15c>
+  25bcf0:	a93eeffd 	stp	x29, x27, [sp, #-24]
+  25bcf4:	d10063fd 	sub	x29, sp, #0x18
+  25bcf8:	97fd05ca 	bl	19d420 <_cgo_topofstack@@Base+0x510>
+  25bcfc:	d10023fd 	sub	x29, sp, #0x8
+  25bd00:	f908abff 	str	xzr, [sp, #4432]
+  25bd04:	f908a7ff 	str	xzr, [sp, #4424]
+  25bd08:	f908abe4 	str	x4, [sp, #4432]
+  25bd0c:	910dc3e6 	add	x6, sp, #0x370
+  25bd10:	f908a3e6 	str	x6, [sp, #4416]
+  25bd14:	d503201f 	nop
+  25bd18:	9109c3f4 	add	x20, sp, #0x270
+  25bd1c:	1000009b 	adr	x27, 25bd2c <crosscall2@@Base+0xaf18c>
+  25bd20:	a93eeffd 	stp	x29, x27, [sp, #-24]
+  25bd24:	d10063fd 	sub	x29, sp, #0x18
+  25bd28:	97fd05be 	bl	19d420 <_cgo_topofstack@@Base+0x510>
+  25bd2c:	d10023fd 	sub	x29, sp, #0x8
+  25bd30:	f9089fff 	str	xzr, [sp, #4408]
+  25bd34:	f9089bff 	str	xzr, [sp, #4400]
+  25bd38:	f9089fe4 	str	x4, [sp, #4408]
+  25bd3c:	9109c3e6 	add	x6, sp, #0x270
+  25bd40:	f90897e6 	str	x6, [sp, #4392]
+  25bd44:	d503201f 	nop
+  25bd48:	9105c3f4 	add	x20, sp, #0x170
+  25bd4c:	1000009b 	adr	x27, 25bd5c <crosscall2@@Base+0xaf1bc>
+  25bd50:	a93eeffd 	stp	x29, x27, [sp, #-24]
+  25bd54:	d10063fd 	sub	x29, sp, #0x18
+  25bd58:	97fd05b2 	bl	19d420 <_cgo_topofstack@@Base+0x510>
+  25bd5c:	d10023fd 	sub	x29, sp, #0x8
+  25bd60:	f90893ff 	str	xzr, [sp, #4384]
+  25bd64:	f9088fff 	str	xzr, [sp, #4376]
+  25bd68:	f90893e4 	str	x4, [sp, #4384]
+  25bd6c:	9105c3e6 	add	x6, sp, #0x170
+  25bd70:	f9088be6 	str	x6, [sp, #4368]
+  25bd74:	914007e6 	add	x6, sp, #0x1, lsl #12
+  25bd78:	910980c6 	add	x6, x6, #0x260
+  25bd7c:	f9083fe6 	str	x6, [sp, #4216]
+  25bd80:	914007e6 	add	x6, sp, #0x1, lsl #12
+  25bd84:	910920c6 	add	x6, x6, #0x248
+  25bd88:	f90843e6 	str	x6, [sp, #4224]
+  25bd8c:	914007e6 	add	x6, sp, #0x1, lsl #12
+  25bd90:	9108c0c6 	add	x6, x6, #0x230
+  25bd94:	f90847e6 	str	x6, [sp, #4232]
+  25bd98:	914007e6 	add	x6, sp, #0x1, lsl #12
+  25bd9c:	910860c6 	add	x6, x6, #0x218
+  25bda0:	f9084be6 	str	x6, [sp, #4240]
+  25bda4:	914007e6 	add	x6, sp, #0x1, lsl #12
+  25bda8:	910800c6 	add	x6, x6, #0x200
+  25bdac:	f9084fe6 	str	x6, [sp, #4248]
+  25bdb0:	914007e6 	add	x6, sp, #0x1, lsl #12
+  25bdb4:	9107a0c6 	add	x6, x6, #0x1e8
+  25bdb8:	f90853e6 	str	x6, [sp, #4256]
+  25bdbc:	914007e6 	add	x6, sp, #0x1, lsl #12
+  25bdc0:	910740c6 	add	x6, x6, #0x1d0
+  25bdc4:	f90857e6 	str	x6, [sp, #4264]
+  25bdc8:	914007e6 	add	x6, sp, #0x1, lsl #12
+  25bdcc:	9106e0c6 	add	x6, x6, #0x1b8
+  25bdd0:	f9085be6 	str	x6, [sp, #4272]
+  25bdd4:	914007e6 	add	x6, sp, #0x1, lsl #12
+  25bdd8:	910680c6 	add	x6, x6, #0x1a0
+  25bddc:	f9085fe6 	str	x6, [sp, #4280]
+  25bde0:	914007e6 	add	x6, sp, #0x1, lsl #12
+  25bde4:	910620c6 	add	x6, x6, #0x188
+  25bde8:	f90863e6 	str	x6, [sp, #4288]
+  25bdec:	914007e6 	add	x6, sp, #0x1, lsl #12
+  25bdf0:	9105c0c6 	add	x6, x6, #0x170
+  25bdf4:	f90867e6 	str	x6, [sp, #4296]
+  25bdf8:	914007e6 	add	x6, sp, #0x1, lsl #12
+  25bdfc:	910560c6 	add	x6, x6, #0x158
+  25be00:	f9086be6 	str	x6, [sp, #4304]
+  25be04:	914007e6 	add	x6, sp, #0x1, lsl #12
+  25be08:	910500c6 	add	x6, x6, #0x140
+  25be0c:	f9086fe6 	str	x6, [sp, #4312]
+  25be10:	914007e6 	add	x6, sp, #0x1, lsl #12
+  25be14:	9104a0c6 	add	x6, x6, #0x128
+  25be18:	f90873e6 	str	x6, [sp, #4320]
+  25be1c:	914007e6 	add	x6, sp, #0x1, lsl #12
+  25be20:	910440c6 	add	x6, x6, #0x110
+  25be24:	f90877e6 	str	x6, [sp, #4328]
+  25be28:	f9483fe6 	ldr	x6, [sp, #4216]
+  25be2c:	f9083be6 	str	x6, [sp, #4208]
+  25be30:	f9400427 	ldr	x7, [x1, #8]
+  25be34:	f9002fe7 	str	x7, [sp, #88]
+  25be38:	f94008c8 	ldr	x8, [x6, #16]
+  25be3c:	eb07011f 	cmp	x8, x7
+  25be40:	5400026b 	b.lt	25be8c <crosscall2@@Base+0xaf2ec>  // b.tstop
+  25be44:	f94004c8 	ldr	x8, [x6, #8]
+  25be48:	b4000188 	cbz	x8, 25be78 <crosscall2@@Base+0xaf2d8>
+  25be4c:	f94000c0 	ldr	x0, [x6]
+  25be50:	d37df101 	lsl	x1, x8, #3
+  25be54:	97fd060b 	bl	19d680 <_cgo_topofstack@@Base+0x770>    ; CALL type:.eq.crypto/x509.rfc2821Mailbox
+  25be58:	f94947e0 	ldr	x0, [sp, #4744]
+  25be5c:	f9494be1 	ldr	x1, [sp, #4752]
+  25be60:	f9494fe2 	ldr	x2, [sp, #4760]
+  25be64:	f94953e3 	ldr	x3, [sp, #4768]
+  25be68:	b27b03e4 	orr	x4, xzr, #0x20
+  25be6c:	f9495be5 	ldr	x5, [sp, #4784]
+  25be70:	f9483be6 	ldr	x6, [sp, #4208]
+  25be74:	f9402fe7 	ldr	x7, [sp, #88]
+  25be78:	f94008c8 	ldr	x8, [x6, #16]
+  25be7c:	eb07011f 	cmp	x8, x7
+  25be80:	540027e3 	b.cc	25c37c <crosscall2@@Base+0xaf7dc>  // b.lo, b.ul, b.last
+  25be84:	f90004c7 	str	x7, [x6, #8]
+  25be88:	14000019 	b	25beec <crosscall2@@Base+0xaf34c>
+  25be8c:	90000b00 	adrp	x0, 3bb000 <res_search@plt+0x23d90>
+  25be90:	91190000 	add	x0, x0, #0x640
+  25be94:	aa0703e1 	mov	x1, x7
+  25be98:	aa0103e2 	mov	x2, x1
+  25be9c:	97fcecb9 	bl	197180 <_cgo_yield@@Base+0x76bc8>
+  25bea0:	f9402fe3 	ldr	x3, [sp, #88]
+  25bea4:	f9483be1 	ldr	x1, [sp, #4208]
+  25bea8:	f9000423 	str	x3, [x1, #8]
+  25beac:	f9000823 	str	x3, [x1, #16]
+  25beb0:	b0001e9b 	adrp	x27, 62c000 <x_cgo_inittls@@Base+0x286f0>
+  25beb4:	b9499363 	ldr	w3, [x27, #2448]
+  25beb8:	340000a3 	cbz	w3, 25becc <crosscall2@@Base+0xaf32c>
+  25bebc:	97fd0441 	bl	19cfc0 <_cgo_topofstack@@Base+0xb0>
+  25bec0:	f9000320 	str	x0, [x25]
+  25bec4:	f9400024 	ldr	x4, [x1]
+  25bec8:	f9000724 	str	x4, [x25, #8]
+  25becc:	f9000020 	str	x0, [x1]
+  25bed0:	f94947e0 	ldr	x0, [sp, #4744]
+  25bed4:	f9494be1 	ldr	x1, [sp, #4752]
+  25bed8:	f9494fe2 	ldr	x2, [sp, #4760]
+  25bedc:	f94953e3 	ldr	x3, [sp, #4768]
+  25bee0:	b27b03e4 	orr	x4, xzr, #0x20
+  25bee4:	f9495be5 	ldr	x5, [sp, #4784]
+  25bee8:	f9483be6 	ldr	x6, [sp, #4208]
+  25beec:	f94000c7 	ldr	x7, [x6]
+  25bef0:	f94004c8 	ldr	x8, [x6, #8]
+  25bef4:	f9400029 	ldr	x9, [x1]
+  25bef8:	f940042a 	ldr	x10, [x1, #8]
+  25befc:	eb0a011f 	cmp	x8, x10
+  25bf00:	9a88c148 	csel	x8, x10, x8, gt
+  25bf04:	eb0900ff 	cmp	x7, x9
+  25bf08:	540000e0 	b.eq	25bf24 <crosscall2@@Base+0xaf384>  // b.none
+  25bf0c:	d37df102 	lsl	x2, x8, #3
+

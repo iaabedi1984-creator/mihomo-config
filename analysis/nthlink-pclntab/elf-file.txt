@@ -1,0 +1,1 @@
+rootgo.so: ELF 64-bit LSB shared object, ARM aarch64, version 1 (SYSV), dynamically linked, Go BuildID=tND9N8rlGT_bxtJD7H49/bZOTeegFJgQN1XuQDElE/k57MilMf0CO7ZzdEEBe1/DOqrdXXCIXHVL6UQamFO, stripped

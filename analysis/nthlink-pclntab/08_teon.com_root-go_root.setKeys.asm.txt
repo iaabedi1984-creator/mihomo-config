@@ -1,0 +1,60 @@
+
+rootgo.so:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+000000000025a790 <crosscall2@@Base+0xadbf0>:
+  25a790:	f94047e2 	ldr	x2, [sp, #136]
+  25a794:	eb0118bf 	cmp	x5, x1, lsl #6
+  25a798:	54fffee3 	b.cc	25a774 <crosscall2@@Base+0xadbd4>  // b.lo, b.ul, b.last
+  25a79c:	d37ae424 	lsl	x4, x1, #6
+  25a7a0:	b27a03e3 	orr	x3, xzr, #0x40
+  25a7a4:	14000002 	b	25a7ac <crosscall2@@Base+0xadc0c>
+  25a7a8:	d1000463 	sub	x3, x3, #0x1
+  25a7ac:	b7f806a3 	tbnz	x3, #63, 25a880 <crosscall2@@Base+0xadce0>
+  25a7b0:	9ac32485 	lsr	x5, x4, x3
+  25a7b4:	f101007f 	cmp	x3, #0x40
+  25a7b8:	9a9f30a5 	csel	x5, x5, xzr, cc	// cc = lo, ul, last
+  25a7bc:	eb4108bf 	cmp	x5, x1, lsr #2
+  25a7c0:	54ffff49 	b.ls	25a7a8 <crosscall2@@Base+0xadc08>  // b.plast
+  25a7c4:	f9002fe4 	str	x4, [sp, #88]
+  25a7c8:	f9001fe3 	str	x3, [sp, #56]
+  25a7cc:	f9002be5 	str	x5, [sp, #80]
+  25a7d0:	aa1f03e1 	mov	x1, xzr
+  25a7d4:	1400000b 	b	25a800 <crosscall2@@Base+0xadc60>
+  25a7d8:	f9001be1 	str	x1, [sp, #48]
+  25a7dc:	aa0003e1 	mov	x1, x0
+  25a7e0:	94000184 	bl	25adf0 <crosscall2@@Base+0xae250>
+  25a7e4:	f9401be3 	ldr	x3, [sp, #48]
+  25a7e8:	91000461 	add	x1, x3, #0x1
+  25a7ec:	f94037e0 	ldr	x0, [sp, #104]
+  25a7f0:	f94047e2 	ldr	x2, [sp, #136]
+  25a7f4:	f9401fe3 	ldr	x3, [sp, #56]
+  25a7f8:	f9402fe4 	ldr	x4, [sp, #88]
+  25a7fc:	f9402be5 	ldr	x5, [sp, #80]
+  25a800:	eb05003f 	cmp	x1, x5
+  25a804:	54fffea3 	b.cc	25a7d8 <crosscall2@@Base+0xadc38>  // b.lo, b.ul, b.last
+  25a808:	14000005 	b	25a81c <crosscall2@@Base+0xadc7c>
+  25a80c:	f94037e0 	ldr	x0, [sp, #104]
+  25a810:	f94047e2 	ldr	x2, [sp, #136]
+  25a814:	aa0403e3 	mov	x3, x4
+  25a818:	aa0503e4 	mov	x4, x5
+  25a81c:	f100007f 	cmp	x3, #0x0
+  25a820:	540002ad 	b.le	25a874 <crosscall2@@Base+0xadcd4>
+  25a824:	f9001fe3 	str	x3, [sp, #56]
+  25a828:	aa0003e1 	mov	x1, x0
+  25a82c:	aa0203e3 	mov	x3, x2
+  25a830:	aa0003e2 	mov	x2, x0
+  25a834:	940001ff 	bl	25b030 <crosscall2@@Base+0xae490>
+  25a838:	f9401fe4 	ldr	x4, [sp, #56]
+  25a83c:	d1000484 	sub	x4, x4, #0x1
+  25a840:	f9402fe5 	ldr	x5, [sp, #88]
+  25a844:	9ac424a6 	lsr	x6, x5, x4
+  25a848:	f101009f 	cmp	x4, #0x40
+  25a84c:	9a9f30c6 	csel	x6, x6, xzr, cc	// cc = lo, ul, last
+  25a850:	3607fde6 	tbz	w6, #0, 25a80c <crosscall2@@Base+0xadc6c>
+  25a854:	f90027e4 	str	x4, [sp, #72]
+  25a858:	f94037e0 	ldr	x0, [sp, #104]
+  25a85c:	aa0003e1 	mov	x1, x0
+

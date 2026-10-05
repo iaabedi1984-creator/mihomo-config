@@ -1,0 +1,72 @@
+
+rootgo.so:     file format elf64-littleaarch64
+
+
+Disassembly of section .text:
+
+000000000025b7e0 <crosscall2@@Base+0xaec40>:
+  25b7e0:	d37df0a2 	lsl	x2, x5, #3
+  25b7e4:	aa0403e0 	mov	x0, x4
+  25b7e8:	97fd080e 	bl	19d820 <_cgo_topofstack@@Base+0x910>
+  25b7ec:	f943a7e0 	ldr	x0, [sp, #1864]
+  25b7f0:	f943b3e3 	ldr	x3, [sp, #1888]
+  25b7f4:	f9403fea 	ldr	x10, [sp, #120]
+  25b7f8:	aa0a03e1 	mov	x1, x10
+  25b7fc:	aa0303e2 	mov	x2, x3
+  25b800:	97fffd00 	bl	25ac00 <crosscall2@@Base+0xae060>
+  25b804:	17fffec7 	b	25b320 <crosscall2@@Base+0xae780>
+  25b808:	aa0503e0 	mov	x0, x5
+  25b80c:	97fd06b9 	bl	19d2f0 <_cgo_topofstack@@Base+0x3e0>
+  25b810:	aa0503e1 	mov	x1, x5
+  25b814:	aa0403e2 	mov	x2, x4
+  25b818:	97fd06ae 	bl	19d2d0 <_cgo_topofstack@@Base+0x3c0>
+  25b81c:	f86e78d0 	ldr	x16, [x6, x14, lsl #3]
+  25b820:	9bcc7e11 	umulh	x17, x16, x12
+  25b824:	9b0c7e10 	mul	x16, x16, x12
+  25b828:	f86e79b3 	ldr	x19, [x13, x14, lsl #3]
+  25b82c:	910005d4 	add	x20, x14, #0x1
+  25b830:	ab100270 	adds	x16, x19, x16
+  25b834:	aa1f03f3 	mov	x19, xzr
+  25b838:	ba130231 	adcs	x17, x17, x19
+  25b83c:	ab1001f0 	adds	x16, x15, x16
+  25b840:	f82e79b0 	str	x16, [x13, x14, lsl #3]
+  25b844:	ba11026f 	adcs	x15, x19, x17
+  25b848:	aa1403ee 	mov	x14, x20
+  25b84c:	eb0501df 	cmp	x14, x5
+  25b850:	54fffe6b 	b.lt	25b81c <crosscall2@@Base+0xaec7c>  // b.tstop
+  25b854:	17ffff9f 	b	25b6d0 <crosscall2@@Base+0xaeb30>
+  25b858:	f86e7891 	ldr	x17, [x4, x14, lsl #3]
+  25b85c:	9bcc7e33 	umulh	x19, x17, x12
+  25b860:	9b117d91 	mul	x17, x12, x17
+  25b864:	f86e79b4 	ldr	x20, [x13, x14, lsl #3]
+  25b868:	910005d5 	add	x21, x14, #0x1
+  25b86c:	ab110291 	adds	x17, x20, x17
+  25b870:	aa1f03f4 	mov	x20, xzr
+  25b874:	ba140273 	adcs	x19, x19, x20
+  25b878:	ab110211 	adds	x17, x16, x17
+  25b87c:	f82e79b1 	str	x17, [x13, x14, lsl #3]
+  25b880:	ba130290 	adcs	x16, x20, x19
+  25b884:	aa1503ee 	mov	x14, x21
+  25b888:	eb0501df 	cmp	x14, x5
+  25b88c:	54fffe6b 	b.lt	25b858 <crosscall2@@Base+0xaecb8>  // b.tstop
+  25b890:	17ffff77 	b	25b66c <crosscall2@@Base+0xaeacc>
+  25b894:	aa0e03e0 	mov	x0, x14
+  25b898:	aa0503e1 	mov	x1, x5
+  25b89c:	97fd067d 	bl	19d290 <_cgo_topofstack@@Base+0x380>
+  25b8a0:	aa0903e0 	mov	x0, x9
+  25b8a4:	aa0b03e1 	mov	x1, x11
+  25b8a8:	97fd0692 	bl	19d2f0 <_cgo_topofstack@@Base+0x3e0>
+  25b8ac:	aa0b03e0 	mov	x0, x11
+  25b8b0:	97fd0678 	bl	19d290 <_cgo_topofstack@@Base+0x380>
+  25b8b4:	97fd0687 	bl	19d2d0 <_cgo_topofstack@@Base+0x3c0>
+  25b8b8:	aa0503e1 	mov	x1, x5
+  25b8bc:	aa0603e2 	mov	x2, x6
+  25b8c0:	97fd0684 	bl	19d2d0 <_cgo_topofstack@@Base+0x3c0>
+  25b8c4:	aa0503e1 	mov	x1, x5
+  25b8c8:	aa0603e2 	mov	x2, x6
+  25b8cc:	97fd0681 	bl	19d2d0 <_cgo_topofstack@@Base+0x3c0>
+  25b8d0:	d503201f 	nop
+  25b8d4:	f90007e0 	str	x0, [sp, #8]
+  25b8d8:	f9000be1 	str	x1, [sp, #16]
+  25b8dc:	f9000fe2 	str	x2, [sp, #24]
+
