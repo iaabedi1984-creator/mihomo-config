@@ -18,7 +18,7 @@ proxy-providers:
     interval: 300
     health-check:
       enable: true
-      url: "https://speed.cloudflare.com/__down?bytes=2048"
+      url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
       interval: 240
       timeout: 12000
       lazy: false
@@ -33,9 +33,9 @@ proxy-providers:
     interval: 900
     health-check:
       enable: true
-      url: "https://speed.cloudflare.com/__down?bytes=65536"
+      url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/hiddify-sub.txt"
       interval: 420
-      timeout: 6500
+      timeout: 7000
       lazy: false
       expected-status: 200
     override:
@@ -48,7 +48,7 @@ proxy-providers:
     interval: 600
     health-check:
       enable: true
-      url: "https://speed.cloudflare.com/__down?bytes=2048"
+      url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
       interval: 300
       timeout: 12000
       lazy: true
@@ -63,7 +63,7 @@ proxy-providers:
     interval: 600
     health-check:
       enable: true
-      url: "https://speed.cloudflare.com/__down?bytes=2048"
+      url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
       interval: 300
       timeout: 12000
       lazy: true
@@ -78,7 +78,7 @@ proxy-providers:
     interval: 900
     health-check:
       enable: true
-      url: "https://speed.cloudflare.com/__down?bytes=2048"
+      url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
       interval: 300
       timeout: 12000
       lazy: true
@@ -93,7 +93,7 @@ proxy-providers:
     interval: 1800
     health-check:
       enable: true
-      url: "https://speed.cloudflare.com/__down?bytes=2048"
+      url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
       interval: 300
       timeout: 12000
       lazy: true
@@ -108,7 +108,7 @@ proxy-providers:
     interval: 1800
     health-check:
       enable: true
-      url: "https://speed.cloudflare.com/__down?bytes=2048"
+      url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
       interval: 300
       timeout: 12000
       lazy: true
@@ -170,10 +170,10 @@ proxy-groups:
     use:
       - provider-speed-vless
       - provider-r1-ss44
-    url: "https://speed.cloudflare.com/__down?bytes=65536"
+    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/hiddify-sub.txt"
     interval: 180
     tolerance: 350
-    timeout: 6500
+    timeout: 7000
     lazy: false
     max-failed-times: 2
     expected-status: 200
@@ -186,10 +186,10 @@ proxy-groups:
       - R1-GREEN-085
       - R1-GREEN-093
       - R1-GREEN-102-FASTLY
-    url: "https://speed.cloudflare.com/__down?bytes=65536"
+    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/hiddify-sub.txt"
     interval: 180
     tolerance: 350
-    timeout: 6500
+    timeout: 7000
     lazy: false
     max-failed-times: 2
     expected-status: 200
@@ -202,7 +202,7 @@ proxy-groups:
       - R1-GREEN-085
       - R1-GREEN-093
       - R1-GREEN-102-FASTLY
-    url: "https://speed.cloudflare.com/__down?bytes=2048"
+    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
     interval: 180
     timeout: 12000
     lazy: false
@@ -213,7 +213,7 @@ proxy-groups:
     type: url-test
     use:
       - provider-r1-ss44
-    url: "https://speed.cloudflare.com/__down?bytes=2048"
+    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
     interval: 240
     tolerance: 1200
     timeout: 12000
@@ -227,7 +227,7 @@ proxy-groups:
       - provider-r1-ss44
       - provider-r2-blacklist
       - provider-r3-whitelist
-    url: "https://speed.cloudflare.com/__down?bytes=2048"
+    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
     interval: 300
     tolerance: 1500
     timeout: 12000
@@ -239,7 +239,7 @@ proxy-groups:
     type: url-test
     use:
       - provider-c-tested
-    url: "https://speed.cloudflare.com/__down?bytes=2048"
+    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
     interval: 300
     tolerance: 1000
     timeout: 12000
@@ -251,7 +251,7 @@ proxy-groups:
     type: url-test
     use:
       - provider-b-vless
-    url: "https://speed.cloudflare.com/__down?bytes=2048"
+    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
     interval: 300
     tolerance: 900
     timeout: 12000
@@ -263,7 +263,7 @@ proxy-groups:
     type: url-test
     use:
       - provider-a-public
-    url: "https://speed.cloudflare.com/__down?bytes=2048"
+    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
     interval: 300
     tolerance: 900
     timeout: 12000
@@ -282,7 +282,7 @@ proxy-groups:
       - TESTED-MIX
       - PROVIDER-B
       - PROVIDER-A
-    url: "https://speed.cloudflare.com/__down?bytes=2048"
+    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/resilient_mihomo_service_failover.yaml"
     interval: 120
     timeout: 12000
     max-failed-times: 3
