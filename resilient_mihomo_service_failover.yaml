@@ -41,6 +41,21 @@ proxy-providers:
     override:
       additional-prefix: "[A] "
 
+  provider-c-tested:
+    type: http
+    url: "https://raw.githubusercontent.com/MohammadBahemmat/V2ray-Collector/main/Tested.txt"
+    path: ./proxy_providers/provider-c-tested.txt
+    interval: 900
+    health-check:
+      enable: true
+      url: "https://www.gstatic.com/generate_204"
+      interval: 180
+      timeout: 8000
+      lazy: false
+      expected-status: 204
+    override:
+      additional-prefix: "[C] "
+
 proxies:
   - name: "Fastly-223"
     type: vless
@@ -138,7 +153,77 @@ proxies:
       headers:
         Host: pokerrr.global.ssl.fastly.net
 
+  - name: "Reality-Intel-443"
+    type: vless
+    server: 2.26.194.15
+    port: 443
+    uuid: 0a54534f-8a65-42f7-ae91-573ae0bf09b7
+    udp: true
+    tls: true
+    servername: www.intel.com
+    client-fingerprint: firefox
+    network: tcp
+    reality-opts:
+      public-key: vqxKvKPwdM4NB1EnIAy90LSglZM9oTRx995mUQIW2Rg
+      short-id: 6bd15a
+
+  - name: "Reality-GitHub-443"
+    type: vless
+    server: 130.17.25.67
+    port: 443
+    uuid: 1c5ed2e1-56da-41ab-9a78-159d9892ec17
+    udp: true
+    tls: true
+    servername: github.com
+    client-fingerprint: chrome
+    network: tcp
+    flow: xtls-rprx-vision
+    reality-opts:
+      public-key: lHCkAu_DOVFtE-iL2JGrPt44QeTCFijXuRfuGaSni3Q
+      short-id: 9e4eced6e98ed4d4
+
+  - name: "Reality-Yandex-443"
+    type: vless
+    server: usself.yandex-api.com
+    port: 443
+    uuid: 1b7ee703-fa08-4305-8469-ae3e30e61e44
+    udp: true
+    tls: true
+    servername: usself.yandex-api.com
+    client-fingerprint: random
+    network: tcp
+    flow: xtls-rprx-vision
+    reality-opts:
+      public-key: HXFe_cPryw01zqXchAFjZciDAS4UJg1-xScx6vjgjjY
+      short-id: 7f2e9c4b1a8d6e25
+
 proxy-groups:
+  - name: "REALITY-443"
+    type: url-test
+    proxies:
+      - Reality-Intel-443
+      - Reality-GitHub-443
+      - Reality-Yandex-443
+    url: "https://www.gstatic.com/generate_204"
+    interval: 120
+    tolerance: 250
+    timeout: 8000
+    lazy: false
+    max-failed-times: 2
+    expected-status: 204
+
+  - name: "TESTED-MIX"
+    type: url-test
+    use:
+      - provider-c-tested
+    url: "https://www.gstatic.com/generate_204"
+    interval: 180
+    tolerance: 300
+    timeout: 8000
+    lazy: false
+    max-failed-times: 2
+    expected-status: 204
+
   - name: "FASTLY-STABLE"
     type: fallback
     proxies:
@@ -193,6 +278,8 @@ proxy-groups:
   - name: "AUTO-RESCUE"
     type: fallback
     proxies:
+      - REALITY-443
+      - TESTED-MIX
       - FASTLY-STABLE
       - FASTLY-PUBLIC
       - PROVIDER-B
@@ -208,10 +295,15 @@ proxy-groups:
     type: select
     proxies:
       - AUTO-RESCUE
+      - REALITY-443
+      - TESTED-MIX
       - FASTLY-STABLE
       - FASTLY-PUBLIC
       - PROVIDER-B
       - PROVIDER-A
+      - Reality-Intel-443
+      - Reality-GitHub-443
+      - Reality-Yandex-443
       - Fastly-223
       - Fastly-159
       - Fastly-DNS
