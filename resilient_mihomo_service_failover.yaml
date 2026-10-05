@@ -42,18 +42,6 @@ proxy-providers:
       additional-prefix: "[A] "
 
 proxies:
-  - name: "HY2-QUIC-443"
-    type: hysteria2
-    server: 162.249.125.133
-    port: 443
-    password: QCgqi_I4EkV8UR-OgQ_tG4EnVTEVvIyR2GgRBzrIn2s
-    obfs: salamander
-    obfs-password: c1b4086fea89914496c7e10967a419216566
-    sni: hy2-new.aspidnet.xyz
-    skip-cert-verify: false
-    alpn:
-      - h3
-
   - name: "Fastly-223"
     type: vless
     server: 199.232.78.223
@@ -143,7 +131,6 @@ proxy-groups:
   - name: "AUTO-RESCUE"
     type: fallback
     proxies:
-      - HY2-QUIC-443
       - FASTLY-STABLE
       - PROVIDER-B
       - PROVIDER-A
@@ -157,7 +144,6 @@ proxy-groups:
   - name: "PROXY"
     type: select
     proxies:
-      - HY2-QUIC-443
       - AUTO-RESCUE
       - FASTLY-STABLE
       - PROVIDER-B
