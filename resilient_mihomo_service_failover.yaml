@@ -116,6 +116,52 @@ proxy-providers:
     override:
       additional-prefix: "[A] "
 
+
+  provider-fresh-mini100:
+    type: http
+    url: "https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/mini.txt"
+    path: ./proxy_providers/provider-fresh-mini100.txt
+    interval: 3600
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 300
+      timeout: 8000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[NEW100] "
+
+  provider-fresh-ss5m:
+    type: http
+    url: "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/ss.txt"
+    path: ./proxy_providers/provider-fresh-ss5m.txt
+    interval: 300
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 300
+      timeout: 8000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[NEW-SS] "
+
+  provider-fresh-trojan5m:
+    type: http
+    url: "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/trojan.txt"
+    path: ./proxy_providers/provider-fresh-trojan5m.txt
+    interval: 300
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 300
+      timeout: 8000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[NEW-TR] "
+
 proxies:
   - name: "R1-GREEN-070"
     type: ss
@@ -497,9 +543,37 @@ proxy-groups:
     max-failed-times: 3
     expected-status: 200
 
+  - name: "NEW-SS-5M"
+    type: url-test
+    use:
+      - provider-fresh-ss5m
+    url: "https://www.google.com/robots.txt"
+    interval: 300
+    tolerance: 700
+    timeout: 8000
+    lazy: true
+    max-failed-times: 3
+    expected-status: 200
+
+  - name: "NEW-FRESH-POOL"
+    type: url-test
+    use:
+      - provider-fresh-mini100
+      - provider-fresh-ss5m
+      - provider-fresh-trojan5m
+    url: "https://www.google.com/robots.txt"
+    interval: 300
+    tolerance: 700
+    timeout: 8000
+    lazy: true
+    max-failed-times: 3
+    expected-status: 200
+
   - name: "AUTO-RESCUE"
     type: fallback
     proxies:
+      - NEW-SS-5M
+      - NEW-FRESH-POOL
       - R2-PROVEN-PINNED
       - FRESH-443-DATA
       - FRESH-443-LIVE
@@ -523,6 +597,8 @@ proxy-groups:
   - name: "PROXY"
     type: select
     proxies:
+      - NEW-SS-5M
+      - NEW-FRESH-POOL
       - R2-PROVEN-PINNED
       - R2-HIST-DALLAS-443
       - R2-CURR-US-CDN-443
