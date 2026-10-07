@@ -1,0 +1,638 @@
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: info
+ipv6: false
+unified-delay: true
+tcp-concurrent: true
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+proxy-providers:
+  provider-r1-ss44:
+    type: http
+    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/hiddify-sub.txt"
+    path: ./proxy_providers/provider-r1-ss44.txt
+    interval: 300
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 300
+      timeout: 8000
+      lazy: false
+      expected-status: 200
+    override:
+      additional-prefix: "[R1] "
+
+  provider-speed-vless:
+    type: http
+    url: "https://raw.githubusercontent.com/luxxuria/harvester/main/speed_tested.txt"
+    path: ./proxy_providers/provider-speed-vless.txt
+    interval: 900
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 600
+      timeout: 8000
+      lazy: false
+      expected-status: 200
+    override:
+      additional-prefix: "[SPD] "
+
+  provider-r2-blacklist:
+    type: http
+    url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/BLACK_VLESS_RUS_mobile.txt"
+    path: ./proxy_providers/provider-r2-blacklist.txt
+    interval: 600
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 300
+      timeout: 8000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[R2] "
+
+  provider-r3-whitelist:
+    type: http
+    url: "https://raw.githubusercontent.com/hussaroff/lte-universal-checked/refs/heads/main/whitelist.txt"
+    path: ./proxy_providers/provider-r3-whitelist.txt
+    interval: 600
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 300
+      timeout: 8000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[R3] "
+
+  provider-c-tested:
+    type: http
+    url: "https://raw.githubusercontent.com/MohammadBahemmat/V2ray-Collector/main/Tested.txt"
+    path: ./proxy_providers/provider-c-tested.txt
+    interval: 900
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 300
+      timeout: 8000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[C] "
+
+  provider-b-vless:
+    type: http
+    url: "https://raw.githubusercontent.com/Baarcuda/vpn-configs/master/top100-vless.txt"
+    path: ./proxy_providers/provider-b-vless.txt
+    interval: 1800
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 300
+      timeout: 8000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[B] "
+
+  provider-a-public:
+    type: http
+    url: "https://github.com/Au1rxx/free-vpn-subscriptions/raw/main/output/v2ray-base64.txt"
+    path: ./proxy_providers/provider-a-public.txt
+    interval: 1800
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 300
+      timeout: 8000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[A] "
+
+
+  provider-fresh-mini100:
+    type: http
+    url: "https://raw.githubusercontent.com/morpheusadam/v2ray-config/main/subs/bundles/mini.txt"
+    path: ./proxy_providers/provider-fresh-mini100.txt
+    interval: 3600
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 300
+      timeout: 8000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[NEW100] "
+
+  provider-fresh-ss5m:
+    type: http
+    url: "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/ss.txt"
+    path: ./proxy_providers/provider-fresh-ss5m.txt
+    interval: 300
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 300
+      timeout: 8000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[NEW-SS] "
+
+  provider-fresh-trojan5m:
+    type: http
+    url: "https://raw.githubusercontent.com/Epodonios/v2ray-configs/main/Splitted-By-Protocol/trojan.txt"
+    path: ./proxy_providers/provider-fresh-trojan5m.txt
+    interval: 300
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 300
+      timeout: 8000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[NEW-TR] "
+
+proxies:
+  - name: "R1-GREEN-070"
+    type: ss
+    server: 195.238.126.20
+    port: 9002
+    cipher: aes-256-cfb
+    password: "b8KkNDjEd5QqFyRm"
+    udp: true
+
+  - name: "R1-GREEN-082"
+    type: ss
+    server: 91.201.65.122
+    port: 9070
+    cipher: aes-256-cfb
+    password: "bf7v334KKDV3YDhH"
+    udp: true
+
+  - name: "R1-GREEN-085"
+    type: ss
+    server: 91.201.65.122
+    port: 9065
+    cipher: aes-256-cfb
+    password: "PeHSHm5SqEjBuEXE"
+    udp: true
+
+  - name: "R1-GREEN-093"
+    type: ss
+    server: 91.201.65.122
+    port: 9002
+    cipher: aes-256-cfb
+    password: "b8KkNDjEd5QqFyRm"
+    udp: true
+
+  - name: "R1-GREEN-102-FASTLY"
+    type: vless
+    server: 199.232.78.159
+    port: 443
+    uuid: 6ead3f4c-023f-4322-b5c4-ac4e327d259d
+    udp: true
+    tls: true
+    servername: ssl.fastly.com
+    skip-cert-verify: false
+    network: ws
+    ws-opts:
+      path: /
+      headers:
+        Host: pannn1.global.ssl.fastly.net
+
+  - name: "F443-RAIL-34"
+    type: vless
+    server: 69.46.46.34
+    port: 443
+    uuid: 00be8dab-84dc-c4a3-5214-0987fbb4cbb3
+    udp: true
+    tls: true
+    servername: ivory-ridge-9884-production.up.railway.app
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /ws/00be8dab-84dc-c4a3-5214-0987fbb4cbb3
+      headers:
+        Host: ivory-ridge-9884-production.up.railway.app
+
+  - name: "F443-RAIL-56"
+    type: vless
+    server: 69.46.46.56
+    port: 443
+    uuid: 1a2bb091-a1e7-8feb-b98f-a59df78416f3
+    udp: true
+    tls: true
+    servername: x4g-production-7013.up.railway.app
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /ws/1a2bb091-a1e7-8feb-b98f-a59df78416f3
+      headers:
+        Host: x4g-production-7013.up.railway.app
+
+  - name: "F443-RAIL-124"
+    type: vless
+    server: 69.46.46.124
+    port: 443
+    uuid: 6abbc9ed-209e-94d7-98e2-e315b5ff3aa9
+    udp: true
+    tls: true
+    servername: norl-production.up.railway.app
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /ws/6abbc9ed-209e-94d7-98e2-e315b5ff3aa9
+      headers:
+        Host: norl-production.up.railway.app
+
+  - name: "F443-LOTUS"
+    type: vless
+    server: 66.81.247.155
+    port: 443
+    uuid: 17540a16-a0dd-5694-7e1e-14e281ccc032
+    udp: true
+    tls: true
+    servername: crm.lotussec.com
+    skip-cert-verify: false
+    network: ws
+    ws-opts:
+      path: /@JavidnamanIran/Javid-SHAH-KingRezaPahlavi/
+      headers:
+        Host: crm.lotussec.com
+
+  - name: "F443-MERKY"
+    type: vless
+    server: 94.143.231.146
+    port: 443
+    uuid: 6e05822a-e9da-4135-a9db-71aa07a944af
+    udp: true
+    tls: true
+    servername: sub.merky.top
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /merky-connect/de6/
+      headers:
+        Host: sub.merky.top
+
+  - name: "F443-KAMAZ-12"
+    type: vless
+    server: 167.104.216.12
+    port: 443
+    uuid: 5999a497-a2da-41d0-92cb-5b758082f83c
+    udp: true
+    tls: true
+    servername: kamaz4.api3-max.ru
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: tcp
+    flow: xtls-rprx-vision
+
+  - name: "F443-KAMAZ-206"
+    type: vless
+    server: 167.104.216.206
+    port: 443
+    uuid: 5999a497-a2da-41d0-92cb-5b758082f83c
+    udp: true
+    tls: true
+    servername: kamaz03.api3-max.ru
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: tcp
+    flow: xtls-rprx-vision
+
+  - name: "F443-ZOOM"
+    type: vless
+    server: 170.114.46.6
+    port: 443
+    uuid: 5aafc2be-9348-4dec-b896-f4a91253bbca
+    udp: true
+    tls: true
+    servername: support.zoom.us.yxls.eu.cc
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /id-tksi
+      headers:
+        Host: support.zoom.us.yxls.eu.cc
+
+  - name: "R2-HIST-DALLAS-443"
+    type: vless
+    server: 144.31.3.0
+    port: 443
+    uuid: f39a15ee-e776-4b27-a5f0-50c02052771a
+    udp: true
+    tls: true
+    servername: usin1.confstage.app
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /
+      headers:
+        Host: usin1.confstage.app
+
+  - name: "R2-CURR-US-CDN-443"
+    type: vless
+    server: minimize-evenness.cdn-content.com
+    port: 443
+    uuid: 4ea9c6dd-4d73-49f2-82ce-b80b1b5dd646
+    udp: true
+    tls: true
+    servername: minimize-evenness.cdn-content.com
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /ws
+      headers:
+        Host: minimize-evenness.cdn-content.com
+
+  - name: "R2-CURR-US-VIDEO-443"
+    type: vless
+    server: piracy-android.video-streams.org
+    port: 443
+    uuid: fbef862a-2e17-45e4-b624-dc2ccaac9e10
+    udp: true
+    tls: true
+    servername: piracy-android.video-streams.org
+    skip-cert-verify: false
+    client-fingerprint: chrome
+    network: ws
+    ws-opts:
+      path: /ws
+      headers:
+        Host: piracy-android.video-streams.org
+
+proxy-groups:
+  - name: "R2-PROVEN-PINNED"
+    type: fallback
+    proxies:
+      - R2-HIST-DALLAS-443
+      - R2-CURR-US-CDN-443
+      - R2-CURR-US-VIDEO-443
+      - R1-GREEN-102-FASTLY
+    url: "https://www.google.com/robots.txt"
+    interval: 180
+    timeout: 8000
+    lazy: false
+    max-failed-times: 2
+    expected-status: 200
+
+  - name: "FRESH-443-DATA"
+    type: url-test
+    proxies:
+      - F443-RAIL-34
+      - F443-RAIL-56
+      - F443-RAIL-124
+      - F443-LOTUS
+      - F443-MERKY
+      - F443-KAMAZ-12
+      - F443-KAMAZ-206
+      - F443-ZOOM
+    url: "https://cachefly.cachefly.net/1mb.test"
+    interval: 600
+    tolerance: 500
+    timeout: 10000
+    lazy: false
+    max-failed-times: 2
+    expected-status: 200
+
+  - name: "FRESH-443-LIVE"
+    type: fallback
+    proxies:
+      - F443-RAIL-34
+      - F443-RAIL-56
+      - F443-RAIL-124
+      - F443-LOTUS
+      - F443-MERKY
+      - F443-KAMAZ-12
+      - F443-KAMAZ-206
+      - F443-ZOOM
+    url: "https://www.google.com/robots.txt"
+    interval: 180
+    timeout: 8000
+    lazy: false
+    max-failed-times: 2
+    expected-status: 200
+
+  - name: "R2-US-BL-STICKY"
+    type: select
+    use:
+      - provider-r2-blacklist
+    filter: "(?i)United States.*🌐.*\\[BL\\]"
+    empty-fallback: R1-GREEN-102-FASTLY
+
+  - name: "REAL-DATA-RACE"
+    type: url-test
+    use:
+      - provider-speed-vless
+    url: "https://cachefly.cachefly.net/1mb.test"
+    interval: 1800
+    tolerance: 400
+    timeout: 6500
+    lazy: false
+    max-failed-times: 2
+    expected-status: 200
+
+  - name: "R1-REAL-DATA"
+    type: url-test
+    proxies:
+      - R1-GREEN-070
+      - R1-GREEN-082
+      - R1-GREEN-085
+      - R1-GREEN-093
+      - R1-GREEN-102-FASTLY
+    url: "https://cachefly.cachefly.net/1mb.test"
+    interval: 900
+    tolerance: 400
+    timeout: 6500
+    lazy: false
+    max-failed-times: 2
+    expected-status: 200
+
+  - name: "R1-GREEN-PINNED"
+    type: fallback
+    proxies:
+      - R1-GREEN-070
+      - R1-GREEN-082
+      - R1-GREEN-085
+      - R1-GREEN-093
+      - R1-GREEN-102-FASTLY
+    url: "https://www.google.com/robots.txt"
+    interval: 180
+    timeout: 8000
+    lazy: false
+    max-failed-times: 3
+    expected-status: 200
+
+  - name: "R1-DISCOVERY"
+    type: url-test
+    use:
+      - provider-r1-ss44
+    url: "https://www.google.com/robots.txt"
+    interval: 240
+    tolerance: 500
+    timeout: 8000
+    lazy: false
+    max-failed-times: 3
+    expected-status: 200
+
+  - name: "ROTATING-RESCUE"
+    type: url-test
+    use:
+      - provider-r1-ss44
+      - provider-r2-blacklist
+      - provider-r3-whitelist
+    url: "https://www.google.com/robots.txt"
+    interval: 300
+    tolerance: 650
+    timeout: 8000
+    lazy: false
+    max-failed-times: 3
+    expected-status: 200
+
+  - name: "TESTED-MIX"
+    type: url-test
+    use:
+      - provider-c-tested
+    url: "https://www.google.com/robots.txt"
+    interval: 300
+    tolerance: 500
+    timeout: 8000
+    lazy: true
+    max-failed-times: 3
+    expected-status: 200
+
+  - name: "PROVIDER-B"
+    type: url-test
+    use:
+      - provider-b-vless
+    url: "https://www.google.com/robots.txt"
+    interval: 300
+    tolerance: 500
+    timeout: 8000
+    lazy: true
+    max-failed-times: 3
+    expected-status: 200
+
+  - name: "PROVIDER-A"
+    type: url-test
+    use:
+      - provider-a-public
+    url: "https://www.google.com/robots.txt"
+    interval: 300
+    tolerance: 500
+    timeout: 8000
+    lazy: true
+    max-failed-times: 3
+    expected-status: 200
+
+  - name: "NEW-SS-5M"
+    type: url-test
+    use:
+      - provider-fresh-ss5m
+    url: "https://www.google.com/robots.txt"
+    interval: 300
+    tolerance: 700
+    timeout: 8000
+    lazy: true
+    max-failed-times: 3
+    expected-status: 200
+
+  - name: "NEW-FRESH-POOL"
+    type: url-test
+    use:
+      - provider-fresh-mini100
+      - provider-fresh-ss5m
+      - provider-fresh-trojan5m
+    url: "https://www.google.com/robots.txt"
+    interval: 300
+    tolerance: 700
+    timeout: 8000
+    lazy: true
+    max-failed-times: 3
+    expected-status: 200
+
+  - name: "AUTO-RESCUE"
+    type: fallback
+    proxies:
+      - NEW-SS-5M
+      - NEW-FRESH-POOL
+      - R2-PROVEN-PINNED
+      - FRESH-443-DATA
+      - FRESH-443-LIVE
+      - R2-US-BL-STICKY
+      - ROTATING-RESCUE
+      - R1-GREEN-PINNED
+      - REAL-DATA-RACE
+      - R1-REAL-DATA
+      - R1-DISCOVERY
+      - TESTED-MIX
+      - PROVIDER-B
+      - PROVIDER-A
+      - R1-GREEN-102-FASTLY
+    url: "https://www.google.com/robots.txt"
+    interval: 180
+    timeout: 8000
+    max-failed-times: 2
+    lazy: false
+    expected-status: 200
+
+  - name: "PROXY"
+    type: select
+    proxies:
+      - NEW-SS-5M
+      - NEW-FRESH-POOL
+      - R2-PROVEN-PINNED
+      - R2-HIST-DALLAS-443
+      - R2-CURR-US-CDN-443
+      - R2-CURR-US-VIDEO-443
+      - AUTO-RESCUE
+      - FRESH-443-DATA
+      - FRESH-443-LIVE
+      - R2-US-BL-STICKY
+      - ROTATING-RESCUE
+      - R1-GREEN-PINNED
+      - REAL-DATA-RACE
+      - R1-REAL-DATA
+      - R1-DISCOVERY
+      - TESTED-MIX
+      - PROVIDER-B
+      - PROVIDER-A
+      - F443-RAIL-34
+      - F443-RAIL-56
+      - F443-RAIL-124
+      - F443-LOTUS
+      - F443-MERKY
+      - F443-KAMAZ-12
+      - F443-KAMAZ-206
+      - F443-ZOOM
+      - R1-GREEN-102-FASTLY
+      - R1-GREEN-070
+      - R1-GREEN-082
+      - R1-GREEN-085
+      - R1-GREEN-093
+      - DIRECT
+
+rules:
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - MATCH,PROXY
