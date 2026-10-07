@@ -162,6 +162,37 @@ proxy-providers:
     override:
       additional-prefix: "[NEW-TR] "
 
+
+  provider-new-fast-today:
+    type: http
+    url: "https://raw.githubusercontent.com/0xRadikal/Free-v2ray-Configs/main/fast/configs.txt"
+    path: ./proxy_providers/provider-new-fast-today.txt
+    interval: 600
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 300
+      timeout: 8000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[TODAY-FAST] "
+
+  provider-new-xray-today:
+    type: http
+    url: "https://raw.githubusercontent.com/G1010yzd10/proxy-scanner/main/subs/by-engine/allxray.txt"
+    path: ./proxy_providers/provider-new-xray-today.txt
+    interval: 600
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 300
+      timeout: 8000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[TODAY-XRAY] "
+
 proxies:
   - name: "R1-GREEN-070"
     type: ss
@@ -543,6 +574,43 @@ proxy-groups:
     max-failed-times: 3
     expected-status: 200
 
+  - name: "NEW-TODAY-FAST"
+    type: url-test
+    use:
+      - provider-new-fast-today
+    url: "https://www.google.com/robots.txt"
+    interval: 300
+    tolerance: 700
+    timeout: 8000
+    lazy: true
+    max-failed-times: 3
+    expected-status: 200
+
+  - name: "NEW-TODAY-XRAY"
+    type: url-test
+    use:
+      - provider-new-xray-today
+    url: "https://www.google.com/robots.txt"
+    interval: 300
+    tolerance: 700
+    timeout: 8000
+    lazy: true
+    max-failed-times: 3
+    expected-status: 200
+
+  - name: "NEW-TODAY-MIX"
+    type: url-test
+    use:
+      - provider-new-fast-today
+      - provider-new-xray-today
+    url: "https://www.google.com/robots.txt"
+    interval: 300
+    tolerance: 700
+    timeout: 8000
+    lazy: true
+    max-failed-times: 3
+    expected-status: 200
+
   - name: "NEW-SS-5M"
     type: url-test
     use:
@@ -572,6 +640,9 @@ proxy-groups:
   - name: "AUTO-RESCUE"
     type: fallback
     proxies:
+      - NEW-TODAY-MIX
+      - NEW-TODAY-FAST
+      - NEW-TODAY-XRAY
       - NEW-SS-5M
       - NEW-FRESH-POOL
       - R2-PROVEN-PINNED
@@ -597,6 +668,9 @@ proxy-groups:
   - name: "PROXY"
     type: select
     proxies:
+      - NEW-TODAY-MIX
+      - NEW-TODAY-FAST
+      - NEW-TODAY-XRAY
       - NEW-SS-5M
       - NEW-FRESH-POOL
       - R2-PROVEN-PINNED
