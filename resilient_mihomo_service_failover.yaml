@@ -11,11 +11,11 @@ profile:
   store-fake-ip: true
 
 proxy-providers:
-  fresh-ss:
+  freenode-featured:
     type: http
-    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/fresh-ss.txt"
-    path: ./proxy_providers/fresh-ss.txt
-    interval: 1800
+    url: "https://freenode.biz/api/featured?format=nsubscribe"
+    path: ./proxy_providers/freenode-featured.txt
+    interval: 900
     health-check:
       enable: true
       url: "https://www.google.com/robots.txt"
@@ -23,12 +23,14 @@ proxy-providers:
       timeout: 8000
       lazy: true
       expected-status: 200
+    override:
+      additional-prefix: "[FNB] "
 
-  fresh-vless:
+  xrayvip:
     type: http
-    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/fresh-vless.txt"
-    path: ./proxy_providers/fresh-vless.txt
-    interval: 1800
+    url: "https://www.xrayvip.com/free.txt"
+    path: ./proxy_providers/xrayvip.txt
+    interval: 900
     health-check:
       enable: true
       url: "https://www.google.com/robots.txt"
@@ -36,61 +38,25 @@ proxy-providers:
       timeout: 8000
       lazy: true
       expected-status: 200
-
-  fresh-trojan:
-    type: http
-    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/fresh-trojan.txt"
-    path: ./proxy_providers/fresh-trojan.txt
-    interval: 1800
-    health-check:
-      enable: true
-      url: "https://www.google.com/robots.txt"
-      interval: 600
-      timeout: 8000
-      lazy: true
-      expected-status: 200
-
-  fresh-vmess:
-    type: http
-    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/fresh-vmess.txt"
-    path: ./proxy_providers/fresh-vmess.txt
-    interval: 1800
-    health-check:
-      enable: true
-      url: "https://www.google.com/robots.txt"
-      interval: 600
-      timeout: 8000
-      lazy: true
-      expected-status: 200
+    override:
+      additional-prefix: "[XVIP] "
 
 proxy-groups:
-  - name: "FRESH-SS"
+  - name: "FREENODE-BIZ"
     type: select
     use:
-      - fresh-ss
+      - freenode-featured
 
-  - name: "FRESH-VLESS"
+  - name: "XRAYVIP"
     type: select
     use:
-      - fresh-vless
+      - xrayvip
 
-  - name: "FRESH-TROJAN"
-    type: select
-    use:
-      - fresh-trojan
-
-  - name: "FRESH-VMESS"
-    type: select
-    use:
-      - fresh-vmess
-
-  - name: "AUTO-COMPAT"
+  - name: "AUTO-EXTERNAL"
     type: url-test
     use:
-      - fresh-ss
-      - fresh-vless
-      - fresh-trojan
-      - fresh-vmess
+      - freenode-featured
+      - xrayvip
     url: "https://www.google.com/robots.txt"
     interval: 300
     tolerance: 800
@@ -102,11 +68,9 @@ proxy-groups:
   - name: "PROXY"
     type: select
     proxies:
-      - FRESH-SS
-      - FRESH-VLESS
-      - FRESH-TROJAN
-      - FRESH-VMESS
-      - AUTO-COMPAT
+      - FREENODE-BIZ
+      - XRAYVIP
+      - AUTO-EXTERNAL
       - DIRECT
 
 rules:
