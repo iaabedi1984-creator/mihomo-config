@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Refresh Mihomo nodes without growing the subscription or copying malformed source records."""
+"""Refresh an SS-only Mihomo profile (no F26, VMess or VLESS); cap 150 nodes."""
 import base64
 import re
 import sys
@@ -13,15 +13,14 @@ BASE = "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/out
 SOURCES = [
     ("DE", "by-country/clash-DE.yaml"),
     ("NL", "by-country/clash-NL.yaml"),
-    ("FR", "by-country/clash-FR.yaml"),
     ("GB", "by-country/clash-GB.yaml"),
     ("US", "by-country/clash-US.yaml"),
     ("CA", "by-country/clash-CA.yaml"),
     ("JP", "by-country/clash-JP.yaml"),
     ("SG", "by-country/clash-SG.yaml"),
     ("FI", "by-country/clash-FI.yaml"),
-    ("CH", "by-country/clash-CH.yaml"),
-    ("TR", "by-country/clash-TR.yaml"),
+    ("AT", "by-country/clash-AT.yaml"),
+    ("MIX", "protocol/shadowsocks/clash-0001.yaml"),
 ]
 OUT = Path("resilient_mihomo_service_failover.yaml")
 TV = Path("tv-v2ray.txt")
@@ -46,29 +45,32 @@ def sane_text(value):
     return True
 
 
+SS_METHODS = {
+    "aes-128-gcm", "aes-192-gcm", "aes-256-gcm",
+    "chacha20-ietf-poly1305", "xchacha20-ietf-poly1305",
+    "aes-128-cfb", "aes-192-cfb", "aes-256-cfb",
+    "chacha20-ietf", "rc4-md5",
+}
+
+
 def valid(node):
+    """Only Shadowsocks, never F26. Ignore damaged or exotic records."""
     if not isinstance(node, dict) or not sane_text(node):
         return False
     name, kind = node.get("name"), node.get("type")
     host, port = node.get("server"), node.get("port")
     if not (isinstance(name, str) and SAFE_NAME.fullmatch(name)):
         return False
-    if kind not in ("ss", "vless", "vmess"):
+    if name.upper().startswith("F26") or kind != "ss":
         return False
     if not (isinstance(host, str) and SAFE_HOST.fullmatch(host)):
         return False
-    if not (isinstance(port, int) and 1 <= port <= 65535):
+    if not (isinstance(port, int) and not isinstance(port, bool) and 1 <= port <= 65535):
         return False
-    if kind == "ss":
-        if not (isinstance(node.get("cipher"), str) and isinstance(node.get("password"), str)
-                and node["cipher"] and node["password"]):
-            return False
-    else:
-        if not isinstance(node.get("uuid"), str) or not node["uuid"]:
-            return False
-        net = node.get("network", "tcp")
-        if net not in ("tcp", "ws", "grpc", "http", "h2"):
-            return False
+    if node.get("cipher") not in SS_METHODS:
+        return False
+    if not isinstance(node.get("password"), str) or not node["password"]:
+        return False
     return True
 
 
@@ -143,7 +145,7 @@ def main():
                 if not valid(node):
                     continue
                 copy = dict(node)
-                copy["name"] = f"R-{country}-{node['name']}"
+                copy["name"] = f"SS-{country}-{node['name']}"
                 if valid(copy):
                     filtered.append(copy)
             pools.append([country, filtered])
@@ -191,7 +193,7 @@ def main():
             "MATCH,PROXY",
         ],
     }
-    result = "# Managed FLClash subscription; max 150 nodes, no unbounded growth.\n" + yaml.safe_dump(
+    result = "# FLClash SS-only subscription. Max 150 unique nodes. F26, VLESS and VMess excluded.\n" + yaml.safe_dump(
         cfg, allow_unicode=False, sort_keys=False, default_flow_style=False)
     verified = yaml.safe_load(result)
     if len(verified["proxies"]) > CAP or len(result) > 100_000 or any(
