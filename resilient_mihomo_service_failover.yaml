@@ -11,11 +11,11 @@ profile:
   store-fake-ip: true
 
 proxy-providers:
-  speed28:
+  fresh-ss:
     type: http
-    url: "https://raw.githubusercontent.com/luxxuria/harvester/main/speed_tested.txt"
-    path: ./proxy_providers/speed28.txt
-    interval: 600
+    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/fresh-ss.txt"
+    path: ./proxy_providers/fresh-ss.txt
+    interval: 1800
     health-check:
       enable: true
       url: "https://www.google.com/robots.txt"
@@ -23,14 +23,12 @@ proxy-providers:
       timeout: 8000
       lazy: true
       expected-status: 200
-    override:
-      additional-prefix: "[S28] "
 
-  r2-blacklist:
+  fresh-vless:
     type: http
-    url: "https://raw.githubusercontent.com/igareck/vpn-configs-for-russia/refs/heads/main/BLACK_VLESS_RUS_mobile.txt"
-    path: ./proxy_providers/r2-blacklist.txt
-    interval: 600
+    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/fresh-vless.txt"
+    path: ./proxy_providers/fresh-vless.txt
+    interval: 1800
     health-check:
       enable: true
       url: "https://www.google.com/robots.txt"
@@ -38,66 +36,77 @@ proxy-providers:
       timeout: 8000
       lazy: true
       expected-status: 200
-    override:
-      additional-prefix: "[R2] "
+
+  fresh-trojan:
+    type: http
+    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/fresh-trojan.txt"
+    path: ./proxy_providers/fresh-trojan.txt
+    interval: 1800
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 600
+      timeout: 8000
+      lazy: true
+      expected-status: 200
+
+  fresh-vmess:
+    type: http
+    url: "https://raw.githubusercontent.com/iaabedi1984-creator/mihomo-config/main/fresh-vmess.txt"
+    path: ./proxy_providers/fresh-vmess.txt
+    interval: 1800
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 600
+      timeout: 8000
+      lazy: true
+      expected-status: 200
 
 proxy-groups:
-  - name: "R2-US"
+  - name: "FRESH-SS"
     type: select
     use:
-      - r2-blacklist
-    filter: "(?i)United States.*\\[BL\\]"
+      - fresh-ss
 
-  - name: "R2-US-AUTO"
+  - name: "FRESH-VLESS"
+    type: select
+    use:
+      - fresh-vless
+
+  - name: "FRESH-TROJAN"
+    type: select
+    use:
+      - fresh-trojan
+
+  - name: "FRESH-VMESS"
+    type: select
+    use:
+      - fresh-vmess
+
+  - name: "AUTO-COMPAT"
     type: url-test
     use:
-      - r2-blacklist
-    filter: "(?i)United States.*\\[BL\\]"
+      - fresh-ss
+      - fresh-vless
+      - fresh-trojan
+      - fresh-vmess
     url: "https://www.google.com/robots.txt"
     interval: 300
     tolerance: 800
     timeout: 8000
     lazy: false
     max-failed-times: 3
-    expected-status: 200
-
-  - name: "SPEED28"
-    type: select
-    use:
-      - speed28
-
-  - name: "SPEED28-AUTO"
-    type: url-test
-    use:
-      - speed28
-    url: "https://www.google.com/robots.txt"
-    interval: 300
-    tolerance: 800
-    timeout: 8000
-    lazy: false
-    max-failed-times: 3
-    expected-status: 200
-
-  - name: "AUTO-RESCUE"
-    type: fallback
-    proxies:
-      - R2-US-AUTO
-      - SPEED28-AUTO
-    url: "https://www.google.com/robots.txt"
-    interval: 180
-    timeout: 8000
-    max-failed-times: 2
-    lazy: false
     expected-status: 200
 
   - name: "PROXY"
     type: select
     proxies:
-      - AUTO-RESCUE
-      - R2-US
-      - SPEED28
-      - R2-US-AUTO
-      - SPEED28-AUTO
+      - FRESH-SS
+      - FRESH-VLESS
+      - FRESH-TROJAN
+      - FRESH-VMESS
+      - AUTO-COMPAT
       - DIRECT
 
 rules:
