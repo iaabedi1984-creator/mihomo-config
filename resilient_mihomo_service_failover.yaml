@@ -1,4 +1,5 @@
-# Combined Clash subscription (DE, NL, Shadowsocks and worldwide)
+# Shadowsocks-only FLClash profile; capped at 150 nodes.
+# Retains working/green SS; replaces F26 and non-SS nodes with diverse SS candidates.
 mixed-port: 7890
 allow-lan: false
 mode: rule
@@ -8,8 +9,6 @@ unified-delay: true
 tcp-concurrent: true
 profile:
   store-selected: true
-# Managed size cap: exactly 150 nodes. 66 preserved previously green/working, 34 older standbys, 50 new across country feeds.
-# Static snapshot; future updates must replace nodes, never append beyond 150.
 proxies:
     - cipher: aes-256-cfb
       name: shadowsocks-1694944560
@@ -179,20 +178,6 @@ proxies:
       server: 82.27.100.120
       type: ss
       udp: true
-    - client-fingerprint: chrome
-      flow: xtls-rprx-vision
-      name: vless-1719910564
-      network: tcp
-      port: 9443
-      reality-opts:
-        public-key: 0hIFPaEn4RdFib8_eP8HYxMywR5izEwM3JA2W1Zo8U4
-        short-id: b390142456517acc
-      server: 45.207.157.24
-      servername: www.amazon.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: cbe82d99-2927-49d2-8ea9-d0d0162a60ec
     - cipher: chacha20-ietf
       name: shadowsocks-25882
       password: asd123456
@@ -228,20 +213,6 @@ proxies:
       server: 68.183.227.4
       type: ss
       udp: true
-    - client-fingerprint: chrome
-      flow: xtls-rprx-vision
-      name: vless-1719910567
-      network: tcp
-      port: 9443
-      reality-opts:
-        public-key: 0hIFPaEn4RdFib8_eP8HYxMywR5izEwM3JA2W1Zo8U4
-        short-id: b390142456517acc
-      server: 45.207.158.133
-      servername: www.amazon.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: 52d5defc-88f6-4c2c-9b1f-c19bf3e99778
     - cipher: aes-256-cfb
       name: shadowsocks-817206649
       password: 1234!@#$
@@ -284,20 +255,6 @@ proxies:
       server: 185.212.171.202
       type: ss
       udp: true
-    - client-fingerprint: chrome
-      flow: xtls-rprx-vision
-      name: vless-1695399599
-      network: tcp
-      port: 443
-      reality-opts:
-        public-key: RTG-xTU5UuKTRrkk8_COe04GiUWrqrSdt9mqSak_XEc
-        short-id: e696e744
-      server: 2.27.35.55
-      servername: addons.mozilla.org
-      tls: true
-      type: vless
-      udp: true
-      uuid: df53b6c2-8005-475c-9eb9-74e1be785dc8
     - cipher: aes-256-cfb
       name: shadowsocks-738053649
       password: GeregetR8cvQHzYr
@@ -599,676 +556,508 @@ proxies:
       server: 109.201.152.181
       type: ss
       udp: true
-    - client-fingerprint: firefox
-      name: vless-1712736886
-      network: grpc
-      port: 443
-      reality-opts:
-        public-key: eZXyfQzQgQSreAbhKSorx38cgnKmGuSOiQbthBfG5k0
-        short-id: 0e903b415d812c59
-      server: 185.170.211.197
-      servername: nl6.bbobr.win
-      tls: true
-      type: vless
-      udp: true
-      uuid: 267b3a79-81f2-42ac-a409-c23b05b6329d
-    - client-fingerprint: firefox
-      name: vless-1712736897
-      network: grpc
-      port: 443
-      reality-opts:
-        public-key: eztZ1H-OkkHao6d4FhX8Q728qN1UIeFcYH2jObRq1gc
-        short-id: fbe9c012125d90d2
-      server: 185.170.211.187
-      servername: nl2.bbobr.win
-      tls: true
-      type: vless
-      udp: true
-      uuid: 267b3a79-81f2-42ac-a409-c23b05b6329d
-    - client-fingerprint: firefox
-      name: vless-1712736925
-      network: grpc
-      port: 443
-      reality-opts:
-        public-key: eztZ1H-OkkHao6d4FhX8Q728qN1UIeFcYH2jObRq1gc
-        short-id: fbe9c012125d90d2
-      server: 185.170.211.189
-      servername: nl2.bbobr.win
-      tls: true
-      type: vless
-      udp: true
-      uuid: 267b3a79-81f2-42ac-a409-c23b05b6329d
-    - client-fingerprint: firefox
-      name: vless-1713661963
-      network: grpc
-      port: 443
-      reality-opts:
-        public-key: eZXyfQzQgQSreAbhKSorx38cgnKmGuSOiQbthBfG5k0
-        short-id: 0e903b415d812c59
-      server: nl6.bbobr.win
-      servername: nl6.bbobr.win
-      tls: true
-      type: vless
-      udp: true
-      uuid: 267b3a79-81f2-42ac-a409-c23b05b6329d
-    - client-fingerprint: firefox
-      name: vless-1713661966
-      network: grpc
-      port: 443
-      reality-opts:
-        public-key: eztZ1H-OkkHao6d4FhX8Q728qN1UIeFcYH2jObRq1gc
-        short-id: fbe9c012125d90d2
-      server: nl2.bbobr.win
-      servername: nl2.bbobr.win
-      tls: true
-      type: vless
-      udp: true
-      uuid: 267b3a79-81f2-42ac-a409-c23b05b6329d
-    - client-fingerprint: chrome
-      name: vless-1663154502
-      network: ws
-      port: 443
-      reality-opts:
-        public-key: _E8d7s7B7xYfZImOkKmESW6MJDxwKxnsscu56jhE2EM
-        short-id: 3fb4e08c
-      server: 154.9.241.170
-      servername: itunes.apple.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: 30b98a28-ed4e-46eb-8548-54c25f4db53c
-    - client-fingerprint: chrome
-      name: vless-1664557987
-      network: ws
-      port: 443
-      reality-opts:
-        public-key: jO7THaLxz0Oz3kePAJcuwcKNTlsWoEWGh18zzRmiXgo
-        short-id: 77c4230d
-      server: 144.202.126.147
-      servername: itunes.apple.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: 45d51389-0c38-4843-8ae8-cffb94e97a72
-    - client-fingerprint: chrome
-      name: vless-1631955737
-      network: ws
-      port: 443
-      reality-opts:
-        public-key: 6l-Yq_zkVrnExw8AVv85VwoYnfNc8-dRSpoj_AA-fxY
-        short-id: c5cde18f
-      server: 45.32.69.110
-      servername: itunes.apple.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: 1572b9c5-d741-46eb-b4a2-a5d23958dfbe
-    - client-fingerprint: chrome
-      name: vless-1665784892
-      network: ws
-      port: 443
-      reality-opts:
-        public-key: 6nTROV2ELz-3vNUl0A00hp378QngpYABrPgjCpUknD0
-        short-id: f436f707
-      server: 45.63.53.81
-      servername: itunes.apple.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: c512dcbd-1847-40a2-9c99-989c8bfe4717
-    - client-fingerprint: chrome
-      name: vless-1643064562
-      network: ws
-      port: 443
-      reality-opts:
-        public-key: h6EW_Y5nW9PRypxaOrSOyiHZDR-kuNfdoy24inGOoB0
-        short-id: 33b15a3e
-      server: 154.29.145.196
-      servername: itunes.apple.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: 62fdae06-6692-4b79-8f34-470784e55fd6
-    - client-fingerprint: chrome
-      name: vless-1632449710
-      network: ws
-      port: 443
-      reality-opts:
-        public-key: iJDZHJQcTGl2VIwbsRmlOG9JGbbmxNY5wmv1hc6OwQM
-        short-id: c31176b6
-      server: 154.12.38.202
-      servername: itunes.apple.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: 2a9ab69b-26e7-44d0-a325-e5056d849900
-    - client-fingerprint: chrome
-      flow: xtls-rprx-vision
-      name: vless-1593680572
-      network: tcp
-      port: 443
-      reality-opts:
-        public-key: lHCkAu_DOVFtE-iL2JGrPt44QeTCFijXuRfuGaSni3Q
-        short-id: 9e4eced6e98ed4d4
-      server: 130.17.25.67
-      servername: github.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: 1c5ed2e1-56da-41ab-9a78-159d9892ec17
-    - client-fingerprint: randomized
-      flow: xtls-rprx-vision
-      name: vless-1678961786
-      network: tcp
-      port: 443
-      reality-opts:
-        public-key: -bn-69fLm8-ZIN4AWcFJTvliohVXnevdOK6E0HJF90Y
-        short-id: 123c2bff
-      server: 2.27.69.117
-      servername: addons.mozilla.org
-      tls: true
-      type: vless
-      udp: true
-      uuid: df53b6c2-8005-475c-9eb9-74e1be785dc8
-    - client-fingerprint: random
-      flow: xtls-rprx-vision
-      name: vless-1669904653
-      network: tcp
-      port: 443
-      reality-opts:
-        public-key: 0-or5ogGhYbBgsVSrSC2Fhxyp2BN97Y9pqIdg61Qd08
-        short-id: 4be4110078ebed4a
-      server: 144.31.62.242
-      servername: de2.srv.vbuste.ru
-      tls: true
-      type: vless
-      udp: true
-      uuid: 318c935d-c195-41d3-99ad-9bbcfdab3386
-    - client-fingerprint: chrome
-      flow: xtls-rprx-vision
-      name: vless-1670155830
-      network: tcp
-      port: 443
-      reality-opts:
-        public-key: RTG-xTU5UuKTRrkk8_COe04GiUWrqrSdt9mqSak_XEc
-        short-id: e696e744
-      server: 2.27.69.128
-      servername: addons.mozilla.org
-      tls: true
-      type: vless
-      udp: true
-      uuid: df53b6c2-8005-475c-9eb9-74e1be785dc8
-    - client-fingerprint: chrome
-      flow: xtls-rprx-vision
-      name: vless-1603035148
-      network: tcp
-      port: 443
-      reality-opts:
-        public-key: ZNmuzIn-zyJi2C0sWRpL9fsMYCgYauXpJElXTqY_LEE
-        short-id: d7de3a6ff4018957
-      server: 31.70.111.146
-      servername: www.apple.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: 84ed0e09-6803-4ef9-a977-74b657d971e5
-    - client-fingerprint: chrome
-      name: vless-1609622992
-      network: tcp
-      port: 443
-      reality-opts:
-        public-key: ClG6fvriBTK8donGsTlKusJ0dwRCgVDDTAGzAtZzJDY
-        short-id: 82c2b7d5e70ff000
-      server: 162.35.242.252
-      servername: nl.aksay.pro
-      tls: true
-      type: vless
-      udp: true
-      uuid: e3e9805a-6c8b-4edd-8ee8-621df79806eb
-    - client-fingerprint: firefox
-      flow: xtls-rprx-vision
-      name: vless-1361919261
-      network: tcp
-      port: 443
-      reality-opts:
-        public-key: KvA_7sxZDOMVLEvh64rAKk8jn5XiC-zV47zJIqny2nY
-        short-id: fbc37648292d5393
-      server: 185.253.96.117
-      servername: www.datadoghq.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: aa923621-7ac0-482b-9ae8-e5dbb2ecae26
-    - client-fingerprint: edge
-      flow: xtls-rprx-vision
-      name: vless-1700679236
-      network: tcp
-      port: 443
-      reality-opts:
-        public-key: sgPREsDFJUchKawgXgFGEM4YBjTDur0rgD2GuQmZXzA
-        short-id: 04b9f0b2470fae16
-      server: nl5.freekeysh110.online
-      servername: nl5.freekeysh110.online
-      tls: true
-      type: vless
-      udp: true
-      uuid: 89041d8a-0357-4342-b32f-f791c03048d2
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-NL-shadowsocks-541375980"
-      password: oZIoA69Q8yhcQV8ka3Pa3A
-      port: 443
-      server: 193.29.139.235
+    - cipher: "aes-256-gcm"
+      name: "SS-DE-shadowsocks-11078"
+      password: "XKFKl2rULjIp74"
+      port: 8008
+      server: "185.226.172.8"
       type: ss
       udp: true
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-NL-shadowsocks-1670157774"
-      password: oZIoA69Q8yhcQV8ka3Pa3A
-      port: 443
-      server: 82.38.31.159
-      type: ss
-      udp: true
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-NL-shadowsocks-91981760"
-      password: oZIoA69Q8yhcQV8ka3Pa3A
-      port: 443
-      server: 82.38.31.174
-      type: ss
-      udp: true
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-NL-shadowsocks-72830589"
-      password: oZIoA69Q8yhcQV8ka3Pa3A
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-NL-shadowsocks-158885953"
+      password: "k1dBOmOB4oqi7Ump37a1bQ"
       port: 8080
-      server: 82.38.31.156
+      server: "193.29.139.147"
       type: ss
       udp: true
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-NL-shadowsocks-26220"
-      password: oZIoA69Q8yhcQV8ka3Pa3A
+    - cipher: "aes-256-gcm"
+      name: "SS-GB-shadowsocks-696780678"
+      password: "g5h5jleTRSyO3Rk4"
+      port: 443
+      server: "149.102.132.184"
+      type: ss
+      udp: true
+    - cipher: "rc4-md5"
+      name: "SS-US-shadowsocks-27271"
+      password: "14fFPrbezE3HDZzsMOr6"
       port: 8080
-      server: 193.29.139.202
+      server: "107.155.57.51"
       type: ss
       udp: true
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-NL-shadowsocks-184"
-      password: oZIoA69Q8yhcQV8ka3Pa3A
+    - cipher: "aes-128-gcm"
+      name: "SS-CA-shadowsocks-208"
+      password: "shadowsocks"
+      port: 443
+      server: "149.22.95.183"
+      type: ss
+      udp: true
+    - cipher: "aes-128-gcm"
+      name: "SS-JP-shadowsocks-213"
+      password: "shadowsocks"
+      port: 443
+      server: "149.22.87.240"
+      type: ss
+      udp: true
+    - cipher: "aes-128-gcm"
+      name: "SS-FI-shadowsocks-1653901314"
+      password: "f9300a9bf39ae0347c3a3bfbc4dd7754"
+      port: 18283
+      server: "185.103.110.68"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-AT-shadowsocks-1251465987"
+      password: "ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4="
+      port: 19999
+      server: "82.110.60.9"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-154"
+      password: "G5p6ww4o67HB"
+      port: 8388
+      server: "108.181.118.10"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-DE-shadowsocks-696780676"
+      password: "kKEd0rBrd56Furjz"
+      port: 443
+      server: "2.58.81.221"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-NL-shadowsocks-186"
+      password: "oZIoA69Q8yhcQV8ka3Pa3A"
       port: 8080
-      server: 193.29.139.151
+      server: "193.29.139.204"
       type: ss
       udp: true
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-US-shadowsocks-860758286"
-      password: ZoZtfPOyVvmKARUN
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-GB-shadowsocks-415241978"
+      password: "zRZNBszYyWo5"
       port: 8388
-      server: 140.82.63.79
+      server: "51.77.225.200"
       type: ss
       udp: true
-    - cipher: aes-256-gcm
-      name: "F26-US-shadowsocks-1211880885"
-      password: pKEW8JPByTVTLtM
-      port: 4444
-      server: 15.204.247.206
-      type: ss
-      udp: true
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-US-shadowsocks-154"
-      password: G5p6ww4o67HB
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-US-shadowsocks-860758286"
+      password: "ZoZtfPOyVvmKARUN"
       port: 8388
-      server: 108.181.118.10
+      server: "140.82.63.79"
       type: ss
       udp: true
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-US-shadowsocks-157"
-      password: G5p6ww4o67HB
-      port: 8388
-      server: 108.181.0.177
+    - cipher: "rc4-md5"
+      name: "SS-CA-shadowsocks-468218613"
+      password: "14fFPrbezE3HDZzsMOr6"
+      port: 8080
+      server: "138.197.141.58"
       type: ss
       udp: true
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-US-shadowsocks-12788521"
-      password: 8tmnvX5zYuWGVIDP2jglZw
-      port: 1080
-      server: 5.78.51.123
-      type: ss
-      udp: true
-    - cipher: aes-256-gcm
-      name: "F26-US-shadowsocks-1160568980"
-      password: kDWvXYZoTBcGkC4
-      port: 8882
-      server: 15.204.233.41
-      type: ss
-      udp: true
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-US-shadowsocks-10989"
-      password: RSo52SbxW40r
-      port: 8388
-      server: 108.181.57.93
-      type: ss
-      udp: true
-    - cipher: aes-256-cfb
-      name: "F26-US-shadowsocks-1726763859"
-      password: amazonskr05
+    - cipher: "aes-128-gcm"
+      name: "SS-JP-shadowsocks-218"
+      password: "shadowsocks"
       port: 443
-      server: 3.80.84.187
+      server: "149.22.87.204"
       type: ss
       udp: true
-    - cipher: aes-128-gcm
-      name: "F26-GB-shadowsocks-271"
-      password: shadowsocks
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-157"
+      password: "G5p6ww4o67HB"
+      port: 8388
+      server: "108.181.0.177"
+      type: ss
+      udp: true
+    - cipher: "aes-256-cfb"
+      name: "SS-DE-shadowsocks-1726762863"
+      password: "amazonskr05"
       port: 443
-      server: 141.98.101.181
+      server: "3.79.59.187"
       type: ss
       udp: true
-    - cipher: aes-256-gcm
-      name: "F26-GB-shadowsocks-717969059"
-      password: LXchLsIwtCeUAUgu
-      port: 443
-      server: 149.102.149.207
-      type: ss
-      udp: true
-    - cipher: aes-256-gcm
-      name: "F26-GB-shadowsocks-696780670"
-      password: LXchLsIwtCeUAUgu
+    - cipher: "aes-256-gcm"
+      name: "SS-GB-shadowsocks-696780670"
+      password: "LXchLsIwtCeUAUgu"
       port: 80
-      server: 149.102.149.207
+      server: "149.102.149.207"
       type: ss
       udp: true
-    - cipher: aes-256-gcm
-      name: "F26-GB-shadowsocks-717969008"
-      password: g5h5jleTRSyO3Rk4
+    - cipher: "rc4-md5"
+      name: "SS-US-shadowsocks-27269"
+      password: "14fFPrbezE3HDZzsMOr6"
+      port: 8080
+      server: "138.199.42.68"
+      type: ss
+      udp: true
+    - cipher: "rc4-md5"
+      name: "SS-CA-shadowsocks-166"
+      password: "14fFPrbezE3HDZzsMOr6"
+      port: 8080
+      server: "137.184.174.93"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-JP-shadowsocks-696780669"
+      password: "3eOFeNssde7PYYMv"
       port: 80
-      server: 149.102.132.184
+      server: "84.247.155.196"
       type: ss
       udp: true
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-GB-shadowsocks-415241978"
-      password: zRZNBszYyWo5
-      port: 8388
-      server: 51.77.225.200
-      type: ss
-      udp: true
-    - cipher: aes-128-gcm
-      name: "F26-CA-shadowsocks-208"
-      password: shadowsocks
-      port: 443
-      server: 149.22.95.183
-      type: ss
-      udp: true
-    - cipher: aes-128-gcm
-      name: "F26-CA-shadowsocks-1635221275"
-      password: 4efe1af272e7292139b889f6a63ee071
-      port: 18766
-      server: 64.74.163.69
-      type: ss
-      udp: true
-    - cipher: aes-256-gcm
-      name: "F26-CA-shadowsocks-1118951746"
-      password: Y6R9pAtvxxzmGC
-      port: 5000
-      server: 51.222.200.165
-      type: ss
-      udp: true
-    - cipher: rc4-md5
-      name: "F26-CA-shadowsocks-468218613"
-      password: 14fFPrbezE3HDZzsMOr6
-      port: 8080
-      server: 138.197.141.58
-      type: ss
-      udp: true
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-DE-shadowsocks-209"
-      password: 1hhrqrokj3ag
-      port: 8388
-      server: 209.46.102.22
-      type: ss
-      udp: true
-    - cipher: aes-256-cfb
-      name: "F26-DE-shadowsocks-1725776653"
-      password: amazonskr05
-      port: 443
-      server: 3.77.34.196
-      type: ss
-      udp: true
-    - cipher: rc4-md5
-      name: "F26-DE-shadowsocks-27307"
-      password: 14fFPrbezE3HDZzsMOr6
-      port: 8080
-      server: 169.150.210.233
-      type: ss
-      udp: true
-    - cipher: aes-128-gcm
-      name: "F26-JP-shadowsocks-213"
-      password: shadowsocks
-      port: 443
-      server: 149.22.87.240
-      type: ss
-      udp: true
-    - cipher: aes-128-gcm
-      name: "F26-JP-shadowsocks-218"
-      password: shadowsocks
-      port: 443
-      server: 149.22.87.204
-      type: ss
-      udp: true
-    - client-fingerprint: chrome
-      flow: xtls-rprx-vision
-      name: "F26-FR-vless-1693989542"
-      network: tcp
-      port: 443
-      reality-opts:
-        public-key: 5BDht3tAZdKEKpJymGlRK9JugOnieA-kMSWz_0FoE0I
-        short-id: 6f76ad09
-      server: 157.228.155.238
-      servername: addons.mozilla.org
-      tls: true
-      type: vless
-      udp: true
-      uuid: df53b6c2-8005-475c-9eb9-74e1be785dc8
-    - client-fingerprint: random
-      flow: xtls-rprx-vision
-      name: "F26-FR-vless-1397731731"
-      network: tcp
-      port: 443
-      reality-opts:
-        public-key: YhT24GkuI1r7Fwo8pxIYH3CmTtbRlYs5X7fWtYp3vTY
-        short-id: 05f4f85fdc6c1379
-      server: 195.154.118.134
-      servername: w-mebel.pro
-      tls: true
-      type: vless
-      udp: true
-      uuid: 3c48b5f5-7766-4896-874e-b3ba1860e83a
-    - client-fingerprint: chrome
-      flow: xtls-rprx-vision
-      name: "F26-FR-vless-1685276578"
-      network: tcp
-      port: 443
-      reality-opts:
-        public-key: 4q8nqNb-0c-akP3XqVmen67BLXJVlx48a_GDRw16nVg
-        short-id: 5ea112e8
-      server: 157.228.155.185
-      servername: addons.mozilla.org
-      tls: true
-      type: vless
-      udp: true
-      uuid: df53b6c2-8005-475c-9eb9-74e1be785dc8
-    - client-fingerprint: random
-      flow: xtls-rprx-vision
-      name: "F26-SG-vless-1727113508"
-      network: tcp
-      port: 443
-      reality-opts:
-        public-key: 4tYZTzPnpJQQiG3bExrmT1TBzRMuaBWhFssBRNqrDVU
-        short-id: b1a9832f489b
-      server: 52.221.209.181
-      servername: ap-southeast-1.console.aws.amazon.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: 11bce34b-e248-4af5-a0f1-951c4c5ece45
-    - client-fingerprint: safari
-      flow: xtls-rprx-vision
-      name: "F26-SG-vless-522223674"
-      network: tcp
-      port: 17623
-      reality-opts:
-        public-key: k2hPp0tTW0Da-HK94wYpSCLbuK44LfGqC2MSJIM1Ti0
-        short-id: 48050fab
-      server: 3.0.111.82
-      servername: www.apple.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: 814bd064-544d-4255-a070-5705c03f6da9
-    - client-fingerprint: random
-      flow: xtls-rprx-vision
-      name: "F26-SG-vless-1023674397"
-      network: tcp
-      port: 41688
-      reality-opts:
-        public-key: srwIElIGTPs0kshpN1vvPsn4wixV_pLd56y_v9m0sTk
-        short-id: 7f342137c20387
-      server: 54.169.200.246
-      servername: www.intel.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: 49c0aac1-5e05-4f04-b624-248fc59e03c4
-    - client-fingerprint: random
-      flow: xtls-rprx-vision
-      name: "F26-FI-vless-1709199370"
-      network: tcp
-      port: 443
-      reality-opts:
-        public-key: FuKGULeQ9xZMJN8hWz6J_49tDJKT9HA-nsAXOOVRmyM
-        short-id: ff867ed245c73f43
-      server: 13.143.166.245
-      servername: cdn.jsdelivr.net
-      tls: true
-      type: vless
-      udp: true
-      uuid: 2a0b565e-904e-4d3b-a7eb-0725d6a2c7cd
-    - client-fingerprint: firefox
-      name: "F26-FI-vless-1317697670"
-      network: tcp
-      port: 2053
-      reality-opts:
-        public-key: 4nfogj5mHqNowtSn_2sXS3xTX8vcH75rFEU2BWvyekM
-        short-id: d368b94e275ab080
-      server: 95.216.27.15
-      servername: www.google.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: 1c81f6d3-5771-4c5d-9fdd-1655eff50634
-    - client-fingerprint: random
-      name: "F26-CH-vless-1571355288"
-      network: tcp
-      port: 2053
-      reality-opts:
-        public-key: A49ue7zXSusJZdErPAewg3jqGdUFIO1a9xOunEKJfC0
-        short-id: ad86e2d52ff40ebd
-      server: 208.69.78.217
-      servername: www.apple.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: c0dd6d59-1573-43af-8b70-1470b2632a6d
-    - client-fingerprint: firefox
-      flow: xtls-rprx-vision
-      name: "F26-TR-vless-1349640077"
-      network: tcp
-      port: 443
-      reality-opts:
-        public-key: sZAJkAu23wp1WKY-qeaeiwR38izP5OyfhumoE9xhbB8
-        short-id: f46cd3ea3d1eb72d
-      server: 78.135.73.47
-      servername: www.datadoghq.com
-      tls: true
-      type: vless
-      udp: true
-      uuid: 25e16692-d097-4e69-9e2d-8415609c1968
-    - cipher: aes-128-gcm
-      name: "F26-MIX-shadowsocks-211"
-      password: shadowsocks
-      port: 443
-      server: 149.22.87.241
-      type: ss
-      udp: true
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-MIX-shadowsocks-216"
-      password: hCCWOcIsK5wrFz4OX70rWf
-      port: 443
-      server: 216.105.168.18
-      type: ss
-      udp: true
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-MIX-shadowsocks-11012"
-      password: eDfN7SODQceIOmIAbtJJtK
-      port: 443
-      server: 198.98.53.130
-      type: ss
-      udp: true
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-MIX-shadowsocks-26744"
-      password: QFWzCw2uX9B9i6qAYeFBIE
-      port: 443
-      server: 154.46.31.106
-      type: ss
-      udp: true
-    - cipher: aes-128-gcm
-      name: "F26-MIX-shadowsocks-27055"
-      password: shadowsocks
-      port: 443
-      server: 158.173.20.171
-      type: ss
-      udp: true
-    - cipher: aes-128-gcm
-      name: "F26-MIX-shadowsocks-126252"
-      password: shadowsocks
-      port: 443
-      server: 158.173.24.73
-      type: ss
-      udp: true
-    - cipher: chacha20-ietf-poly1305
-      name: "F26-MIX-shadowsocks-130484"
-      password: QFWzCw2uX9B9i6qAYeFBIE
-      port: 443
-      server: bogging-eyeteeth-fly.freesocks.work
-      type: ss
-      udp: true
-    - cipher: aes-256-gcm
-      name: "F26-MIX-shadowsocks-696780676"
-      password: kKEd0rBrd56Furjz
-      port: 443
-      server: 2.58.81.221
-      type: ss
-      udp: true
-    - cipher: aes-256-gcm
-      name: "F26-MIX-shadowsocks-696780678"
-      password: g5h5jleTRSyO3Rk4
-      port: 443
-      server: 149.102.132.184
-      type: ss
-      udp: true
-    - cipher: aes-256-gcm
-      name: "F26-MIX-shadowsocks-951685696"
-      password: 3eOFeNssde7PYYMv
-      port: 443
-      server: 84.247.155.196
-      type: ss
-      udp: true
-    - cipher: aes-256-gcm
-      name: "F26-MIX-shadowsocks-207"
-      password: RexnBgU7EV5ADxG
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-207"
+      password: "RexnBgU7EV5ADxG"
       port: 7001
-      server: 141.164.45.187
+      server: "141.164.45.187"
       type: ss
       udp: true
-    - cipher: aes-256-gcm
-      name: "F26-MIX-shadowsocks-210"
-      password: TEzjfAYq2IjtuoS
+    - cipher: "aes-256-cfb"
+      name: "SS-DE-shadowsocks-1725776653"
+      password: "amazonskr05"
+      port: 443
+      server: "3.77.34.196"
+      type: ss
+      udp: true
+    - cipher: "aes-128-gcm"
+      name: "SS-GB-shadowsocks-271"
+      password: "shadowsocks"
+      port: 443
+      server: "141.98.101.181"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-US-shadowsocks-12788521"
+      password: "8tmnvX5zYuWGVIDP2jglZw"
+      port: 1080
+      server: "5.78.51.123"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-CA-shadowsocks-1118951746"
+      password: "Y6R9pAtvxxzmGC"
+      port: 5000
+      server: "51.222.200.165"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-209"
+      password: "1hhrqrokj3ag"
+      port: 8388
+      server: "209.46.102.22"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-GB-shadowsocks-717969059"
+      password: "LXchLsIwtCeUAUgu"
+      port: 443
+      server: "149.102.149.207"
+      type: ss
+      udp: true
+    - cipher: "rc4-md5"
+      name: "SS-US-shadowsocks-27275"
+      password: "14fFPrbezE3HDZzsMOr6"
+      port: 8080
+      server: "107.155.57.11"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-210"
+      password: "TEzjfAYq2IjtuoS"
       port: 6679
-      server: 141.164.45.187
+      server: "141.164.45.187"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-GB-shadowsocks-717969008"
+      password: "g5h5jleTRSyO3Rk4"
+      port: 80
+      server: "149.102.132.184"
+      type: ss
+      udp: true
+    - cipher: "rc4-md5"
+      name: "SS-US-shadowsocks-468218487"
+      password: "14fFPrbezE3HDZzsMOr6"
+      port: 8080
+      server: "138.199.43.159"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-216"
+      password: "hCCWOcIsK5wrFz4OX70rWf"
+      port: 443
+      server: "216.105.168.18"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-US-shadowsocks-1160568980"
+      password: "kDWvXYZoTBcGkC4"
+      port: 8882
+      server: "15.204.233.41"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-229"
+      password: "PWpjPo3tqhPN4yRZ"
+      port: 20001
+      server: "8.209.74.72"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-US-shadowsocks-10989"
+      password: "RSo52SbxW40r"
+      port: 8388
+      server: "108.181.57.93"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-231"
+      password: "ARgvGZywA+gacgGV26Bvmu05+wZmRW/j+AdU+Z8Bt44="
+      port: 990
+      server: "185.213.23.63"
+      type: ss
+      udp: true
+    - cipher: "aes-256-cfb"
+      name: "SS-US-shadowsocks-1726763859"
+      password: "amazonskr05"
+      port: 443
+      server: "3.80.84.187"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-240"
+      password: "RexnBgU7EV5ADxG"
+      port: 7001
+      server: "94.156.250.148"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-246"
+      password: "Xsy8Ox4yOV3xLlpxtjzs3X"
+      port: 16233
+      server: "102.133.165.160"
+      type: ss
+      udp: true
+    - cipher: "aes-256-cfb"
+      name: "SS-MIX-shadowsocks-260"
+      password: "qwerREWQ@@"
+      port: 4652
+      server: "p141.panda001.net"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-276"
+      password: "RexnBgU7EV5ADxG"
+      port: 7001
+      server: "213.202.208.199"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-11012"
+      password: "eDfN7SODQceIOmIAbtJJtK"
+      port: 443
+      server: "198.98.53.130"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-16132"
+      password: "WSyL4XTwNsdv"
+      port: 8388
+      server: "108.181.121.226"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-26744"
+      password: "QFWzCw2uX9B9i6qAYeFBIE"
+      port: 443
+      server: "154.46.31.106"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-27048"
+      password: "RexnBgU7EV5ADxG"
+      port: 7002
+      server: "172.105.39.124"
+      type: ss
+      udp: true
+    - cipher: "aes-128-gcm"
+      name: "SS-MIX-shadowsocks-27055"
+      password: "shadowsocks"
+      port: 443
+      server: "158.173.20.171"
+      type: ss
+      udp: true
+    - cipher: "rc4-md5"
+      name: "SS-MIX-shadowsocks-27307"
+      password: "14fFPrbezE3HDZzsMOr6"
+      port: 8080
+      server: "169.150.210.233"
+      type: ss
+      udp: true
+    - cipher: "aes-128-gcm"
+      name: "SS-MIX-shadowsocks-126252"
+      password: "shadowsocks"
+      port: 443
+      server: "158.173.24.73"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-130484"
+      password: "QFWzCw2uX9B9i6qAYeFBIE"
+      port: 443
+      server: "bogging-eyeteeth-fly.freesocks.work"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-370755727"
+      password: "tfAcRikawhNoZAhu"
+      port: 8388
+      server: "139.84.247.164"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-415241977"
+      password: "2YdE4lFOid5a"
+      port: 8388
+      server: "51.195.126.38"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-415242972"
+      password: "BqnqToih0PbU"
+      port: 8388
+      server: "51.255.13.232"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-496614106"
+      password: "zDNVedRFPQexG9v"
+      port: 445
+      server: "51.222.12.127"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-537388328"
+      password: "faBAoD54k87UJG7"
+      port: 2375
+      server: "15.204.247.124"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-687923666"
+      password: "FoOiGlkAA9yPEGP"
+      port: 7307
+      server: "15.204.246.132"
+      type: ss
+      udp: true
+    - cipher: "aes-256-cfb"
+      name: "SS-MIX-shadowsocks-696781305"
+      password: "45xgMgm386pjWjTx"
+      port: 9082
+      server: "185.135.86.175"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-717969012"
+      password: "kKEd0rBrd56Furjz"
+      port: 80
+      server: "2.58.81.221"
+      type: ss
+      udp: true
+    - cipher: "aes-256-cfb"
+      name: "SS-MIX-shadowsocks-717969044"
+      password: "Yg4MbdXFQ9HFFVY6"
+      port: 9034
+      server: "185.135.86.175"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-809724003"
+      password: "kDWvXYZoTBcGkC4"
+      port: 8882
+      server: "51.79.49.116"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-809724016"
+      password: "XKFKl2rULjIp74"
+      port: 8008
+      server: "15.204.247.175"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-809724024"
+      password: "cdBIDV42DCwnfIN"
+      port: 8119
+      server: "51.79.64.198"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-842256759"
+      password: "Y6R9pAtvxxzmGC"
+      port: 5601
+      server: "51.222.155.113"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-860328950"
+      password: "8C5valhOd8vfwaTXUSZ6Zyb0Ip34lRR5z7P8az"
+      port: 31348
+      server: "103.160.63.199"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-891518478"
+      password: "itzvpn@321"
+      port: 8388
+      server: "57.131.48.45"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-951685696"
+      password: "3eOFeNssde7PYYMv"
+      port: 443
+      server: "84.247.155.196"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-1074759848"
+      password: "kDWvXYZoTBcGkC4"
+      port: 8882
+      server: "51.222.136.236"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-1105433916"
+      password: "cdBIDV42DCwnfIN"
+      port: 8118
+      server: "51.79.85.185"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-1105433917"
+      password: "Y6R9pAtvxxzmGC"
+      port: 8888
+      server: "15.204.246.107"
+      type: ss
+      udp: true
+    - cipher: "aes-256-gcm"
+      name: "SS-MIX-shadowsocks-1136106230"
+      password: "zDNVedRFPQexG9v"
+      port: 445
+      server: "51.222.141.125"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-1364026099"
+      password: "e8KgS8fD0yDqYFpgN4G5piCOt9aFyqA3"
+      port: 8388
+      server: "132.243.175.144"
+      type: ss
+      udp: true
+    - cipher: "chacha20-ietf-poly1305"
+      name: "SS-MIX-shadowsocks-1505185476"
+      password: "9epp3o9ng8ej59uv"
+      port: 14249
+      server: "45.128.12.20"
       type: ss
       udp: true
 
