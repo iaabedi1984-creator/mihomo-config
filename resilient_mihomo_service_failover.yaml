@@ -58,8 +58,8 @@ proxy-providers:
 
   au1rxx-mixed:
     type: http
-    url: "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt"
-    path: ./proxy_providers/au1rxx-mixed.txt
+    url: "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/clash.yaml"
+    path: ./proxy_providers/au1rxx-mixed.yaml
     interval: 1800
     health-check:
       enable: true
