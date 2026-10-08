@@ -41,6 +41,36 @@ proxy-providers:
     override:
       additional-prefix: "[XVIP] "
 
+  baarcuda-vless:
+    type: http
+    url: "https://raw.githubusercontent.com/Baarcuda/vpn-configs/master/top100-vless.txt"
+    path: ./proxy_providers/baarcuda-vless.txt
+    interval: 1800
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 600
+      timeout: 8000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[BAR] "
+
+  au1rxx-mixed:
+    type: http
+    url: "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/v2ray-base64.txt"
+    path: ./proxy_providers/au1rxx-mixed.txt
+    interval: 1800
+    health-check:
+      enable: true
+      url: "https://www.google.com/robots.txt"
+      interval: 600
+      timeout: 8000
+      lazy: true
+      expected-status: 200
+    override:
+      additional-prefix: "[AU1] "
+
 proxy-groups:
   - name: "FREENODE-BIZ"
     type: select
@@ -52,11 +82,23 @@ proxy-groups:
     use:
       - xrayvip
 
+  - name: "BAARCUDA-VLESS"
+    type: select
+    use:
+      - baarcuda-vless
+
+  - name: "AU1RXX-MIXED"
+    type: select
+    use:
+      - au1rxx-mixed
+
   - name: "AUTO-EXTERNAL"
     type: url-test
     use:
       - freenode-featured
       - xrayvip
+      - baarcuda-vless
+      - au1rxx-mixed
     url: "https://www.google.com/robots.txt"
     interval: 300
     tolerance: 800
@@ -70,6 +112,8 @@ proxy-groups:
     proxies:
       - FREENODE-BIZ
       - XRAYVIP
+      - BAARCUDA-VLESS
+      - AU1RXX-MIXED
       - AUTO-EXTERNAL
       - DIRECT
 
