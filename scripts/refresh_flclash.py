@@ -55,7 +55,7 @@ def main():
             {"name": "PROXY", "type": "select",
              "proxies": [KNOWN, "AUTO-ALL", *[n for n in names if n != KNOWN], "DIRECT"]},
             {"name": "AUTO-ALL", "type": "url-test", "proxies": names,
-             "url": "https://www.google.com/robots.txt", "interval": 300, "tolerance": 800},
+             "url": "https://www.google.com/robots.txt", "interval": 900, "tolerance": 200, "lazy": False},
         ],
         "rules": [
             "IP-CIDR,127.0.0.0/8,DIRECT,no-resolve",
