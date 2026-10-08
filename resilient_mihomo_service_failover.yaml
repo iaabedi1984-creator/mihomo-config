@@ -14113,8 +14113,9 @@ proxy-groups:
     include-all: true
     filter: ".*"
     url: "https://www.google.com/robots.txt"
-    interval: 300
-    tolerance: 800
+    interval: 900
+    tolerance: 200
+    lazy: false
 
 rules:
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
