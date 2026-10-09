@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Refresh an SS-only Mihomo profile (no F26, VMess or VLESS); cap 150 nodes."""
+"""Keep only previously retained SS nodes; remove failed SS-/F26 additions."""
 import base64
 import re
 import sys
@@ -10,23 +10,13 @@ from pathlib import Path
 import yaml
 
 BASE = "https://raw.githubusercontent.com/Au1rxx/free-vpn-subscriptions/main/output/"
-SOURCES = [
-    ("DE", "by-country/clash-DE.yaml"),
-    ("NL", "by-country/clash-NL.yaml"),
-    ("GB", "by-country/clash-GB.yaml"),
-    ("US", "by-country/clash-US.yaml"),
-    ("CA", "by-country/clash-CA.yaml"),
-    ("JP", "by-country/clash-JP.yaml"),
-    ("SG", "by-country/clash-SG.yaml"),
-    ("FI", "by-country/clash-FI.yaml"),
-    ("AT", "by-country/clash-AT.yaml"),
-    ("MIX", "protocol/shadowsocks/clash-0001.yaml"),
-]
+SOURCES = []  # Auto-readding SS- nodes paused: user reported all new nodes failed.
+
 OUT = Path("resilient_mihomo_service_failover.yaml")
 TV = Path("tv-v2ray.txt")
 KNOWN = "shadowsocks-1694944560"
 CAP = 150
-PRESERVE = 100             # Confirmed nodes first, then old standbys
+PRESERVE = 150             # Confirmed nodes first, then old standbys
 FRESH = CAP - PRESERVE
 SAFE_NAME = re.compile(r"^[A-Za-z0-9_.-]{1,120}$")
 SAFE_HOST = re.compile(r"^[A-Za-z0-9_.:][A-Za-z0-9_.:-]{0,250}$")
@@ -54,14 +44,14 @@ SS_METHODS = {
 
 
 def valid(node):
-    """Only Shadowsocks, never F26. Ignore damaged or exotic records."""
+    """Only existing Shadowsocks without excluded F26 / SS- prefixes."""
     if not isinstance(node, dict) or not sane_text(node):
         return False
     name, kind = node.get("name"), node.get("type")
     host, port = node.get("server"), node.get("port")
     if not (isinstance(name, str) and SAFE_NAME.fullmatch(name)):
         return False
-    if name.upper().startswith("F26") or kind != "ss":
+    if name.upper().startswith(("F26", "SS-")) or kind != "ss":
         return False
     if not (isinstance(host, str) and SAFE_HOST.fullmatch(host)):
         return False
@@ -193,7 +183,7 @@ def main():
             "MATCH,PROXY",
         ],
     }
-    result = "# FLClash SS-only subscription. Max 150 unique nodes. F26, VLESS and VMess excluded.\n" + yaml.safe_dump(
+    result = "# FLClash stable SS-only subscription. Excludes SS-, F26 and VLESS; max 150 nodes.\n" + yaml.safe_dump(
         cfg, allow_unicode=False, sort_keys=False, default_flow_style=False)
     verified = yaml.safe_load(result)
     if len(verified["proxies"]) > CAP or len(result) > 100_000 or any(
