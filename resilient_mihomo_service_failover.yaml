@@ -1,4 +1,4 @@
-# FLClash SS-only: 78 original + 1 confirmed N28 + 20 traffic-confirmed N29; 99 nodes.
+# FLClash stable SS-only subscription. Excludes SS-, F26 and VLESS; max 170 nodes.
 mixed-port: 7890
 allow-lan: false
 mode: rule
@@ -555,154 +555,153 @@ proxies:
   server: 109.201.152.181
   type: ss
   udp: true
-- cipher: "aes-256-cfb"
-  name: "N28-LAT-002-ZZ"
-  password: "amazonskr05"
+- cipher: aes-256-cfb
+  name: N28-LAT-002-ZZ
+  password: amazonskr05
   port: 443
-  server: "18.184.136.175"
+  server: 18.184.136.175
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-DE-01"
-  password: "amazonskr05"
+  name: N29-AWS-DE-01
+  password: amazonskr05
   port: 443
-  server: "18.153.68.109"
+  server: 18.153.68.109
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-DE-02"
-  password: "amazonskr05"
+  name: N29-AWS-DE-02
+  password: amazonskr05
   port: 443
-  server: "3.68.150.169"
+  server: 3.68.150.169
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-DE-03"
-  password: "amazonskr05"
+  name: N29-AWS-DE-03
+  password: amazonskr05
   port: 443
-  server: "63.180.254.10"
+  server: 63.180.254.10
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-FR-01"
-  password: "amazonskr05"
+  name: N29-AWS-FR-01
+  password: amazonskr05
   port: 443
-  server: "35.180.75.226"
+  server: 35.180.75.226
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-FR-02"
-  password: "amazonskr05"
+  name: N29-AWS-FR-02
+  password: amazonskr05
   port: 443
-  server: "35.181.173.15"
+  server: 35.181.173.15
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-FR-03"
-  password: "amazonskr05"
+  name: N29-AWS-FR-03
+  password: amazonskr05
   port: 443
-  server: "35.180.23.68"
+  server: 35.180.23.68
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-FR-04"
-  password: "amazonskr05"
+  name: N29-AWS-FR-04
+  password: amazonskr05
   port: 443
-  server: "52.47.99.71"
+  server: 52.47.99.71
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-FR-05"
-  password: "amazonskr05"
+  name: N29-AWS-FR-05
+  password: amazonskr05
   port: 443
-  server: "13.38.72.199"
+  server: 13.38.72.199
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-FR-06"
-  password: "amazonskr05"
+  name: N29-AWS-FR-06
+  password: amazonskr05
   port: 443
-  server: "15.237.119.135"
+  server: 15.237.119.135
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-FR-07"
-  password: "amazonskr05"
+  name: N29-AWS-FR-07
+  password: amazonskr05
   port: 443
-  server: "13.36.241.80"
+  server: 13.36.241.80
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-FR-08"
-  password: "amazonskr05"
+  name: N29-AWS-FR-08
+  password: amazonskr05
   port: 443
-  server: "15.237.53.180"
+  server: 15.237.53.180
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-FR-09"
-  password: "amazonskr05"
+  name: N29-AWS-FR-09
+  password: amazonskr05
   port: 443
-  server: "13.36.167.227"
+  server: 13.36.167.227
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-US-01"
-  password: "amazonskr05"
+  name: N29-AWS-US-01
+  password: amazonskr05
   port: 443
-  server: "18.208.223.39"
+  server: 18.208.223.39
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-US-02"
-  password: "amazonskr05"
+  name: N29-AWS-US-02
+  password: amazonskr05
   port: 443
-  server: "18.212.247.202"
+  server: 18.212.247.202
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-US-03"
-  password: "amazonskr05"
+  name: N29-AWS-US-03
+  password: amazonskr05
   port: 443
-  server: "3.95.219.195"
+  server: 3.95.219.195
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-US-04"
-  password: "amazonskr05"
+  name: N29-AWS-US-04
+  password: amazonskr05
   port: 443
-  server: "54.226.217.37"
+  server: 54.226.217.37
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-JP-01"
-  password: "amazonskr05"
+  name: N29-AWS-JP-01
+  password: amazonskr05
   port: 443
-  server: "43.207.166.104"
+  server: 43.207.166.104
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-JP-02"
-  password: "amazonskr05"
+  name: N29-AWS-JP-02
+  password: amazonskr05
   port: 443
-  server: "54.178.60.213"
+  server: 54.178.60.213
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-SG-01"
-  password: "amazonskr05"
+  name: N29-AWS-SG-01
+  password: amazonskr05
   port: 443
-  server: "54.179.221.54"
+  server: 54.179.221.54
   type: ss
   udp: true
 - cipher: aes-256-cfb
-  name: "N29-AWS-SG-02"
-  password: "amazonskr05"
+  name: N29-AWS-SG-02
+  password: amazonskr05
   port: 443
-  server: "13.215.191.190"
+  server: 13.215.191.190
   type: ss
   udp: true
-
 proxy-groups:
 - name: PROXY
   type: select
