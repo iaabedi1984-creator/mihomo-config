@@ -15,8 +15,8 @@ SOURCES = []  # Auto-readding SS- nodes paused: user reported all new nodes fail
 OUT = Path("resilient_mihomo_service_failover.yaml")
 TV = Path("tv-v2ray.txt")
 KNOWN = "shadowsocks-1694944560"
-CAP = 150
-PRESERVE = 150             # Confirmed nodes first, then old standbys
+CAP = 170
+PRESERVE = 170             # Confirmed nodes first, then old standbys
 FRESH = CAP - PRESERVE
 SAFE_NAME = re.compile(r"^[A-Za-z0-9_.-]{1,120}$")
 SAFE_HOST = re.compile(r"^[A-Za-z0-9_.:][A-Za-z0-9_.:-]{0,250}$")
@@ -183,7 +183,7 @@ def main():
             "MATCH,PROXY",
         ],
     }
-    result = "# FLClash stable SS-only subscription. Excludes SS-, F26 and VLESS; max 150 nodes.\n" + yaml.safe_dump(
+    result = "# FLClash stable SS-only subscription. Excludes SS-, F26 and VLESS; max 170 nodes.\n" + yaml.safe_dump(
         cfg, allow_unicode=False, sort_keys=False, default_flow_style=False)
     verified = yaml.safe_load(result)
     if len(verified["proxies"]) > CAP or len(result) > 100_000 or any(
