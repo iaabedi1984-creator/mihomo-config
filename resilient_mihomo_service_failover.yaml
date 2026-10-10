@@ -5963,15 +5963,16 @@ proxy-groups:
 - name: PROXY
   type: select
   proxies:
-  - shadowsocks-1694944560
   - AUTO-ALL
+  - shadowsocks-1694944560
   - DIRECT
   include-all: true
 - name: AUTO-ALL
   type: url-test
   include-all: true
   url: https://www.google.com/robots.txt
-  interval: 900
+  interval: 120
+  timeout: 5000
   tolerance: 200
   lazy: false
 rules:
