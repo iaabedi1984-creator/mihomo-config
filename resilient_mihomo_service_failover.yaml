@@ -1199,6 +1199,13 @@ proxies:
   server: 82.38.31.170
   type: ss
   udp: true
+- cipher: aes-256-gcm
+  name: N36-DE-001
+  password: "RexnBgU7EV5ADxG"
+  port: 7001
+  server: "213.202.208.199"
+  type: ss
+  udp: true
 proxy-groups:
 - name: PROXY
   type: select
