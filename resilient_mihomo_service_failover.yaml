@@ -5970,9 +5970,11 @@ proxy-groups:
 - name: AUTO-ALL
   type: url-test
   include-all: true
-  url: https://www.google.com/robots.txt
-  interval: 120
+  url: https://speed.cloudflare.com/__down?bytes=16384
+  expected-status: 200
+  interval: 180
   timeout: 5000
+  max-failed-times: 1
   tolerance: 200
   lazy: false
 rules:
