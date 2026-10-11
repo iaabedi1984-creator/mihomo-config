@@ -7273,6 +7273,7 @@ proxy-groups:
 - name: PROXY
   type: select
   proxies:
+  - N42-WORKING
   - N42-AUTO
   - N42-VR
   - N42-LAB
@@ -7284,6 +7285,14 @@ proxy-groups:
   - N42-UT
   - N42-UP
   - DIRECT
+# User-confirmed actual data transfer, 2026-10-11
+- name: N42-WORKING
+  type: select
+  proxies:
+  - N42-VR-004
+  - N42-LAB-H26-REAL
+  - N42-LAB-H27-REAL
+  - N42-LAB-H35-REAL
 - name: N42-LAB
   type: select
   proxies:
