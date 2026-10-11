@@ -6641,12 +6641,257 @@ proxies:
     path: "/"
     headers:
       Host: "2639w-throbbing-band-3840.xphnn6jp.workers.dev"
+# EXP N42-LAB-A01-BASE from N42-VR-004 | Known-working control; identical endpoint and credentials
+- name: "N42-LAB-A01-BASE"
+  server: 95.111.212.241
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# EXP N42-LAB-A02-FIREFOX from N42-VR-004 | Only client fingerprint: firefox
+- name: "N42-LAB-A02-FIREFOX"
+  server: 95.111.212.241
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: firefox
+  network: tcp
+# EXP N42-LAB-A03-EDGE from N42-VR-004 | Only client fingerprint: edge
+- name: "N42-LAB-A03-EDGE"
+  server: 95.111.212.241
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: edge
+  network: tcp
+# EXP N42-LAB-A04-IOS from N42-VR-004 | Only client fingerprint: ios
+- name: "N42-LAB-A04-IOS"
+  server: 95.111.212.241
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: ios
+  network: tcp
+# EXP N42-LAB-A05-SAFARI from N42-VR-004 | Only client fingerprint: safari
+- name: "N42-LAB-A05-SAFARI"
+  server: 95.111.212.241
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: safari
+  network: tcp
+# EXP N42-LAB-A06-TFO from N42-VR-004 | Only TCP Fast Open enabled
+- name: "N42-LAB-A06-TFO"
+  server: 95.111.212.241
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+  tfo: true
+# EXP N42-LAB-A07-ALPN1 from N42-VR-004 | Only ALPN: http/1.1
+- name: "N42-LAB-A07-ALPN1"
+  server: 95.111.212.241
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+  alpn: [http/1.1]
+# EXP N42-LAB-A08-ALPN2 from N42-VR-004 | Only ALPN: h2 plus http/1.1
+- name: "N42-LAB-A08-ALPN2"
+  server: 95.111.212.241
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+  alpn: [h2, http/1.1]
+# EXP N42-LAB-B01-CHROME from N42-VR-022 | Original firefox; only fingerprint -> chrome
+- name: "N42-LAB-B01-CHROME"
+  server: 45.82.56.253
+  port: 443
+  type: vless
+  uuid: 616c7b3b-41f4-4038-88c6-d6fedd0ae4a7
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: nd-2.ardesnode.ru
+  reality-opts:
+    public-key: PKlt_5ASsz137EvA9SKSadtjEv1k_U7VRtoelKCgADs
+    short-id: 9ea74b83f4993ca9
+  client-fingerprint: chrome
+  network: tcp
+# EXP N42-LAB-B02-CHROME from N42-VR-033 | Original random; only fingerprint -> chrome
+- name: "N42-LAB-B02-CHROME"
+  server: 94.156.114.89
+  port: 443
+  type: vless
+  uuid: f8d52ece-fad4-478d-875d-df6eed3befa7
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: ge-s-1.pythonmakemigreat.wiki
+  reality-opts:
+    public-key: 5fkwwCKZzMsE6Eb_b3iqluu-1AWIfnYl-p0N3EL9Al8
+    short-id: 2c9a2790ad5900b2
+  client-fingerprint: chrome
+  network: tcp
+# EXP N42-LAB-B03-CHROME from N42-VR-045 | Original firefox; only fingerprint -> chrome
+- name: "N42-LAB-B03-CHROME"
+  server: 178.17.57.120
+  port: 40443
+  type: vless
+  uuid: bb0f1ed0-0298-40a1-adb1-1f5d6ab33d54
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: deepl.com
+  reality-opts:
+    public-key: w4AYHvQnQS6olDqoG9ptLOtgehaWOsv9HQhDax5bLA4
+    short-id: db46e2946fc466fd
+  client-fingerprint: chrome
+  network: tcp
+# EXP N42-LAB-B04-CHROME from N42-VR-059 | Original ios; only fingerprint -> chrome
+- name: "N42-LAB-B04-CHROME"
+  server: 45.150.33.33
+  port: 443
+  type: vless
+  uuid: eec2f6a7-c10f-43b0-b133-61f9bf9bbc27
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: amazon.de
+  reality-opts:
+    public-key: G8SING6Ibc_igZ5vI5578fXCT_mBMRuq_o8_Ymnj2SQ
+    short-id: eba1498e012ef580
+  client-fingerprint: chrome
+  network: tcp
+# EXP N42-LAB-B05-CHROME from N42-VR-065 | Original firefox; only fingerprint -> chrome
+- name: "N42-LAB-B05-CHROME"
+  server: 145.223.68.58
+  port: 443
+  type: vless
+  uuid: edb50d20-2d3e-4c1e-8a75-a17168a89aa5
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.cloudflare.com
+  reality-opts:
+    public-key: qc2DcqT9zPPZr6ePZ7ukxACWrYhRNIBjDIjCK7veyQg
+    short-id: a44ff7d2e80213c2
+  client-fingerprint: chrome
+  network: tcp
+# EXP N42-LAB-B06-CHROME from N42-VR-076 | Original firefox; only fingerprint -> chrome
+- name: "N42-LAB-B06-CHROME"
+  server: 5.253.28.224
+  port: 40443
+  type: vless
+  uuid: af5eac96-e478-488a-bc8c-45269d7e8847
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: deepl.com
+  reality-opts:
+    public-key: g77ZJbm18JEotapmVRjaXi133MzkbhkU2lxhVeXx8zw
+    short-id: 68a8
+  client-fingerprint: chrome
+  network: tcp
+# EXP N42-LAB-B07-CHROME from N42-VR-079 | Original safari; only fingerprint -> chrome
+- name: "N42-LAB-B07-CHROME"
+  server: 217.149.30.73
+  port: 8443
+  type: vless
+  uuid: ee18d188-14cc-417e-beb1-70e4add6d023
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: time.nztvpn.com
+  reality-opts:
+    public-key: p87u9cOh91BaXsKS-HoCoOUXxHcOwkM6ByTWmz_6b2Y
+    short-id: 0da7e14db353e7d0
+  client-fingerprint: chrome
+  network: tcp
+# EXP N42-LAB-B08-CHROME from N42-VR-037 | Original randomized; only fingerprint -> chrome
+- name: "N42-LAB-B08-CHROME"
+  server: 2.27.69.117
+  port: 443
+  type: vless
+  uuid: df53b6c2-8005-475c-9eb9-74e1be785dc8
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: addons.mozilla.org
+  reality-opts:
+    public-key: -bn-69fLm8-ZIN4AWcFJTvliohVXnevdOK6E0HJF90Y
+    short-id: 123c2bff
+  client-fingerprint: chrome
+  network: tcp
+
 proxy-groups:
 - name: PROXY
   type: select
   proxies:
   - N42-AUTO
   - N42-VR
+  - N42-LAB
   - N42-VW
   - N42-VG
   - N42-VM
@@ -6655,6 +6900,26 @@ proxy-groups:
   - N42-UT
   - N42-UP
   - DIRECT
+- name: N42-LAB
+  type: select
+  proxies:
+  - N42-VR-004
+  - N42-LAB-A01-BASE
+  - N42-LAB-A02-FIREFOX
+  - N42-LAB-A03-EDGE
+  - N42-LAB-A04-IOS
+  - N42-LAB-A05-SAFARI
+  - N42-LAB-A06-TFO
+  - N42-LAB-A07-ALPN1
+  - N42-LAB-A08-ALPN2
+  - N42-LAB-B01-CHROME
+  - N42-LAB-B02-CHROME
+  - N42-LAB-B03-CHROME
+  - N42-LAB-B04-CHROME
+  - N42-LAB-B05-CHROME
+  - N42-LAB-B06-CHROME
+  - N42-LAB-B07-CHROME
+  - N42-LAB-B08-CHROME
 - name: N42-AUTO
   type: url-test
   proxies:
