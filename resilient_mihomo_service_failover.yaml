@@ -7192,6 +7192,187 @@ proxies:
   network: tcp
   tfo: true
 
+# LAB-E unverified alternate address: preserve all N42-VR-004 credentials and port
+- name: "N42-LAB-E01-IP95-111-212-237"
+  server: 95.111.212.237
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-E unverified alternate address: preserve all N42-VR-004 credentials and port
+- name: "N42-LAB-E02-IP95-111-212-239"
+  server: 95.111.212.239
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-E unverified alternate address: preserve all N42-VR-004 credentials and port
+- name: "N42-LAB-E03-IP95-111-212-240"
+  server: 95.111.212.240
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-E unverified alternate address: preserve all N42-VR-004 credentials and port
+- name: "N42-LAB-E04-IP95-111-212-242"
+  server: 95.111.212.242
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-E unverified alternate address: preserve all N42-VR-004 credentials and port
+- name: "N42-LAB-E05-IP95-111-212-243"
+  server: 95.111.212.243
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-E unverified alternate address: preserve all N42-VR-004 credentials and port
+- name: "N42-LAB-E06-IP95-111-212-245"
+  server: 95.111.212.245
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-E unverified alternate address: preserve all N42-VR-004 credentials and port
+- name: "N42-LAB-E07-IP95-111-212-248"
+  server: 95.111.212.248
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-E unverified alternate address: preserve all N42-VR-004 credentials and port
+- name: "N42-LAB-E08-IP95-111-212-251"
+  server: 95.111.212.251
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-E unverified alternate address: preserve all N42-VR-004 credentials and port
+- name: "N42-LAB-E09-IP95-111-213-241"
+  server: 95.111.213.241
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-E unverified alternate address: preserve all N42-VR-004 credentials and port
+- name: "N42-LAB-E10-IP95-111-214-241"
+  server: 95.111.214.241
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-E unverified alternate address: preserve all N42-VR-004 credentials and port
+- name: "N42-LAB-E11-IP95-111-215-241"
+  server: 95.111.215.241
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-E unverified alternate address: preserve all N42-VR-004 credentials and port
+- name: "N42-LAB-E12-IP95-111-212-225"
+  server: 95.111.212.225
+  port: 443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+
 proxy-groups:
 - name: PROXY
   type: select
@@ -7247,6 +7428,18 @@ proxy-groups:
   - N42-LAB-D05-MOD
   - N42-LAB-D06-BASE
   - N42-LAB-D06-MOD
+  - N42-LAB-E01-IP95-111-212-237
+  - N42-LAB-E02-IP95-111-212-239
+  - N42-LAB-E03-IP95-111-212-240
+  - N42-LAB-E04-IP95-111-212-242
+  - N42-LAB-E05-IP95-111-212-243
+  - N42-LAB-E06-IP95-111-212-245
+  - N42-LAB-E07-IP95-111-212-248
+  - N42-LAB-E08-IP95-111-212-251
+  - N42-LAB-E09-IP95-111-213-241
+  - N42-LAB-E10-IP95-111-214-241
+  - N42-LAB-E11-IP95-111-215-241
+  - N42-LAB-E12-IP95-111-212-225
 - name: N42-AUTO
   type: url-test
   proxies:
