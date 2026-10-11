@@ -6641,852 +6641,633 @@ proxies:
     path: "/"
     headers:
       Host: "2639w-throbbing-band-3840.xphnn6jp.workers.dev"
-- name: "N42-LAB-G01-VR"
-  server: 201.51.11.117
+- name: "N42-LAB-H01-REAL"
+  server: 185.218.17.127
   port: 443
   type: vless
-  uuid: 5d0e5029-061f-4d75-ac97-718dbf827957
+  uuid: bc8446e7-ba8e-4dfd-92df-8681793fe31e
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "www.samsung.com"
+  servername: corporate.amazon.com
   reality-opts:
-    public-key: 9eiEOSjRUJfWtjR5_h6qYOIIC7oihvCNtyFFvtu7MEM
-    short-id: "ed07a0272e0123e0"
+    public-key: QKaBb_u0KoNkMYbh9ljrxC9BDtnHyFoaMd4-s4xfKxQ
+    short-id: 33c0b6e213
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G02-VR"
-  server: 66.78.40.202
+- name: "N42-LAB-H02-REAL"
+  server: 164.37.100.195
   port: 443
   type: vless
-  uuid: 302c2e89-6f2d-4500-90ce-26d075c7e84f
+  uuid: 4bdeee92-97e8-414d-bef6-ec1d5e2ab73b
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "www.samsung.com"
+  servername: tomaz1337shellbuy.vvzzkontaktezzvv.garden
   reality-opts:
-    public-key: 8zJkTehTmhmgKWUIj-CyJP4gtMjNxLgBxPjHC1wwW3A
-    short-id: "61"
-    spider-x: "/b46a29a208a37d1"
+    public-key: s0ypPx0AL3k2KOk74tbm-aE-i7eIR_MYVzfLHZeLaUk
+    short-id: 2e124af254a65e7c
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G03-VR"
-  server: 172.245.253.16
-  port: 443
-  type: vless
-  uuid: b67422ff-101b-433b-8f66-4ab282960b36
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "www.apple.com"
-  reality-opts:
-    public-key: Vh8dv6ENmfFd4JlPgj9-R1Fbet2m6JyRFukcVvDq5A8
-    short-id: "e7dc2c820ba8bbd4"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G04-VR"
-  server: 23.251.47.71
-  port: 443
-  type: vless
-  uuid: 86930779-64ec-46a5-97d9-55e3107f3ce3
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "www.apple.com"
-  reality-opts:
-    public-key: E6TSsyOKiYD_V3m3-4BTZVJBbHDgn2dEDg6cCDpASxU
-    short-id: "dde3c2dca27ae6e7"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G05-VR"
-  server: 128.1.12.164
-  port: 443
-  type: vless
-  uuid: e01b5875-0b0b-4056-bbf5-0b0ecdc97937
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "www.cloudflare.com"
-  reality-opts:
-    public-key: Z41OxiwFrf0VAEv7_qXoEMKSmLJPjEPPJzXpP1s6gGk
-    short-id: "977a84fa5512be5a"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G06-VR"
-  server: 207.56.137.51
-  port: 443
-  type: vless
-  uuid: 01ada9fb-fa2f-45da-a0d0-bce80cdf433b
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "www.cloudflare.com"
-  reality-opts:
-    public-key: WNifT0qNHWrUsvC6cuvej0rzZe6qPijopbmJyRADOF0
-    short-id: "f713561d"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G07-VR"
-  server: 23.251.56.78
-  port: 443
-  type: vless
-  uuid: 9638a83e-f1f7-4cc8-a602-924965d9534f
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "www.cloudflare.com"
-  reality-opts:
-    public-key: E6Y9lNizCXo8tJ6EXwLYQIjyIwmxIs4foyRlY2MgkjA
-    short-id: "59ccabb0a1483c4b"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G08-VR"
-  server: 46.28.64.242
-  port: 443
-  type: vless
-  uuid: 1e560bb6-4d52-4625-a629-54b1282f1b93
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "www.cloudflare.com"
-  reality-opts:
-    public-key: 2FrYX1NTCe-fnm0kvNLYMPAuOZ8jbsYOSCKu3lY3CBQ
-    short-id: "64c147592a2f84d9"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G09-VR"
-  server: 5.181.171.2
-  port: 443
-  type: vless
-  uuid: a87bf8a2-17a4-3054-b51e-876b5f1d0f24
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "speed.cloudflare.com"
-  reality-opts:
-    public-key: YNGotlyAx3ELUmi4lxOUjiEDmibqf1pPUTE9o3YYT2Y
-    short-id: ""
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G10-VR"
-  server: 85.209.157.184
-  port: 443
-  type: vless
-  uuid: 21710d7d-5e87-4655-bac2-36e9b655e3ee
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "www.microsoft.com"
-  reality-opts:
-    public-key: YDYWOKQpoOkOPQ64PosSfJHAaLPuAZJ_jiB6Qj_iYnQ
-    short-id: ""
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G11-VR"
-  server: 139.28.98.115
-  port: 443
-  type: vless
-  uuid: a74099c6-2d46-42f7-b117-cc7ffaf09e63
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "www.nvidia.com"
-  reality-opts:
-    public-key: uMDJI4EuoKDaY6cCu26RACdCtBnN9DFq0JyhEZMdGhg
-    short-id: ""
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G12-VR"
-  server: 172.86.105.222
-  port: 443
-  type: vless
-  uuid: 67a544a2-bfc6-11f1-9c3e-52540030ba36
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "www.nvidia.com"
-  reality-opts:
-    public-key: n25FmewpAEsvLl9Vr0bRFcz044f4IE7orWeWOzu8rwk
-    short-id: ""
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G13-VR"
-  server: 172.86.111.135
-  port: 443
-  type: vless
-  uuid: 79ccb156-bfc6-11f1-9811-525400d1d4f7
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "www.nvidia.com"
-  reality-opts:
-    public-key: n25FmewpAEsvLl9Vr0bRFcz044f4IE7orWeWOzu8rwk
-    short-id: ""
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G14-VR"
-  server: 85.155.101.37
-  port: 443
-  type: vless
-  uuid: a74099c6-2d46-42f7-b117-cc7ffaf09e63
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "www.nvidia.com"
-  reality-opts:
-    public-key: uMDJI4EuoKDaY6cCu26RACdCtBnN9DFq0JyhEZMdGhg
-    short-id: ""
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G15-VR"
-  server: 31.76.113.240
-  port: 443
-  type: vless
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "nvidia.com"
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: "db04ce8bdb8900f1"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G16-VR"
-  server: 85.192.48.142
-  port: 443
-  type: vless
-  uuid: adc11f30-e4cb-4985-bf5e-f9ded69c019f
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "nvidia.com"
-  reality-opts:
-    public-key: fNfokzklCF4l_c8k8PciOCjm5ecNoF_sNLjEtaO-xzI
-    short-id: "db04ce8bdb8900f1"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G17-VR"
-  server: 144.31.125.60
-  port: 443
-  type: vless
-  uuid: 9015f0bc-2053-4ca1-9b9b-a018b97b32d2
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "www.intel.com"
-  reality-opts:
-    public-key: SVgtyuD9khylgHuB0treGekxVSHPOS-wPZTNHUf6zj8
-    short-id: "85c86a9863"
-    spider-x: "/ozks0ksxmyHue4v"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G18-VR"
-  server: 138.124.73.88
-  port: 443
-  type: vless
-  uuid: a889fba5-5472-4022-a6b4-9710157fda2f
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "github.com"
-  reality-opts:
-    public-key: SpDERK2bCJgRdaDP3cSsQDfOCghD94d0-zjuKIHYQy0
-    short-id: "a2aa"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G19-VR"
-  server: 138.124.52.85
-  port: 443
-  type: vless
-  uuid: 09a4bf7f-f997-4174-8bef-9fab75aa186e
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "www.google.com"
-  reality-opts:
-    public-key: K7v4Rsxa-9lBsD_IQrzXREfIME_bFmwELHQAE3Yp1ng
-    short-id: "b9988c11"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G20-VR"
-  server: 169.40.42.16
-  port: 443
-  type: vless
-  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "yahoo.com"
-  reality-opts:
-    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
-    short-id: "c39cc7310a"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G21-VR"
-  server: 178.128.112.70
-  port: 443
-  type: vless
-  uuid: 9206ae06-88ee-49b1-a558-531ade80fcaa
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "www.amazon.com"
-  reality-opts:
-    public-key: -O8QFkqeMAc6TzQp6eY1s38my_8jhBd7HDHxNki6QlY
-    short-id: "7f7f"
-    spider-x: "/"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G22-VR"
-  server: 82.39.171.12
-  port: 443
-  type: vless
-  uuid: d65cc14c-f53f-4fe2-b262-97856601319c
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "yahoo.com"
-  reality-opts:
-    public-key: e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg
-    short-id: "c39cc7310a"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G23-VR"
-  server: 103.109.234.129
-  port: 443
-  type: vless
-  uuid: b5ca5ab3-8cbc-4ac3-89da-9cd360589ecb
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "dep.opngtr.nl"
-  reality-opts:
-    public-key: gA6-Fj5hl4x-HOtbCcYqD99qsml4ActHRmw-VTkFU14
-    short-id: "7d6b6b7a606c21cf"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G24-VR"
-  server: 103.112.71.83
-  port: 443
-  type: vless
-  uuid: f82332b2-dc8c-4196-ac12-f276e37e278a
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "test.bridge.anti-zapret.com"
-  reality-opts:
-    public-key: 0AVsyS7udTbxKRdSyQ2rtFC63icDQOVWq8FvAhhU-WY
-    short-id: "cbb0a5c1dc905505"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G25-VR"
-  server: 103.126.50.203
-  port: 443
-  type: vless
-  uuid: 76f6b7fe-5de8-4637-87a0-6ddd33d67b3e
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "ro.getvlessvpn.com"
-  reality-opts:
-    public-key: xp7g5asMyVx4aI7vEwfZZPrpd57izUvnNzAOpBs4mh0
-    short-id: "b9f8f9772217538f"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G26-VR"
-  server: 103.139.51.21
-  port: 443
-  type: vless
-  uuid: 71b91642-93ed-4923-8cab-877e19bfc2d6
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "auth.figmafound.org"
-  reality-opts:
-    public-key: H5CXI4RvEWW0TFPvFrnF1iX-05Y57ZYMMngjmkMfv24
-    short-id: "711ad7f475c35e5e"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G27-VR"
-  server: 103.227.84.162
-  port: 443
-  type: vless
-  uuid: d6b59299-2f48-4e9b-9130-b9e9cb5d0a51
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "de3.hat.onl"
-  reality-opts:
-    public-key: OEp5OMlE08EaAunays3K7Lbd0JWKOQKZ8HXiytog4EQ
-    short-id: "e8d6c07aa30b81fa"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G28-VR"
-  server: 103.241.65.169
-  port: 443
-  type: vless
-  uuid: 91344c03-b37f-42c5-90f1-cbb95c5cf256
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "gb.srv.dvzh.net"
-  reality-opts:
-    public-key: 9GEc6lOjnGQyyE1951OZSBMWt4uCXsOjKyj9fysxHH0
-    short-id: "d30f9d846a7c8cba"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G29-VR"
-  server: 103.27.157.120
-  port: 443
-  type: vless
-  uuid: 025a80fb-233b-4714-b02d-f4384c653d58
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "download.amd.com"
-  reality-opts:
-    public-key: k0883nIGfstbzb8hES-dQ1yPcBwbUbnsyg4w-UA5gkA
-    short-id: "68aaa5222092bbea"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G30-VR"
-  server: 104.238.31.71
-  port: 443
-  type: vless
-  uuid: b783c6d6-3a0f-4c13-bbd1-86bf1ec4d94d
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "unitbook.net"
-  reality-opts:
-    public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: "6ba85179e30d4fc2"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G31-VR"
-  server: 104.245.103.36
-  port: 443
-  type: vless
-  uuid: 30141a8e-1b78-4f4b-88d3-1b0c90042256
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "portal.citygrainla.com"
-  reality-opts:
-    public-key: BlSccfT5tvDIOS7v9VaPd0ulUNhUdvlMjGiNzDNDUHE
-    short-id: "051f20c2344a2dfd"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G32-VR"
-  server: 109.104.106.149
-  port: 443
-  type: vless
-  uuid: 87fd990d-ca93-440a-bbd4-e8281c4a0910
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "d3-ro.cloud-cdn.xyz"
-  reality-opts:
-    public-key: a_v5l6R-rpVGlENLeONW4sz-GdRwIoDqISOWXGov8nw
-    short-id: "87709fed663228e5"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G33-VR"
-  server: 109.120.185.230
-  port: 443
-  type: vless
-  uuid: 3559f1f7-7d70-46c9-82db-d2b46269300b
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "dipvpn.ru"
-  reality-opts:
-    public-key: 1BdgrQ_esOEya01sDCBYK4MGpJgaUhssHQG-aWJkyFQ
-    short-id: ""
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G34-VR"
-  server: 109.169.76.34
-  port: 443
-  type: vless
-  uuid: b2bef9e4-0e52-43d7-9613-f6e73c2eb970
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "slashdot.org"
-  reality-opts:
-    public-key: JZ6o_q7-OSJ87w9kTrcn9I4UiMVZdPUnjXoRs4TbLzE
-    short-id: "61811b12a62fb2a4"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G35-VR"
-  server: 109.169.85.139
-  port: 443
-  type: vless
-  uuid: 98bc431a-2963-4faa-a712-cc83798a2edb
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "slashdot.org"
-  reality-opts:
-    public-key: SiSky02wHz-S0TDHKFTdYhnrlT8Y3CfRsekZlcdLXDY
-    short-id: "fd55b698ee8c3629"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G36-VR"
-  server: 109.202.246.144
-  port: 443
-  type: vless
-  uuid: fc50ce8b-6e25-4f20-82d1-8cf29f06ad8b
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "play.google.com"
-  reality-opts:
-    public-key: DmwKNYnqku627Q_FP8ByVmGmRYz_3Gj0T9-g6xK_nRM
-    short-id: "2116b1708308bd3e"
-    spider-x: "/MSkrgsXNUHQXGLm"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G37-VR"
-  server: 109.69.218.168
-  port: 443
-  type: vless
-  uuid: c28ee61d-0d43-4e69-8e6a-6397ed0ffc03
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "agile-raptor.cdn.cachefleet.com"
-  reality-opts:
-    public-key: cv_KJnMzQUZruACPbH-BCgLWrYqPm2dbUymg-gW_sVc
-    short-id: ""
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G38-VR"
-  server: 118.26.59.85
-  port: 443
-  type: vless
-  uuid: cdc86ade-9bc3-41eb-a7b9-879130378820
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "www.bing.com"
-  reality-opts:
-    public-key: -Ngz1wsLiTc5fP1MdkFMS2oor1jRoFLAYD8oOgybGFw
-    short-id: "e6d2c443d8f7702a"
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G39-VR"
-  server: 128.254.186.11
-  port: 443
-  type: vless
-  uuid: 98d0fa1b-d778-477e-b897-4e2569c53178
-  udp: true
-  tls: true
-  flow: xtls-rprx-vision
-  servername: "mother-earth.fyi"
-  reality-opts:
-    public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-    short-id: ""
-  client-fingerprint: chrome
-  network: tcp
-- name: "N42-LAB-G40-VR"
-  server: 13.143.129.45
+- name: "N42-LAB-H03-REAL"
+  server: 157.228.155.185
   port: 443
   type: vless
   uuid: df53b6c2-8005-475c-9eb9-74e1be785dc8
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "addons.mozilla.org"
+  servername: addons.mozilla.org
   reality-opts:
-    public-key: CsoM3VUYii1XxgxnrT4VEe-EALgn60k6BaKMJVP9qAM
-    short-id: "7dd08043"
+    public-key: 4q8nqNb-0c-akP3XqVmen67BLXJVlx48a_GDRw16nVg
+    short-id: 5ea112e8
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G41-VR"
-  server: 13.143.163.148
+- name: "N42-LAB-H04-REAL"
+  server: 89.125.100.59
   port: 443
   type: vless
-  uuid: f811a2e8-08ed-4b30-b44c-449a7cab54d8
+  uuid: 86096188-0ece-41af-922d-792c5f96c3ad
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "gemsubbgem.world"
+  servername: anime.caloribro.uno
   reality-opts:
-    public-key: 6PJlXT9xrgJP8RXfhpWDMKPh4eqGt_IZmenc_a6v0gg
-    short-id: ""
+    public-key: BzXQPqKb1waqaBR4b2GGyE6VWX4LGd9iCOkyuMc8IGs
+    short-id: 14aa9b370c30c55d
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G42-VR"
-  server: 13.143.166.245
+- name: "N42-LAB-H05-REAL"
+  server: 201.10.90.118
   port: 443
   type: vless
-  uuid: 2a0b565e-904e-4d3b-a7eb-0725d6a2c7cd
+  uuid: 86096188-0ece-41af-922d-792c5f96c3ad
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "cdn.jsdelivr.net"
+  servername: pl1.w-brand.shop
   reality-opts:
-    public-key: FuKGULeQ9xZMJN8hWz6J_49tDJKT9HA-nsAXOOVRmyM
-    short-id: "ff867ed245c73f43"
+    public-key: SUqLHKFiu82qz10ruF3RVkoYesyoCcEHCATTz8XPahY
+    short-id: acc1edca2a337172
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G43-VR"
-  server: 13.143.174.176
+- name: "N42-LAB-H06-REAL"
+  server: 38.207.130.15
   port: 443
   type: vless
-  uuid: 56de13ac-086e-4789-8e1e-1bf2bd90216b
+  uuid: e4cd263b-c5c7-4410-bf61-8893179ec429
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "swidenlanzerotte.live"
+  servername: amazon.com
   reality-opts:
-    public-key: MQrvfivvEfLGzDee7h0j5uC-DwaD_38_NXOY9-NhqxM
-    short-id: ""
+    public-key: sDKrtAJk2VP_w1w7cFi2O86RdlvQ2E2An5xsRdJlgGE
+    short-id: 6d962e8d8a0dce
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G44-VR"
-  server: 13.143.239.67
+- name: "N42-LAB-H07-REAL"
+  server: pl.golangwikito.cfd
   port: 443
   type: vless
-  uuid: f622c73a-1532-4832-8e15-754191752209
+  uuid: f8d52ece-fad4-478d-875d-df6eed3befa7
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "eeconverter.teddylink.com"
+  servername: pl.golangwikito.cfd
   reality-opts:
-    public-key: fQvafZ0GP7J-BM4z0Y3zcnu9iNTdbC-eto3XccpK_Ec
-    short-id: "1ca2119aa517c7"
+    public-key: DsTVLCehsKvfFGtNZU5leKOLTlEp28qeifHYtRKOFwg
+    short-id: f8b695e5c59d028c
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G45-VR"
-  server: 130.49.188.4
+- name: "N42-LAB-H08-REAL"
+  server: 2.27.71.48
   port: 443
   type: vless
-  uuid: c795bdd5-0460-42bd-927b-fbff154d2ab5
+  uuid: df53b6c2-8005-475c-9eb9-74e1be785dc8
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "lk.s.dn.iki-servers.com"
+  servername: addons.mozilla.org
   reality-opts:
-    public-key: GW-DWwk3vtXtXBEqQxY_Cf83JIisyyk34rUrtkMZ90g
-    short-id: ""
-    spider-x: "/"
+    public-key: FTB4bvTP-3JAbScj_vvkIOPFGjtN2TaNTUfeY-Ew8EU
+    short-id: 4d767145
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G46-VR"
-  server: 131.123.13.93
+- name: "N42-LAB-H09-REAL"
+  server: t14.qifei.app
   port: 443
   type: vless
-  uuid: 55ccbeb5-0bf4-4e4d-afcb-23c038e73e00
+  uuid: b98d4c6e-6770-4a31-8256-a4750cdea0e7
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "1mcfn.67resserv67.info"
+  servername: www.amazon.com
   reality-opts:
-    public-key: rj3rvl7AGOd0NOPrX6h2c1auXGnCBJTPMDeT86AMvBA
-    short-id: "29455a3a790acbd0"
-    spider-x: "/"
+    public-key: 0i_xAxYgSNx5NMpK2lOaWGS-CvAiD_LneYPO0MF0owo
+    short-id: 1a
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G47-VR"
-  server: 131.123.34.42
+- name: "N42-LAB-H10-REAL"
+  server: jpga01.jumpernode.site
   port: 443
   type: vless
-  uuid: 54ee5e59-55a3-4599-83ff-0c67b3f411b2
+  uuid: 05453546-201f-4e8d-97ae-fd70da0e951f
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "sheetpeek.com"
+  servername: amzn.com
   reality-opts:
-    public-key: pX9uknHGLC9I26TT5kq4bIAljtX2AGWLK23EMgn6xFo
-    short-id: "84be686ea1d16478"
+    public-key: AgTktefiMM58y7f-KFgEtmVti_YJbd0GPSkxNeJ0RH4
+    short-id: c8e49965
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G48-VR"
-  server: 132.243.231.12
+- name: "N42-LAB-H11-REAL"
+  server: 82.118.16.189
   port: 443
   type: vless
-  uuid: 87fd990d-ca93-440a-bbd4-e8281c4a0910
+  uuid: d5e5f5a1-0f23-4c49-af9f-4be445bf9d8e
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "d3-se1.cloud-cdn.xyz"
+  servername: www.cloudflare.com
   reality-opts:
-    public-key: zWDvtTWK-cWWwHDMHMXcOpQy4k3EKp7yw-5e0wTZAUM
-    short-id: "5efa80b939612291"
+    public-key: SjGkzJQ9I6ZZjC3V73atcPMczhMm0oiTrB8mUQXz1HY
+    short-id: 37fbf155c7a9f3ff
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G49-VR"
-  server: 132.243.66.6
+- name: "N42-LAB-H12-REAL"
+  server: 2.27.39.233
   port: 443
   type: vless
-  uuid: ed7fd359-573d-45e5-a093-379af60afbab
+  uuid: df53b6c2-8005-475c-9eb9-74e1be785dc8
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "x2b7k-mixstage.nordlinemedia.com"
+  servername: addons.mozilla.org
   reality-opts:
-    public-key: uVTXgQyjdhoPUaYxtjT2SUi4vVGia5A3fEdI0_6JRkg
-    short-id: "80cccbe54939b856"
+    public-key: 5tMM2VdgddmxOKhdNa3b7i_aXno1g-_61SzkppS2UXQ
+    short-id: f3c023cc
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G50-VR"
-  server: 136.148.71.151
+- name: "N42-LAB-H13-REAL"
+  server: 64.176.231.183
   port: 443
   type: vless
-  uuid: d0f0a880-0df1-48c9-bdf1-5669fb9483ce
+  uuid: 583cc910-b57c-4dd0-a4a7-cea51a30b032
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "germa12.ggisopi.su"
+  servername: www.apple.com
   reality-opts:
-    public-key: SB1uC0OEveYjSiS_Nuw9Ld-uVVXWqi794OGnldthY3I
-    short-id: ""
+    public-key: GR_zPAgxF9PZ70Z9UpSmMlcd2STyoAC0fZTSHkTTCGE
+    short-id: ca193e889d958f81
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G51-VR"
-  server: 136.176.68.44
+- name: "N42-LAB-H14-REAL"
+  server: 31.76.68.245
   port: 443
   type: vless
-  uuid: 0b21158e-00f5-4a2f-b242-e3e5574f68a0
+  uuid: f9cb2991-ad4a-4a54-aeb3-55d56ac02a8e
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "www.amd.com"
+  servername: fra01.deflink.net
   reality-opts:
-    public-key: C-_dFKmuuFw7zIT6ThH0N2FKkR21f2v31zGRIbTmuBM
-    short-id: "561533e7f4"
+    public-key: INbgA5nXpjZ2P1f6lY7sMBlDM3ZMV8RX3cw-RRGM0mM
+    short-id: f22e97cfd4d9
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G52-VR"
-  server: 138.124.112.196
+- name: "N42-LAB-H15-REAL"
+  server: 146.70.124.85
   port: 443
   type: vless
-  uuid: 564082ff-cf3c-48db-9e10-8ad2312847b4
+  uuid: 40abbe13-f02e-4da2-9b19-966c2c3eb4ee
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "node5.mxvpn.dev"
+  servername: www.datadoghq.com
   reality-opts:
-    public-key: TlpXTLz1Y-v8B6q9MX55U6eypjfL0LCSNE5zQP4yRHw
-    short-id: "bbc68cec8bb8d2e3"
+    public-key: byzvlw97wjAAAfHs5AZRV0P0H6_JKBEZ4yfLS0HNewE
+    short-id: fe24f8a0a560056e
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G53-VR"
-  server: 138.124.126.158
+- name: "N42-LAB-H16-REAL"
+  server: tgfree.rush-server.com
   port: 443
   type: vless
-  uuid: b12eebc2-369c-4f3c-96a0-a8bd150ca8d5
+  uuid: ebd1c0d6-7ff4-4b9f-8692-237517a27a64
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "eh.vk.com"
+  servername: anyfile2file.com
   reality-opts:
-    public-key: Lxs8Ruv2zHH0XW5EiQmuCaScfkGPCxWjW02YDWH8pyU
-    short-id: "eb0cca7312345678"
+    public-key: mza5Hn1aolSz65qu-UwvBP3oesxMe25r11o4nxvikF0
+    short-id: 64c1fe36c7846400
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G54-VR"
-  server: 138.124.15.231
+- name: "N42-LAB-H17-REAL"
+  server: 177.1.192.72
   port: 443
   type: vless
-  uuid: 616c7b3b-41f4-4038-88c6-d6fedd0ae4a7
+  uuid: 4d852af3-a121-41aa-9aed-4ca40a6f7b4d
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "fn-2.ardesnode.ru"
+  servername: addons.mozilla.org
   reality-opts:
-    public-key: PKlt_5ASsz137EvA9SKSadtjEv1k_U7VRtoelKCgADs
-    short-id: "9ea74b83f4993ca9"
+    public-key: y3YCXTqEVks0nGfiSwJ43ol4pY69-mWFUZsdmveoVDM
+    short-id: 46455ff0
   client-fingerprint: chrome
   network: tcp
-- name: "N42-LAB-G55-VR"
-  server: 138.124.60.146
+- name: "N42-LAB-H18-REAL"
+  server: 185.209.15.100
   port: 443
   type: vless
-  uuid: bbfd1f68-ec64-452f-8404-9e2bcf1df951
+  uuid: c6db98c5-9959-425e-9340-300779fc4e4b
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "usa.oblaco.bet"
+  servername: n1.vimeostream.online
   reality-opts:
-    public-key: mJ-0fJDvKp0rhuyUvs1bw4RasRRM-BEOAl9iAZ8gXy0
-    short-id: ""
-  client-fingerprint: chrome
+    public-key: kK2a0QSYg0XQIMQOvDI7lJJvJcMH0-52RB90FivhVmM
+    short-id: c334408a1056aaf8
+  client-fingerprint: firefox
   network: tcp
-- name: "N42-LAB-G56-VR"
-  server: 139.59.191.88
+- name: "N42-LAB-H19-REAL"
+  server: 37.49.229.6
   port: 443
   type: vless
-  uuid: a6c5f4c7-073f-416b-b5e3-4a86ec2d9f22
+  uuid: c6db98c5-9959-425e-9340-300779fc4e4b
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "www.stanford.edu"
+  servername: n3.vimeostream.online
   reality-opts:
-    public-key: JeaMU58AmMJ2JqJ-QGotRFua9DYxxveqw7I_XMWCu34
-    short-id: "2da3ecc3ad9a323b"
-  client-fingerprint: chrome
+    public-key: nSDCUz3Hfy3iu_EtHXZKAqRV87rPoP_EFQe3QyhcKik
+    short-id: eba7ad82c6344ab6
+  client-fingerprint: firefox
   network: tcp
-- name: "N42-LAB-G57-VR"
-  server: 142.91.108.25
+- name: "N42-LAB-H20-REAL"
+  server: 185.253.96.117
+  port: 443
+  type: vless
+  uuid: aa923621-7ac0-482b-9ae8-e5dbb2ecae26
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.datadoghq.com
+  reality-opts:
+    public-key: KvA_7sxZDOMVLEvh64rAKk8jn5XiC-zV47zJIqny2nY
+    short-id: fbc37648292d5393
+  client-fingerprint: firefox
+  network: tcp
+- name: "N42-LAB-H21-REAL"
+  server: 195.154.118.134
+  port: 443
+  type: vless
+  uuid: 3c48b5f5-7766-4896-874e-b3ba1860e83a
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: w-mebel.pro
+  reality-opts:
+    public-key: YhT24GkuI1r7Fwo8pxIYH3CmTtbRlYs5X7fWtYp3vTY
+    short-id: 05f4f85fdc6c1379
+  client-fingerprint: random
+  network: tcp
+- name: "N42-LAB-H22-REAL"
+  server: 87.199.205.28
+  port: 443
+  type: vless
+  uuid: 501a2da5-cb22-4a3f-915e-e3b821d1d62d
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: vkvd754.okcdn.ru
+  reality-opts:
+    public-key: W-9zyiOq287RtXVTZlTFbSDJ0Mx8joyBLJoA7ZE7eBw
+    short-id: ef1d3554c652a436
+  client-fingerprint: qq
+  network: tcp
+- name: "N42-LAB-H23-REAL"
+  server: nl5.freekeysh110.online
+  port: 443
+  type: vless
+  uuid: 5e57c327-d4b9-4732-a6a4-2ce2770cecb7
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: nl5.freekeysh110.online
+  reality-opts:
+    public-key: sgPREsDFJUchKawgXgFGEM4YBjTDur0rgD2GuQmZXzA
+    short-id: 04b9f0b2470fae16
+  client-fingerprint: edge
+  network: tcp
+- name: "N42-LAB-H24-REAL"
+  server: fr4.sodahub.online
+  port: 443
+  type: vless
+  uuid: c6db98c5-9959-425e-9340-300779fc4e4b
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: fr4.cyphervpn.pro
+  reality-opts:
+    public-key: 8_v9Eq0VarPDLDLElqECI0ZrqFpL3lMVuluuPXB-DAo
+    short-id: 662fdf1f4412b654
+  client-fingerprint: firefox
+  network: tcp
+- name: "N42-LAB-H25-REAL"
+  server: 94.183.206.123
+  port: 443
+  type: vless
+  uuid: 6d5c8390-69fb-4bcf-a2f9-d7f850aaf2cc
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: optim.tildacdn.pub
+  reality-opts:
+    public-key: 54D9VU01h1iNtBP1XVSrQJr_7Cabjg8VC692kjT_VEg
+    short-id: ''
+  client-fingerprint: random
+  network: tcp
+- name: "N42-LAB-H26-REAL"
+  server: 150.241.92.20
+  port: 443
+  type: vless
+  uuid: accfae78-b31c-47cb-86a1-bb9a07973e4a
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: google.com
+  reality-opts:
+    public-key: 0oXIa2uHGVxp9he5NAGjenp2XrzUXPL7fk41jrWRRhQ
+    short-id: 935a83b8f9fc4f96
+  client-fingerprint: firefox
+  network: tcp
+- name: "N42-LAB-H27-REAL"
+  server: 88.151.197.213
   port: 443
   type: vless
   uuid: ee18d188-14cc-417e-beb1-70e4add6d023
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "jp3.nztvpn.com"
+  servername: frafra.nztvpn.com
   reality-opts:
-    public-key: 9ZCYjybxMQ7JpE39B8u_Bo-alI1LIbt5ER0E-4yMjiM
-    short-id: "ea36c03d86f91287"
-  client-fingerprint: chrome
+    public-key: 7gPPAdSE90GC5DWQhNH3-7oAHulpWz6iN8dIuKfBflc
+    short-id: 0da7e14db353e7d0
+  client-fingerprint: random
   network: tcp
-- name: "N42-LAB-G58-VR"
-  server: 143.246.194.36
+- name: "N42-LAB-H28-REAL"
+  server: 147.45.39.4
   port: 443
   type: vless
-  uuid: 49dc4f1e-c185-11f1-997b-54db13ea7d40
+  uuid: ee18d188-14cc-417e-beb1-70e4add6d023
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "www.blocket.se"
+  servername: de5.nztvpn.com
   reality-opts:
-    public-key: wSjV1yR_rhDUdoNbM9zIXNGLASLp9RorComnyoayo2c
-    short-id: ""
-  client-fingerprint: chrome
+    public-key: 7vGRh29DmlE13UV_fLUfl2bUpqkmJprSenLZXS8XJEc
+    short-id: 3560f3d77a767c3a
+  client-fingerprint: random
   network: tcp
-- name: "N42-LAB-G59-VR"
-  server: 144.124.241.233
+- name: "N42-LAB-H29-REAL"
+  server: 216.173.71.43
   port: 443
   type: vless
-  uuid: a5ea9247-79f3-4655-aece-3fb51e1e669e
+  uuid: ee18d188-14cc-417e-beb1-70e4add6d023
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "rezerv1.yunus.guru"
+  servername: lv.nztvpn.com
   reality-opts:
-    public-key: -X9CZv5MYKivpxPVP1vdgFKf2AJWmZ0Pju-j8LFmlh4
-    short-id: "6c88854e73e86773"
-  client-fingerprint: chrome
+    public-key: miDhSALrcCvSfc38VjCDYlzNh5M61NMR5IkUli7IN08
+    short-id: 0da7e14db353e7d0
+  client-fingerprint: firefox
   network: tcp
-- name: "N42-LAB-G60-VR"
-  server: 144.31.168.59
+- name: "N42-LAB-H30-REAL"
+  server: de2.my-cdn.org
   port: 443
   type: vless
-  uuid: d0f0a880-0df1-48c9-bdf1-5669fb9483ce
+  uuid: 249cce58-48ab-49a0-8aa1-fb8cd68a1104
   udp: true
   tls: true
   flow: xtls-rprx-vision
-  servername: "aotocon.ggisopi.su"
+  servername: de2.my-cdn.org
   reality-opts:
-    public-key: SB1uC0OEveYjSiS_Nuw9Ld-uVVXWqi794OGnldthY3I
-    short-id: ""
+    public-key: 4EUWyCLFjgb-cDwj8ws2nC82mCY_L5VvoCia7mHPH2o
+    short-id: adbbecad
+  client-fingerprint: random
+  network: tcp
+- name: "N42-LAB-H31-REAL"
+  server: 87.239.135.112
+  port: 443
+  type: vless
+  uuid: d18c7dfb-94c9-4caa-9d0d-da0e563a71ea
+  udp: true
+  tls: true
+  servername: tel.free-run.club
+  reality-opts:
+    public-key: DpCRsmgaFW54dSpiAKYGnN6cNayu9prjZTYGAyiP_jo
+    short-id: 025f065c
+  client-fingerprint: chrome
+  network: grpc
+  grpc-opts:
+    grpc-service-name: ''
+- name: "N42-LAB-H32-REAL"
+  server: 45.9.156.24
+  port: 443
+  type: vless
+  uuid: 2f35965a-9a9b-45fd-ba32-987296dfb6be
+  udp: true
+  tls: true
+  servername: bg2.univesalsrv.com
+  reality-opts:
+    public-key: 0f0dh_FUju5cHgQcIwUjHvxQb9aIZ00p0kZRHeE7Ey4
+    short-id: 501ab3325b77e1ca
+  client-fingerprint: chrome
+  network: grpc
+  grpc-opts:
+    grpc-service-name: api.v2.PushService
+- name: "N42-LAB-H33-REAL"
+  server: 66.70.179.198
+  port: 2053
+  type: vless
+  uuid: dc620cd6-a9d8-4a0f-8f18-006b895db77e
+  udp: true
+  tls: true
+  servername: www.cloudflare.com
+  reality-opts:
+    public-key: k4l6TxwkBbx9DhZAFpByq5rfCWFSgyOex3f_eFe9CWU
+    short-id: 83f8317a948bb769
   client-fingerprint: chrome
   network: tcp
+- name: "N42-LAB-H34-REAL"
+  server: 198.251.78.29
+  port: 2053
+  type: vless
+  uuid: c423cc1b-f88e-421c-9a16-c480d84da20f
+  udp: true
+  tls: true
+  servername: www.cloudflare.com
+  reality-opts:
+    public-key: Uk5b-Wh_uxeCc7R8NS9iWE40xc0h9wWC04rSB9yhgAw
+    short-id: b5d625695ec82c7e
+  client-fingerprint: chrome
+  network: tcp
+- name: "N42-LAB-H35-REAL"
+  server: 104.207.152.198
+  port: 4433
+  type: vless
+  uuid: 25eec897-580f-4e5c-9d8e-9abde6059a56
+  udp: true
+  tls: true
+  servername: google.com
+  reality-opts:
+    public-key: 3vBRCDJzbYdn7qOkxZzxWIXf966vhT0QIeybvbKrtxo
+    short-id: 99d4afd174ccbf04
+  client-fingerprint: chrome
+  network: tcp
+- name: "N42-LAB-H36-REAL"
+  server: 107.173.237.146
+  port: 8443
+  type: vless
+  uuid: 1d39f715-2740-4d99-bc3b-197cc48dcee7
+  udp: true
+  tls: true
+  servername: updates.cdn-apple.com
+  reality-opts:
+    public-key: D3ojIs3AUKP_tV0E4TEjh90HBVJp24Nq3qMfdxD30kc
+    short-id: df8611c07d
+  client-fingerprint: chrome
+  network: tcp
+- name: "N42-LAB-I01-SS44"
+  type: vless
+  server: miki.moumou207.dpdns.org
+  port: 2096
+  uuid: "cb79ddc4-ec21-4077-a2c9-f5035d680a10"
+  udp: true
+  network: "ws"
+  tls: true
+  servername: "mIKi.MoumOu207.dPdNs.Org"
+  ws-opts: {"path": "/eyJqdW5rIjoiblNzWDl5VnRkRmF5R05mIiwicHJvdG9jb2wiOiJ2bCIsIm1vZGUiOiJwcm94eWlwIiwicGFuZWxJUHMiOlsiNDUuOC4xMTQuOTkiXX0=", "headers": {"Host": "mIKi.MoumOu207.dPdNs.Org"}}
+- name: "N42-LAB-I02-SS44"
+  type: vless
+  server: 172.66.0.162
+  port: 443
+  uuid: "d342d11e-d224-4463-b982-532309285094"
+  udp: true
+  network: "ws"
+  tls: true
+  servername: "ccc.010304.xyz"
+  client-fingerprint: "chrome"
+  ws-opts: {"path": "/", "headers": {"Host": "ccc.010304.xyz"}}
+- name: "N42-LAB-I03-SS44"
+  type: vless
+  server: sino.bestsellers1.site
+  port: 2083
+  uuid: "7858128a-6b5e-4f86-9bff-52c1f1e6439d"
+  udp: true
+  network: "ws"
+  tls: true
+  servername: "sino.bestsellers1.site"
+  client-fingerprint: "chrome"
+  ws-opts: {"path": "/", "headers": {"Host": "sino.bestsellers1.site"}}
+- name: "N42-LAB-I04-SS44"
+  type: vless
+  server: 89.125.96.89
+  port: 2053
+  uuid: "6c713691-3ca2-0008-ad25-113d1bed6b03"
+  udp: true
+  network: "ws"
+  tls: true
+  servername: "wss.zazazuza.ru"
+  client-fingerprint: "chrome"
+  ws-opts: {"path": "/vpn-wss/fluxor/59011/", "headers": {"Host": "wss.zazazuza.ru"}}
+- name: "N42-LAB-I05-SS44"
+  type: vless
+  server: 159.89.87.21
+  port: 28190
+  uuid: "14c80e0e-f7ce-4991-94fc-99a1db4a9b1e"
+  udp: true
+  network: "tcp"
+  tls: true
+  servername: "aws.amazon.com"
+  client-fingerprint: "chrome"
+  flow: "xtls-rprx-vision"
+  reality-opts: {"public-key": "ZJRnFU-1s1JOnO8E9uZ7b00l1fPEh63fGRbdBANFRno", "short-id": ""}
+- name: "N42-LAB-I06-SS44"
+  type: vless
+  server: 147.182.212.232
+  port: 56565
+  uuid: "7b188eea-b08f-42c2-bac7-d3b0e74218b8"
+  udp: true
+  network: "tcp"
+  tls: true
+  servername: "www.paypal.com"
+  client-fingerprint: "chrome"
+  flow: "xtls-rprx-vision"
+  reality-opts: {"public-key": "Td03Ae-cuYLq4xg7MSps58c_yRUcbbwtZLXm0ywabjY", "short-id": ""}
+- name: "N42-LAB-I07-SS44"
+  type: vless
+  server: 169.40.42.231
+  port: 443
+  uuid: "d65cc14c-f53f-4fe2-b262-97856601319c"
+  udp: true
+  network: "tcp"
+  tls: true
+  servername: "yahoo.com"
+  client-fingerprint: "chrome"
+  flow: "xtls-rprx-vision"
+  reality-opts: {"public-key": "e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg", "short-id": "c39cc7310a"}
+- name: "N42-LAB-I08-SS44"
+  type: vless
+  server: 51.158.206.12
+  port: 23576
+  uuid: "48ff2b70-e180-582f-8866-d9a2edeed5f5"
+  udp: true
+  network: "tcp"
+  tls: true
+  servername: "fuck.rkn"
+  client-fingerprint: "chrome"
+  flow: "xtls-rprx-vision"
+  reality-opts: {"public-key": "1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s", "short-id": "01"}
+- name: "N42-LAB-I09-SS44"
+  type: trojan
+  server: fancy-javelin.rooster465.autos
+  port: 443
+  password: "UX82473651"
+  udp: true
+  network: "tcp"
+  sni: "fancy-javelin.rooster465.autos"
+- name: "N42-LAB-I10-SS44"
+  type: trojan
+  server: 193.239.160.134
+  port: 443
+  password: "humanity"
+  udp: true
+  network: "ws"
+  sni: "www.calmlunch.com"
+  ws-opts: {"path": "/assignment"}
+- name: "N42-LAB-I11-SS44"
+  type: trojan
+  server: 188.42.145.180
+  port: 443
+  password: "humanity"
+  udp: true
+  network: "ws"
+  sni: "wWw.Volumeroot.cOm."
+  ws-opts: {"path": "/assignment"}
+- name: "N42-LAB-I12-SS44"
+  type: trojan
+  server: 38.181.42.136
+  port: 9443
+  password: "trj-qWC4DKUemeUYWSKA1xx7okumSKKw0QSX"
+  udp: true
+  network: "tcp"
+  sni: "www.jqyverse.com"
 
 proxy-groups:
 - name: PROXY
@@ -7507,66 +7288,54 @@ proxy-groups:
   type: select
   proxies:
   - N42-VR-004
-  - N42-LAB-G01-VR
-  - N42-LAB-G02-VR
-  - N42-LAB-G03-VR
-  - N42-LAB-G04-VR
-  - N42-LAB-G05-VR
-  - N42-LAB-G06-VR
-  - N42-LAB-G07-VR
-  - N42-LAB-G08-VR
-  - N42-LAB-G09-VR
-  - N42-LAB-G10-VR
-  - N42-LAB-G11-VR
-  - N42-LAB-G12-VR
-  - N42-LAB-G13-VR
-  - N42-LAB-G14-VR
-  - N42-LAB-G15-VR
-  - N42-LAB-G16-VR
-  - N42-LAB-G17-VR
-  - N42-LAB-G18-VR
-  - N42-LAB-G19-VR
-  - N42-LAB-G20-VR
-  - N42-LAB-G21-VR
-  - N42-LAB-G22-VR
-  - N42-LAB-G23-VR
-  - N42-LAB-G24-VR
-  - N42-LAB-G25-VR
-  - N42-LAB-G26-VR
-  - N42-LAB-G27-VR
-  - N42-LAB-G28-VR
-  - N42-LAB-G29-VR
-  - N42-LAB-G30-VR
-  - N42-LAB-G31-VR
-  - N42-LAB-G32-VR
-  - N42-LAB-G33-VR
-  - N42-LAB-G34-VR
-  - N42-LAB-G35-VR
-  - N42-LAB-G36-VR
-  - N42-LAB-G37-VR
-  - N42-LAB-G38-VR
-  - N42-LAB-G39-VR
-  - N42-LAB-G40-VR
-  - N42-LAB-G41-VR
-  - N42-LAB-G42-VR
-  - N42-LAB-G43-VR
-  - N42-LAB-G44-VR
-  - N42-LAB-G45-VR
-  - N42-LAB-G46-VR
-  - N42-LAB-G47-VR
-  - N42-LAB-G48-VR
-  - N42-LAB-G49-VR
-  - N42-LAB-G50-VR
-  - N42-LAB-G51-VR
-  - N42-LAB-G52-VR
-  - N42-LAB-G53-VR
-  - N42-LAB-G54-VR
-  - N42-LAB-G55-VR
-  - N42-LAB-G56-VR
-  - N42-LAB-G57-VR
-  - N42-LAB-G58-VR
-  - N42-LAB-G59-VR
-  - N42-LAB-G60-VR
+  - N42-LAB-H01-REAL
+  - N42-LAB-H02-REAL
+  - N42-LAB-H03-REAL
+  - N42-LAB-H04-REAL
+  - N42-LAB-H05-REAL
+  - N42-LAB-H06-REAL
+  - N42-LAB-H07-REAL
+  - N42-LAB-H08-REAL
+  - N42-LAB-H09-REAL
+  - N42-LAB-H10-REAL
+  - N42-LAB-H11-REAL
+  - N42-LAB-H12-REAL
+  - N42-LAB-H13-REAL
+  - N42-LAB-H14-REAL
+  - N42-LAB-H15-REAL
+  - N42-LAB-H16-REAL
+  - N42-LAB-H17-REAL
+  - N42-LAB-H18-REAL
+  - N42-LAB-H19-REAL
+  - N42-LAB-H20-REAL
+  - N42-LAB-H21-REAL
+  - N42-LAB-H22-REAL
+  - N42-LAB-H23-REAL
+  - N42-LAB-H24-REAL
+  - N42-LAB-H25-REAL
+  - N42-LAB-H26-REAL
+  - N42-LAB-H27-REAL
+  - N42-LAB-H28-REAL
+  - N42-LAB-H29-REAL
+  - N42-LAB-H30-REAL
+  - N42-LAB-H31-REAL
+  - N42-LAB-H32-REAL
+  - N42-LAB-H33-REAL
+  - N42-LAB-H34-REAL
+  - N42-LAB-H35-REAL
+  - N42-LAB-H36-REAL
+  - N42-LAB-I01-SS44
+  - N42-LAB-I02-SS44
+  - N42-LAB-I03-SS44
+  - N42-LAB-I04-SS44
+  - N42-LAB-I05-SS44
+  - N42-LAB-I06-SS44
+  - N42-LAB-I07-SS44
+  - N42-LAB-I08-SS44
+  - N42-LAB-I09-SS44
+  - N42-LAB-I10-SS44
+  - N42-LAB-I11-SS44
+  - N42-LAB-I12-SS44
 - name: N42-AUTO
   type: url-test
   proxies:
