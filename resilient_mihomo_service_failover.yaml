@@ -6885,6 +6885,313 @@ proxies:
   client-fingerprint: chrome
   network: tcp
 
+# LAB-2 N42-LAB-C01-PORT8443 | N42-VR-004 | Alternate port 8443 of proven IP; may be closed
+- name: "N42-LAB-C01-PORT8443"
+  server: 95.111.212.241
+  port: 8443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-2 N42-LAB-C02-PORT2053 | N42-VR-004 | Alternate port 2053 of proven IP; may be closed
+- name: "N42-LAB-C02-PORT2053"
+  server: 95.111.212.241
+  port: 2053
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-2 N42-LAB-C03-PORT2083 | N42-VR-004 | Alternate port 2083 of proven IP; may be closed
+- name: "N42-LAB-C03-PORT2083"
+  server: 95.111.212.241
+  port: 2083
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-2 N42-LAB-C04-PORT2087 | N42-VR-004 | Alternate port 2087 of proven IP; may be closed
+- name: "N42-LAB-C04-PORT2087"
+  server: 95.111.212.241
+  port: 2087
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-2 N42-LAB-C05-PORT2096 | N42-VR-004 | Alternate port 2096 of proven IP; may be closed
+- name: "N42-LAB-C05-PORT2096"
+  server: 95.111.212.241
+  port: 2096
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-2 N42-LAB-C06-PORT4433 | N42-VR-004 | Alternate port 4433 of proven IP; may be closed
+- name: "N42-LAB-C06-PORT4433"
+  server: 95.111.212.241
+  port: 4433
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-2 N42-LAB-C07-PORT9443 | N42-VR-004 | Alternate port 9443 of proven IP; may be closed
+- name: "N42-LAB-C07-PORT9443"
+  server: 95.111.212.241
+  port: 9443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-2 N42-LAB-C08-PORT4443 | N42-VR-004 | Alternate port 4443 of proven IP; may be closed
+- name: "N42-LAB-C08-PORT4443"
+  server: 95.111.212.241
+  port: 4443
+  type: vless
+  uuid: 924fe46b-b6e0-479e-ae7f-a3661680e706
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.samsung.com
+  reality-opts:
+    public-key: BSTnEthBXhb_UyuWpLBDxg82-C-wcpU2_kOD5ohS12g
+    short-id: 3a697adb4c58d495
+  client-fingerprint: chrome
+  network: tcp
+# LAB-2 N42-LAB-D01-BASE | N42-VR-003 | Independent endpoint control (unchanged)
+- name: "N42-LAB-D01-BASE"
+  server: 47.251.25.74
+  port: 443
+  type: vless
+  uuid: 18805ff3-b420-45de-af18-93be14024ae8
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.amazon.com
+  reality-opts:
+    public-key: H56cOJhw0xw76lDEpt7IuJJmVGemK6_CK34KtHwDMX8
+    short-id: ''
+  client-fingerprint: chrome
+  network: tcp
+# LAB-2 N42-LAB-D01-MOD | N42-VR-003 | Same endpoint, ALPN h2 + http1.1
+- name: "N42-LAB-D01-MOD"
+  server: 47.251.25.74
+  port: 443
+  type: vless
+  uuid: 18805ff3-b420-45de-af18-93be14024ae8
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.amazon.com
+  reality-opts:
+    public-key: H56cOJhw0xw76lDEpt7IuJJmVGemK6_CK34KtHwDMX8
+    short-id: ''
+  client-fingerprint: chrome
+  network: tcp
+  alpn: [h2, http/1.1]
+# LAB-2 N42-LAB-D02-BASE | N42-VR-014 | Independent endpoint control (unchanged)
+- name: "N42-LAB-D02-BASE"
+  server: 107.149.159.190
+  port: 4433
+  type: vless
+  uuid: 443d55c9-9b78-4ad4-ac34-5ada5b98e97e
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.postgresql.org
+  reality-opts:
+    public-key: ptrxM_lwiuXte-ynRSfM7AyayGbWrfCzkV1gQ5EgeSw
+    short-id: 0fa5bc397af019a2
+  client-fingerprint: chrome
+  network: tcp
+# LAB-2 N42-LAB-D02-MOD | N42-VR-014 | Same endpoint, TFO enabled
+- name: "N42-LAB-D02-MOD"
+  server: 107.149.159.190
+  port: 4433
+  type: vless
+  uuid: 443d55c9-9b78-4ad4-ac34-5ada5b98e97e
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.postgresql.org
+  reality-opts:
+    public-key: ptrxM_lwiuXte-ynRSfM7AyayGbWrfCzkV1gQ5EgeSw
+    short-id: 0fa5bc397af019a2
+  client-fingerprint: chrome
+  network: tcp
+  tfo: true
+# LAB-2 N42-LAB-D03-BASE | N42-VR-020 | Independent endpoint control (unchanged)
+- name: "N42-LAB-D03-BASE"
+  server: 150.241.80.113
+  port: 443
+  type: vless
+  uuid: 86037609-3790-4901-bd2f-c698092fb1fc
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: nl.skfv-mirror.ru
+  reality-opts:
+    public-key: qmfrMwVYth3lsYuv7qfr22YlTIlNtVjMl0v4Z5pX7hM
+    short-id: 87cc0414902bee2d
+  client-fingerprint: chrome
+  network: tcp
+# LAB-2 N42-LAB-D03-MOD | N42-VR-020 | Same endpoint, ALPN http1.1
+- name: "N42-LAB-D03-MOD"
+  server: 150.241.80.113
+  port: 443
+  type: vless
+  uuid: 86037609-3790-4901-bd2f-c698092fb1fc
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: nl.skfv-mirror.ru
+  reality-opts:
+    public-key: qmfrMwVYth3lsYuv7qfr22YlTIlNtVjMl0v4Z5pX7hM
+    short-id: 87cc0414902bee2d
+  client-fingerprint: chrome
+  network: tcp
+  alpn: [http/1.1]
+# LAB-2 N42-LAB-D04-BASE | N42-VR-031 | Independent endpoint control (unchanged)
+- name: "N42-LAB-D04-BASE"
+  server: 152.53.236.22
+  port: 443
+  type: vless
+  uuid: 711c018e-2692-4aa8-93f3-544d83fcd16c
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.cloudflare.com
+  reality-opts:
+    public-key: HyVSZ2OyySwXT-xRhTAqoiuYflIaj_b0Jxm7S1Iq9hs
+    short-id: 7a76f3c4b9dd
+  client-fingerprint: chrome
+  network: tcp
+# LAB-2 N42-LAB-D04-MOD | N42-VR-031 | Same endpoint, TFO enabled
+- name: "N42-LAB-D04-MOD"
+  server: 152.53.236.22
+  port: 443
+  type: vless
+  uuid: 711c018e-2692-4aa8-93f3-544d83fcd16c
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.cloudflare.com
+  reality-opts:
+    public-key: HyVSZ2OyySwXT-xRhTAqoiuYflIaj_b0Jxm7S1Iq9hs
+    short-id: 7a76f3c4b9dd
+  client-fingerprint: chrome
+  network: tcp
+  tfo: true
+# LAB-2 N42-LAB-D05-BASE | N42-VR-035 | Independent endpoint control (unchanged)
+- name: "N42-LAB-D05-BASE"
+  server: 86.54.28.75
+  port: 443
+  type: vless
+  uuid: 44ae52b9-76fc-444d-8e43-186b4384b80a
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.apple.com
+  reality-opts:
+    public-key: PryGoq51ilG0eLUPl9i0xCvmk1xpwkyFSr_tG4GNLlU
+    short-id: 1d86d17709852910
+  client-fingerprint: chrome
+  network: tcp
+# LAB-2 N42-LAB-D05-MOD | N42-VR-035 | Same endpoint, ALPN h2 + http1.1
+- name: "N42-LAB-D05-MOD"
+  server: 86.54.28.75
+  port: 443
+  type: vless
+  uuid: 44ae52b9-76fc-444d-8e43-186b4384b80a
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: www.apple.com
+  reality-opts:
+    public-key: PryGoq51ilG0eLUPl9i0xCvmk1xpwkyFSr_tG4GNLlU
+    short-id: 1d86d17709852910
+  client-fingerprint: chrome
+  network: tcp
+  alpn: [h2, http/1.1]
+# LAB-2 N42-LAB-D06-BASE | N42-VR-047 | Independent endpoint control (unchanged)
+- name: "N42-LAB-D06-BASE"
+  server: 93.89.220.37
+  port: 443
+  type: vless
+  uuid: 185e2bb3-2934-48d0-bbd5-dd20d16e83ee
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: ibm.com
+  reality-opts:
+    public-key: lwKaUQ81wJUJRsqAPsfTPj5V_f9N50UYEwzRI_nuq2g
+    short-id: e88cb983f3c97528
+  client-fingerprint: chrome
+  network: tcp
+# LAB-2 N42-LAB-D06-MOD | N42-VR-047 | Same endpoint, TFO enabled
+- name: "N42-LAB-D06-MOD"
+  server: 93.89.220.37
+  port: 443
+  type: vless
+  uuid: 185e2bb3-2934-48d0-bbd5-dd20d16e83ee
+  udp: true
+  tls: true
+  flow: xtls-rprx-vision
+  servername: ibm.com
+  reality-opts:
+    public-key: lwKaUQ81wJUJRsqAPsfTPj5V_f9N50UYEwzRI_nuq2g
+    short-id: e88cb983f3c97528
+  client-fingerprint: chrome
+  network: tcp
+  tfo: true
+
 proxy-groups:
 - name: PROXY
   type: select
@@ -6920,6 +7227,26 @@ proxy-groups:
   - N42-LAB-B06-CHROME
   - N42-LAB-B07-CHROME
   - N42-LAB-B08-CHROME
+  - N42-LAB-C01-PORT8443
+  - N42-LAB-C02-PORT2053
+  - N42-LAB-C03-PORT2083
+  - N42-LAB-C04-PORT2087
+  - N42-LAB-C05-PORT2096
+  - N42-LAB-C06-PORT4433
+  - N42-LAB-C07-PORT9443
+  - N42-LAB-C08-PORT4443
+  - N42-LAB-D01-BASE
+  - N42-LAB-D01-MOD
+  - N42-LAB-D02-BASE
+  - N42-LAB-D02-MOD
+  - N42-LAB-D03-BASE
+  - N42-LAB-D03-MOD
+  - N42-LAB-D04-BASE
+  - N42-LAB-D04-MOD
+  - N42-LAB-D05-BASE
+  - N42-LAB-D05-MOD
+  - N42-LAB-D06-BASE
+  - N42-LAB-D06-MOD
 - name: N42-AUTO
   type: url-test
   proxies:
