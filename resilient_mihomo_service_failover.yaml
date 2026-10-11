@@ -7212,28 +7212,28 @@ proxies:
   reality-opts: {"public-key": "Td03Ae-cuYLq4xg7MSps58c_yRUcbbwtZLXm0ywabjY", "short-id": ""}
 - name: "N42-LAB-I07-SS44"
   type: vless
-  server: 169.40.42.231
+  server: 188.253.26.216
   port: 443
-  uuid: "d65cc14c-f53f-4fe2-b262-97856601319c"
+  uuid: "ee18d188-14cc-417e-beb1-70e4add6d023"
   udp: true
   network: "tcp"
   tls: true
-  servername: "yahoo.com"
+  servername: "nl3.nztvpn.com"
   client-fingerprint: "chrome"
   flow: "xtls-rprx-vision"
-  reality-opts: {"public-key": "e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg", "short-id": "c39cc7310a"}
+  reality-opts: {"public-key": "noszGxmy754-TNyz9eM8EyHiaCRF2T4cu3El6GKb6n0", "short-id": "0da7e14db353e7d0"}
 - name: "N42-LAB-I08-SS44"
   type: vless
-  server: 51.158.206.12
-  port: 23576
-  uuid: "48ff2b70-e180-582f-8866-d9a2edeed5f5"
+  server: 185.121.179.122
+  port: 443
+  uuid: "63c5f8b3-3d3d-46a9-ae1f-58635cdaf891"
   udp: true
   network: "tcp"
   tls: true
-  servername: "fuck.rkn"
+  servername: "de.stream-node6.com"
   client-fingerprint: "chrome"
   flow: "xtls-rprx-vision"
-  reality-opts: {"public-key": "1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s", "short-id": "01"}
+  reality-opts: {"public-key": "wpZDT_592emHu309qN-7-qceofbMJzoAdIx9m9RFJGg", "short-id": "98753667b2406829"}
 - name: "N42-LAB-I09-SS44"
   type: trojan
   server: fancy-javelin.rooster465.autos
